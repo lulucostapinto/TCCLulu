@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>  
+            <p:growl id="messages" showDetail="false"/>
+
+            <h3 style="margin-top:0">SISTEMA DE GERENCIAMENTO DO CAPITAL INTELECTUAL</h3>
+            <p:menu>
+                <p:submenu label="CURSOS">
+                    <p:menuitem value="Incluir curso" outcome="curso"/>
+                    <p:menuitem value="Solicitação de curso" outcome="curso"/>
+                    <p:menuitem value="Cursos em andamento" />
+                    <p:menuitem value="Cursos encerrados" />
+                </p:submenu>
+                <p:submenu label="CURRÍCULO">
+                    <p:menuitem value="Incluir curso externo" />
+                    <p:menuitem value="Relatório de horas" />
+                    <p:menuitem value="Certificados" />                    
+                </p:submenu>
+                <p:submenu label="BIBLOTECA VIRTUAL">
+                    <p:menuitem value="Vídeos" />
+                    <p:menuitem value="Monografias" />
+                    <p:menuitem value="TCC's" />                    
+                </p:submenu>
+                <p:submenu label="AVALIAÇÕES DE DESEMPENHO">
+                    <p:menuitem value="2014" />
+                    <p:menuitem value="2013" />
+                    <p:menuitem value="2012" /> 
+                </p:submenu>
+                <p:submenu label="USUÁRIOS">
+                    <p:menuitem value="Inclui usuário" />    
+                </p:submenu>
+            </p:menu>
+        </h:form>
+    </h:body>
+</html>
+

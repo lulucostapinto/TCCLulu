@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>USUÁRIOS</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <center>                
+                <h:form id="formulario">
+                    <p:messages autoUpdate="true"/>
+                    <h:panelGrid>
+                        <p:panel header="Incluir USUÁRIOS">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Login"/>
+                                <p:inputText id="nome" value="#{usuarioMNG.login}"/> 
+                                <h:outputLabel value="Senha"/>
+                                <p:inputText id="senha" value="#{usuarioMNG.senha}"/>                               
+                                <p:commandButton value="GRAVAR" action="#{usuarioMNG.save}"/>
+                                <p:commandButton value="LIMPAR" type="reset"/> 
+                            </h:panelGrid>
+
+                        </p:panel>
+                    </h:panelGrid>
+                </h:form>
+            </center>
+        </h:body>
+    </f:view>
+</html>
+
