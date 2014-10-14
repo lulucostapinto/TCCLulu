@@ -64,15 +64,15 @@ public class CursoDAO implements CursoDAORemote {
 
     @Override
     public List<Curso> listar() {
-        List<Curso> curso = null;
+        List<Curso> cursos = null;
         try {
             Query query = em.createQuery("Select c from Curso c");
-            curso = query.getResultList();
+            cursos = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return curso;
+        return cursos;
     }
 
 }

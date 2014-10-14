@@ -58,7 +58,7 @@ public class UsuarioMNG {
             }
             context.getExternalContext().getSessionMap().put(USER_SESSION_KEY, usuario);
             System.out.println("Logado");
-            return "paginainicial";
+            return "padrao";
         } else {
             this.msgInvalidLogin(context);
             return null;

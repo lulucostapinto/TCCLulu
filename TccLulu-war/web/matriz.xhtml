@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">     
+    <ui:composition template="/padrao.xhtml">
+        <ui:define name="centro">
+            <center margin-top='-500' style="top:-900px;">
+
+
+
+                <h:form id="formulario">
+                    <p:messages autoUpdate="true"/>
+                    <h:panelGrid>
+                        <p:panel header="Matriz de cursos"> 
+                            
+                            <h:form>
+                                <p:growl id="growl" life="2000" />     
+                                <p:commandButton value="Incluir" id="incluir"  action="curso"/>
+                                <p:commandButton value="Editar" id="editar" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
+                                <p:commandButton value="Excluir" id="excluir" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
+                                <p:commandButton value="Inscritos" id="inscritos" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
+                                <p:commandButton value="Conteúdo" id="conteudo" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
+                            </h:form>  
+
+                            <p:dataTable id="curso" value="#{cursoMNG.lista}" emptyMessage="Não há registros" var="curso" paginator="true" rows="4">
+                                <p:column headerText="Data Inicio">
+                                    <h:outputText value="#{cursoMNG.data_inicio}"/>
+                                </p:column>
+                                <p:column headerText="Data Fim">
+                                    <h:outputText value="#{cursoMNG.data_fim}"/>
+                                </p:column>
+                                <p:column headerText="Nome" filterBy="#{cursoMNG.lista}">
+                                    <h:outputText value="#{cursoMNG.nome}"/>
+                                </p:column>
+                                <p:column headerText="Local">
+                                    <h:outputText value="#{cursoMNG.local}"/>
+                                </p:column>
+                                <p:column headerText="Duração">
+                                    <h:outputText value="#{cursoMNG.duracao}"/>
+                                </p:column>
+                                <p:column headerText="Quantidade Vagas">
+                                    <h:outputText value="#{cursoMNG.qtdVagas}"/>
+                                </p:column>                           
+                                <p:column headerText="Público alvo" filterBy="#{cursoMNG.lista}">
+                                    <h:outputText value="#{cursoMNG.pub_alvo}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </h:panelGrid>
+                </h:form>
+
+            </center>
+        </ui:define>
+    </ui:composition>
+</html>
