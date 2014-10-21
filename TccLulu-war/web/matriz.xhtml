@@ -27,7 +27,7 @@
 
                             <p:dataTable id="curso" value="#{cursoMNG.lista}" emptyMessage="Não há registros" var="curso" paginator="true" rows="4">
                                 <p:column headerText="Data Inicio">
-                                    <h:outputText value="#{cursoMNG.data_inicio}"/>
+                                    <h:outputText value="#{curso.data_inicio}"/>
                                 </p:column>
                                 <p:column headerText="Data Fim">
                                     <h:outputText value="#{cursoMNG.data_fim}"/>
