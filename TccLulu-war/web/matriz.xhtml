@@ -30,22 +30,22 @@
                                     <h:outputText value="#{curso.data_inicio}"/>
                                 </p:column>
                                 <p:column headerText="Data Fim">
-                                    <h:outputText value="#{cursoMNG.data_fim}"/>
+                                    <h:outputText value="#{curso.data_fim}"/>
                                 </p:column>
-                                <p:column headerText="Nome" filterBy="#{cursoMNG.lista}">
-                                    <h:outputText value="#{cursoMNG.nome}"/>
+                                <p:column headerText="Nome" filterBy="#{curso.lista}">
+                                    <h:outputText value="#{curso.nome}"/>
                                 </p:column>
                                 <p:column headerText="Local">
-                                    <h:outputText value="#{cursoMNG.local}"/>
+                                    <h:outputText value="#{curso.local}"/>
                                 </p:column>
                                 <p:column headerText="Duração">
-                                    <h:outputText value="#{cursoMNG.duracao}"/>
+                                    <h:outputText value="#{curso.duracao}"/>
                                 </p:column>
                                 <p:column headerText="Quantidade Vagas">
-                                    <h:outputText value="#{cursoMNG.qtdVagas}"/>
+                                    <h:outputText value="#{curso.qtdVagas}"/>
                                 </p:column>                           
                                 <p:column headerText="Público alvo" filterBy="#{cursoMNG.lista}">
-                                    <h:outputText value="#{cursoMNG.pub_alvo}"/>
+                                    <h:outputText value="#{curso.pub_alvo}"/>
                                 </p:column>
                             </p:dataTable>
                         </p:panel>
