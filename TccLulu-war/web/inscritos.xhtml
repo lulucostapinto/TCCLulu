@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">     
+    <ui:composition template="/padrao.xhtml">
+        <ui:define name="centro">
+            <center margin-top='-500' style="top:-900px;">
+
+
+
+                <h:form id="formulario">
+                    <p:messages autoUpdate="true"/>
+                    <h:panelGrid>
+                        <p:panel header="Inscritos"> 
+
+                            
+
+                            <p:dataTable id="inscritos" value="#{inscricaoMNG.lista}" emptyMessage="Não há registros" var="inscricao" paginator="true" rows="4">
+                                <p:column headerText="Cracha" filterBy="#{inscricao.lista}">
+                                    <h:outputText value="#{inscricao.cracha}">                                        
+                                    </h:outputText>
+                                </p:column>                                
+                                <p:column headerText="Nome" filterBy="#{inscricao.lista}">
+                                    <h:outputText value="#{inscricao.nome}"/>
+                                </p:column>                                
+                                <p:column headerText="Funcao">
+                                    <h:outputText value="#{inscricao.funcao}"/>
+                                </p:column>
+                                <p:column headerText="Centro de custo">
+                                    <h:outputText value="#{inscricao.centro_custo}"/>
+                                </p:column>                                
+                            </p:dataTable>
+                        </p:panel>
+                    </h:panelGrid>
+                </h:form>
+
+            </center>
+        </ui:define>
+    </ui:composition>
+</html>
+

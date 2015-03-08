@@ -21,8 +21,9 @@
                                 <p:commandButton value="Incluir" id="incluir"  action="curso"/>
                                 <p:commandButton value="Editar" id="editar" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
                                 <p:commandButton value="Excluir" id="excluir" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
-                                <p:commandButton value="Inscritos" id="inscritos" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
+                                <p:commandButton value="Inscritos" id="inscritos" action="inscritos" />
                                 <p:commandButton value="Conteúdo" id="conteudo" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
+                                <p:commandButton value="Inscrição" id="inscricao" action="inscricao" />
                             </h:form>  
 
                             <p:dataTable id="curso" value="#{cursoMNG.lista}" emptyMessage="Não há registros" var="curso" paginator="true" rows="4">
