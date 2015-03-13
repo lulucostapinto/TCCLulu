@@ -12,24 +12,21 @@
                 <h:form id="formulario">
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid>
-                        <p:panel header="INCLUIR SALA">                                
-
-                            <h:form>
+                        <p:panel header="CADASTRO DE SALAS">
+                          <h:form>
                                 <p:growl id="growl" life="2000" />     
-                                <p:commandButton value="Incluir" id="incluir"  action="curso"/>
+                                <p:commandButton value="Incluir" id="incluir"  action="cadastrar_sala"/>
                                 <p:commandButton value="Editar" id="editar" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
                                 <p:commandButton value="Excluir" id="excluir" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
                             </h:form> 
-                            
                         </p:panel>
-                        
-                        <p:dataTable id="curso" value="#{cursoMNG.lista}" emptyMessage="Não há registros" var="curso" paginator="true" rows="4" style="width: 820px">
-                               <p:column headerText="Nome" filterBy="#{curso.lista}">
-                                    <h:outputText value="#{curso.nome}"/>
-                                </p:column>
-                                
-                            </p:dataTable>
-                        
+
+                        <p:dataTable id="sala" value="#{salaMNG.lista}" emptyMessage="Não há registros" var="sala" paginator="true" rows="4" style="width: 820px">
+                            <p:column headerText="Nome" filterBy="#{sala.lista}">
+                                <h:outputText value="#{salaMNG.nome}"/>
+                            </p:column>
+                        </p:dataTable>
+
                     </h:panelGrid> 
 
                 </h:form>
