@@ -22,9 +22,9 @@
                         </p:panel>
 
                         <p:dataTable id="sala" value="#{salaMNG.lista}" emptyMessage="Não há registros" var="sala" paginator="true" rows="4" style="width: 820px">
-                            <p:column headerText="Nome" filterBy="#{sala.lista}">
-                                <h:outputText value="#{salaMNG.nome}"/>
-                            </p:column>
+                             <p:column headerText="Nome" filterBy="#{sala.lista}">
+                                    <h:outputText value="#{sala.nome}"/>
+                                </p:column>
                         </p:dataTable>
 
                     </h:panelGrid> 

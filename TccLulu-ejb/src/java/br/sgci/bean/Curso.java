@@ -12,9 +12,12 @@ package br.sgci.bean;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,13 +33,15 @@ public class Curso implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;    
-    private String nome, local, pub_alvo;
+    private String nome, pub_alvo;
     private int qtdVagas, duracao;
     @Temporal(TemporalType.DATE)
-    private Date data_inicio;
-    @Temporal(TemporalType.DATE)
-    private Date data_fim;
-
+    private Date data_inicio, data_fim;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_sala", nullable = false)
+    private Sala sala;
+    
     public int getId() {
         return id;
     }
@@ -77,14 +82,6 @@ public class Curso implements Serializable {
         this.data_fim = data_fim;
     }
 
-    public String getLocal() {
-        return local;
-    }
-
-    public void setLocal(String local) {
-        this.local = local;
-    }
-
     public String getPub_alvo() {
         return pub_alvo;
     }
@@ -101,7 +98,14 @@ public class Curso implements Serializable {
         this.duracao = duracao;
     }
     
-    
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
+  
   
        
 }

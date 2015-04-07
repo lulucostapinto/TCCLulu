@@ -7,12 +7,10 @@ package br.sgci.mng;
 
 import br.sgci.bean.Sala;
 import br.sgci.dao.SalaDAORemote;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ActionEvent;
-import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
 /**
@@ -48,13 +46,8 @@ public class SalaMNG {
     
         
 
-    public List<SelectItem> getLista() {
-        List<SelectItem> lista=new ArrayList<>();
-        lista.add(new SelectItem("Adm","Adm"));
-        lista.add(new SelectItem("Ped","Ped"));
-        lista.add(new SelectItem("Acad","Acad"));
-        lista.add(new SelectItem("Dir","Dir"));
-        return lista;
+    public List<Sala> getLista() {
+      return salaDAO.listar();
     }
 
    

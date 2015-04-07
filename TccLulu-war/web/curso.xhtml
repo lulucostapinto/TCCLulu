@@ -8,38 +8,40 @@
     <ui:composition template="/padrao.xhtml">
         <ui:define name="centro">
             <center margin-top='-200' style="top:-500px;position: relative">
-             
-                    <h:form id="formulario">
-                        <p:messages autoUpdate="true"/>
-                        <h:panelGrid>
-                            <p:panel header="INCLUIR CURSO">
-                                <h:panelGrid columns="2">
-                                    <h:outputLabel value="Nome"/>
-                                    <p:inputText id="nome" value="#{cursoMNG.nome}"/>
-                                    <h:outputLabel value="Público Alvo"/>
-                                    <p:inputText id="pub_alvo" value="#{cursoMNG.pub_alvo}"/> 
-                                    <h:outputLabel value="Quantidade Vagas"/>
-                                    <p:inputText id="qtdVagas" value="#{cursoMNG.qtdVagas}"/>
-                                    <h:outputLabel value="Duração"/>
-                                    <p:inputText id="duracao" value="#{cursoMNG.duracao}"/> 
-                                    <h:outputLabel value="Local"/>
-                                    <p:inputText id="local" value="#{cursoMNG.local}"/> 
-                                    <h:outputLabel value="Data Inicial"/>
-                                    <p:inputMask id="data_inicio" value="#{cursoMNG.data_inicio}" mask="99/99/9999">
-                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                    </p:inputMask>
-                                    <h:outputLabel value="Data Final"/>
-                                    <p:inputMask id="data_fim" value="#{cursoMNG.data_fim}" mask="99/99/9999">
-                                        <f:convertDateTime pattern="dd/MM/yyyy"/>                                        
-                                    </p:inputMask>
-                                    <p:commandButton value="GRAVAR" actionListener="#{cursoMNG.save}" ajax="false"/>
-                                    <p:commandButton value="LIMPAR" type="reset"/> 
-                                </h:panelGrid>
-                            </p:panel>
-                        </h:panelGrid> 
-                            
-                    </h:form>
-                
+
+                <h:form id="formulario">
+                    <p:messages autoUpdate="true"/>
+                    <h:panelGrid>
+                        <p:panel header="INCLUIR CURSO">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Nome"/>
+                                <p:inputText id="nome" value="#{cursoMNG.nome}"/>
+                                <h:outputLabel value="Público Alvo"/>
+                                <p:inputText id="pub_alvo" value="#{cursoMNG.pub_alvo}"/> 
+                                <h:outputLabel value="Quantidade Vagas"/>
+                                <p:inputText id="qtdVagas" value="#{cursoMNG.qtdVagas}"/>
+                                <h:outputLabel value="Duração"/>
+                                <p:inputText id="duracao" value="#{cursoMNG.duracao}"/> 
+                                <p:outputLabel  value="Local"/> 
+                                <p:selectOneMenu id="local" value="#{cursoMNG.salas}">
+                                    <f:selectItems value="#{cursos.sala.nome}"/> 
+                                </p:selectOneMenu>               
+                                <h:outputLabel value="Data Inicial"/>
+                                <p:inputMask id="data_inicio" value="#{cursoMNG.data_inicio}" mask="99/99/9999">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:inputMask>
+                                <h:outputLabel value="Data Final"/>
+                                <p:inputMask id="data_fim" value="#{cursoMNG.data_fim}" mask="99/99/9999">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>                                        
+                                </p:inputMask>
+                                <p:commandButton value="GRAVAR" actionListener="#{cursoMNG.save}" ajax="false"/>
+                                <p:commandButton value="LIMPAR" type="reset"/> 
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:panelGrid> 
+
+                </h:form>
+
             </center>
 
         </ui:define>
