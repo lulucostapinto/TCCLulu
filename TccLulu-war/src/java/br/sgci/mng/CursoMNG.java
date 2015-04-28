@@ -62,6 +62,14 @@ public class CursoMNG {
         this.cursoDAO = cursoDAO;
     }
 
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
+
     public SalaDAORemote getSalaDAO() {
         return salaDAO;
     }

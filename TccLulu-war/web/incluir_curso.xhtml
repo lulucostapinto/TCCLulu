@@ -23,8 +23,10 @@
                                 <h:outputLabel value="Duração"/>
                                 <p:inputText id="duracao" value="#{cursoMNG.duracao}"/> 
                                 <p:outputLabel  value="Local"/> 
-                                <p:selectOneMenu id="local" value="#{cursoMNG.salas}">
-                                    <f:selectItems value="#{cursos.sala.nome}"/> 
+                                <p:selectOneMenu id="local" converter="salaConverter" value="#{cursoMNG.sala}">
+                                      <f:selectItems value="#{cursoMNG.salas}" var ="vSala"
+                                               itemLabel="#{vSala.nome}"
+                                               itemValue="#{vSala}"/>
                                 </p:selectOneMenu>               
                                 <h:outputLabel value="Data Inicial"/>
                                 <p:inputMask id="data_inicio" value="#{cursoMNG.data_inicio}" mask="99/99/9999">
@@ -35,7 +37,8 @@
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>                                        
                                 </p:inputMask>
                                 <p:commandButton value="GRAVAR" actionListener="#{cursoMNG.save}" ajax="false"/>
-                                <p:commandButton value="LIMPAR" type="reset"/> 
+                                <p:commandButton value="LIMPAR" type="reset"/>
+                                <p:commandButton value="CANCELAR" id="cancelar"  action="matriz"/>
                             </h:panelGrid>
                         </p:panel>
                     </h:panelGrid> 

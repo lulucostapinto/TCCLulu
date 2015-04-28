@@ -16,12 +16,9 @@
                     <h:panelGrid>
                         <p:panel header="Inscritos"> 
 
-                            
-
-                            <p:dataTable id="inscritos" value="#{inscricaoMNG.lista}" emptyMessage="Não há registros" var="inscricao" paginator="true" rows="4">
+                            <p:dataTable id="inscritos" value="#{inscricaoMNG.lista}" emptyMessage="Não há registros" var="inscricao" paginator="true" rows="4" rowKey="#{inscricao.id}">
                                 <p:column headerText="Cracha" filterBy="#{inscricao.lista}">
-                                    <h:outputText value="#{inscricao.cracha}">                                        
-                                    </h:outputText>
+                                    <h:outputText value="#{inscricao.cracha}"/>                            
                                 </p:column>                                
                                 <p:column headerText="Nome" filterBy="#{inscricao.lista}">
                                     <h:outputText value="#{inscricao.nome}"/>

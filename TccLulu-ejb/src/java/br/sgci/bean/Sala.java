@@ -38,8 +38,35 @@ public class Sala implements Serializable {
         return nome;
     }
 
+    @Override
+    public String toString() {
+        return nome;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 11 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Sala other = (Sala) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
     }
      
     

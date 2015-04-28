@@ -73,4 +73,9 @@ public class SalaDAO implements SalaDAORemote {
         return sala;
     }
 
+    @Override
+    public Sala retrieve(Sala value) {
+        return this.selecionar(value.getId());
+    }
+
 }

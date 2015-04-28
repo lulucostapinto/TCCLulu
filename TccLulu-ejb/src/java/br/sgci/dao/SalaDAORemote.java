@@ -6,17 +6,19 @@
 package br.sgci.dao;
 
 import br.sgci.bean.Sala;
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
 /**
  *
  * @author Lulu
  */
-@Local
+@Remote
 public interface SalaDAORemote {
     public boolean gravar(Sala sala);
 
     public Sala selecionar(int id);
+    
+    public Sala retrieve(Sala value);
 
     public boolean remover(Sala sala);
 

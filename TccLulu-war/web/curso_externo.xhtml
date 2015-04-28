@@ -12,17 +12,21 @@
                 <h:form id="formulario">
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid>
-                        <p:panel header="LOGIN">
-                            <h:panelGrid columns="2" border="0" style="margin-left: 150px;width: 250px;height: 150px; background-image: url(images/fndLogin.png);background-repeat: no-repeat">
-                                <h:outputLabel value="Login"/>
-                                <p:inputText id="txtLogin" value="#{usuarioMNG.login}"/>
-                                <h:outputLabel value="Senha"/>
-                                <p:keyboard id="txtSenha" value="#{usuarioMNG.senha}"  password="true"/>
-                                <h:commandButton value="OK" action="#{usuarioMNG.valida}"/>
+                        <p:panel header="INCLUIR CURSO EXTERNO">
+                            <h:panelGrid columns="2">
+                                
+                                <p:selectOneMenu id="usuario" converter="salaConverter" value="#{cursoMNG.sala}">
+                                      <f:selectItems value="#{cursoMNG.salas}" var ="vSala"
+                                               itemLabel="#{vSala.nome}"
+                                               itemValue="#{vSala}"/>
+                                </p:selectOneMenu>               
+                                
+                                <p:commandButton value="GRAVAR" actionListener="#{cursoMNG.save}" ajax="false"/>
                                 <p:commandButton value="LIMPAR" type="reset"/> 
                             </h:panelGrid>
                         </p:panel>
-                    </h:panelGrid>
+                    </h:panelGrid> 
+
                 </h:form>
 
             </center>
@@ -30,3 +34,4 @@
         </ui:define>
     </ui:composition>
 </html>
+

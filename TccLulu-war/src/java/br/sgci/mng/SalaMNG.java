@@ -22,7 +22,7 @@ import javax.inject.Named;
 public class SalaMNG {
 
     @EJB
-    SalaDAORemote salaDAO;
+    private SalaDAORemote salaDAO;
     private int id;
     private String nome;
     private List<Sala> lista;
@@ -44,7 +44,12 @@ public class SalaMNG {
         this.salaDAO = salaDAO;
     }
     
-        
+    public Sala getSala(int id) {
+        Sala sal = new Sala();
+        sal.setId(id);
+
+        return salaDAO.retrieve(sal);
+    }    
 
     public List<Sala> getLista() {
       return salaDAO.listar();
