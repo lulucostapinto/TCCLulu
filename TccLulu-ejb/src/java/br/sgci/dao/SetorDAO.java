@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.sgci.dao;
 
-import br.sgci.bean.Curso;
+import br.sgci.bean.Setor;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,16 +17,40 @@ import javax.persistence.Query;
  * @author Lulu
  */
 @Stateless
-public class CursoDAO implements CursoDAORemote {
-
-    @PersistenceContext
+public class SetorDAO implements SetorDAORemote {
+@PersistenceContext
     private EntityManager em;
 
     @Override
-    public boolean gravar(Curso curso) {
+    public boolean gravar(Setor setor) {
         boolean sucesso = false;
         try {
-            em.merge(curso);
+            em.merge(setor);
+            sucesso = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return sucesso;
+    }
+    @Override
+    public Setor selecionar(int id) {
+        Setor setor = null;
+        try {
+            setor = em.find(Setor.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return setor;
+    }
+
+    @Override
+    public boolean remover(Setor setor) {
+        boolean sucesso = false;
+        try {
+            setor = em.find(Setor.class, setor.getId());
+            em.remove(setor);
             sucesso = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,42 +60,21 @@ public class CursoDAO implements CursoDAORemote {
     }
 
     @Override
-    public Curso selecionar(int id) {
-        Curso curso = null;
+    public List<Setor> listar() {
+        List<Setor> setor = null;
         try {
-            curso = em.find(Curso.class, id);
+            Query query = em.createQuery("Select st from Setor st");
+            setor = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return curso;
+        return setor;
     }
 
     @Override
-    public boolean remover(Curso curso) {
-        boolean sucesso = false;
-        try {
-            curso = em.find(Curso.class, curso.getId());
-            em.remove(curso);
-            sucesso = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return sucesso;
-    }
-
-    @Override
-    public List<Curso> listar() {
-        List<Curso> cursos = null;
-        try {
-            Query query = em.createQuery("Select c from Curso c order by c.data_inicio");
-            cursos = query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return cursos;
+    public Setor retrieve(Setor value) {
+        return this.selecionar(value.getId());
     }
 
 }

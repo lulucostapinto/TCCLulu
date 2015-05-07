@@ -5,10 +5,9 @@
  */
 package br.sgci.mng;
 
-import br.sgci.bean.Sala;
-import br.sgci.dao.SalaDAORemote;
+import br.sgci.bean.Setor;
+import br.sgci.dao.SetorDAORemote;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
@@ -17,34 +16,14 @@ import javax.inject.Named;
  *
  * @author Lulu
  */
-@Named(value = "salaMNG")
+@Named(value = "setorMNG")
 @RequestScoped
-public class SalaMNG {
+public class SetorMNG {
 
-    @EJB
-    private SalaDAORemote salaDAO;
+    private SetorDAORemote setorDAO;
     private int id;
     private String nome;
-    private List<Sala> lista;
-
-    public SalaDAORemote getSalaDAO() {
-        return salaDAO;
-    }
-
-    public void setSalaDAO(SalaDAORemote salaDAO) {
-        this.salaDAO = salaDAO;
-    }
-
-    public Sala getSala(int id) {
-        Sala sal = new Sala();
-        sal.setId(id);
-
-        return salaDAO.retrieve(sal);
-    }
-
-    public List<Sala> getLista() {
-        return salaDAO.listar();
-    }
+    private List<Setor> lista;
 
     public int getId() {
         return id;
@@ -62,13 +41,32 @@ public class SalaMNG {
         this.nome = nome;
     }
 
+    public SetorDAORemote getSetorDAO() {
+        return setorDAO;
+    }
+
+    public void setSetorDAO(SetorDAORemote setorDAO) {
+        this.setorDAO = setorDAO;
+    }
+
+    public Setor getSetor(int id) {
+        Setor set = new Setor();
+        set.setId(id);
+
+        return setorDAO.retrieve(set);
+    }
+
+    public List<Setor> getLista() {
+        return setorDAO.listar();
+    }
+
     public void save(ActionEvent actionEvent) {
-        Sala s = new Sala();
-        s.setNome(this.getNome());
+        Setor st = new Setor();
+        st.setNome(this.getNome());
 
-        salaDAO.gravar(s);
-
+        setorDAO.gravar(st);
         this.setNome(null);
+
     }
 
 }

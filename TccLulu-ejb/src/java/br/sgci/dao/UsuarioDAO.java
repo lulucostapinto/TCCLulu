@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.sgci.dao;
 
 import br.sgci.bean.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -19,7 +19,6 @@ import javax.persistence.Query;
  */
 @Stateless
 public class UsuarioDAO implements UsuarioDAORemote {
-
     @PersistenceContext
     private EntityManager em;
 
@@ -32,5 +31,18 @@ public class UsuarioDAO implements UsuarioDAORemote {
             return null;
         }
     }
-}
 
+    
+    public List<Usuario> listar() {
+        List<Usuario> sala = null;
+        try {
+            Query query = em.createQuery("Select u from Usuario u");
+            sala = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return sala;
+    }
+
+}

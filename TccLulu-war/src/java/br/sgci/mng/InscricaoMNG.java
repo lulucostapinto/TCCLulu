@@ -24,17 +24,13 @@ public class InscricaoMNG {
     @EJB
     InscricaoDAORemote inscricaoDAO;
     private int id;
-    private String nome, funcao, setor;
+    private String nome, funcao, setor, curso;
     private int cracha, centro_custo;
     private List<Inscricao> lista;
 
     public void save(ActionEvent actionEvent) {
         Inscricao i = new Inscricao();
-        i.setNome(this.getNome());
-        i.setFuncao(this.getFuncao());
-        i.setSetor(this.getSetor());
-        i.setCentro_custo(this.getCentro_custo());
-        i.setCracha(this.getCracha());
+       
 
         inscricaoDAO.gravar(i);
 

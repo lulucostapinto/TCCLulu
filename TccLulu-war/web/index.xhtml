@@ -1,24 +1,22 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">     
-    <ui:composition template="/padrao.xhtml">
+    <ui:composition template="/WEB-INF/templates/default.xhtml">
         <ui:define name="centro">
-            <center margin-top='-200' style="top:-500px;position: relative">
-
+            <center margin-top='0' style="top:0px;position: relative">
+                
                 <h:form id="formulario">
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid>
                         <p:panel header="LOGIN">
-                            <h:panelGrid columns="2" border="0" style="margin-left: 150px;width: 250px;height: 150px; background-image: url(images/fndLogin.png);background-repeat: no-repeat">
+                            <h:panelGrid>
                                 <h:outputLabel value="Login"/>
                                 <p:inputText id="txtLogin" value="#{usuarioMNG.login}"/>
                                 <h:outputLabel value="Senha"/>
                                 <p:keyboard id="txtSenha" value="#{usuarioMNG.senha}"  password="true"/>
-                                <h:commandButton value="OK" action="#{usuarioMNG.valida}"/>
+                                <p:commandButton value="OK" action="#{usuarioMNG.valida}"/>
                                 <p:commandButton value="LIMPAR" type="reset"/> 
                             </h:panelGrid>
                         </p:panel>

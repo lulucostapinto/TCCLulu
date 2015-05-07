@@ -12,18 +12,18 @@
                 <h:form id="formulario">
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid>
-                        <p:panel header="CADASTRO DE USUARIOS">
+                        <p:panel header="CADASTRO DE SETORES">
                           <h:form>
                                 <p:growl id="growl" life="2000" />     
-                                <p:commandButton value="Incluir" id="incluir"  action="incluir_usuario"/>
+                                <p:commandButton value="Incluir" id="incluir"  action="incluir_setor"/>
                                 <p:commandButton value="Editar" id="editar" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
                                 <p:commandButton value="Excluir" id="excluir" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
                             </h:form> 
                         </p:panel>
 
-                        <p:dataTable id="usuario" value="#{usuarioMNG.lista}" emptyMessage="Não há registros" var="usuario" paginator="true" rows="4" style="width: 820px">
-                             <p:column headerText="Nome" filterBy="#{usuario}">
-                                    <h:outputText value="#{usuario.nome}"/>
+                        <p:dataTable id="setor" value="#{setorMNG.lista}" emptyMessage="Não há registros" var="setor" paginator="true" rows="4" style="width: 820px">
+                             <p:column headerText="Nome" filterBy="#{setor.lista}">
+                                    <h:outputText value="#{setor.nome}"/>
                                 </p:column>
                         </p:dataTable>
 
@@ -36,3 +36,6 @@
         </ui:define>
     </ui:composition>
 </html>
+
+
+

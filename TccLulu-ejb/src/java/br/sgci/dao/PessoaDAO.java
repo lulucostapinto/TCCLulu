@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.sgci.dao;
 
-import br.sgci.bean.Curso;
+import br.sgci.bean.Pessoa;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,16 +17,15 @@ import javax.persistence.Query;
  * @author Lulu
  */
 @Stateless
-public class CursoDAO implements CursoDAORemote {
-
-    @PersistenceContext
+public class PessoaDAO implements PessoaDAORemote {
+@PersistenceContext
     private EntityManager em;
 
     @Override
-    public boolean gravar(Curso curso) {
+    public boolean gravar(Pessoa pessoa) {
         boolean sucesso = false;
         try {
-            em.merge(curso);
+            em.merge(pessoa);
             sucesso = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,23 +35,23 @@ public class CursoDAO implements CursoDAORemote {
     }
 
     @Override
-    public Curso selecionar(int id) {
-        Curso curso = null;
+    public Pessoa selecionar(int id) {
+        Pessoa pessoa = null;
         try {
-            curso = em.find(Curso.class, id);
+            pessoa = em.find(Pessoa.class, id);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return curso;
+        return pessoa;
     }
 
     @Override
-    public boolean remover(Curso curso) {
+    public boolean remover(Pessoa pessoa) {
         boolean sucesso = false;
         try {
-            curso = em.find(Curso.class, curso.getId());
-            em.remove(curso);
+            pessoa = em.find(Pessoa.class, pessoa.getId());
+            em.remove(pessoa);
             sucesso = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,16 +61,21 @@ public class CursoDAO implements CursoDAORemote {
     }
 
     @Override
-    public List<Curso> listar() {
-        List<Curso> cursos = null;
+    public List<Pessoa> listar() {
+        List<Pessoa> pessoa = null;
         try {
-            Query query = em.createQuery("Select c from Curso c order by c.data_inicio");
-            cursos = query.getResultList();
+            Query query = em.createQuery("Select p from Pessoa p");
+            pessoa = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return cursos;
+        return pessoa;
+    }
+
+    @Override
+    public Pessoa retrieve(Pessoa value) {
+        return this.selecionar(value.getId());
     }
 
 }

@@ -7,6 +7,7 @@ package br.sgci.mng;
 
 import br.sgci.bean.Usuario;
 import br.sgci.dao.UsuarioDAORemote;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -26,6 +27,7 @@ public class UsuarioMNG {
     UsuarioDAORemote dao;
     private String login;
     private String senha;
+    private List<Usuario> lista;
 
     /** Creates a new instance of UsuarioMNG */
     public UsuarioMNG() {
@@ -46,7 +48,8 @@ public class UsuarioMNG {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
+    
+    
     public String valida() {
         System.out.println("Tentando logar");
         FacesContext context = FacesContext.getCurrentInstance();
