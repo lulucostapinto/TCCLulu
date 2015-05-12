@@ -17,11 +17,11 @@
                                 <p:growl id="growl" life="2000" />     
                                 <p:commandButton value="Incluir" id="incluir"  action="incluir_setor"/>
                                 <p:commandButton value="Editar" id="editar" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
-                                <p:commandButton value="Excluir" id="excluir" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
+                                <p:commandButton value="Excluir" id="excluir" action="#{setor.remover}"/>
                             </h:form> 
                         </p:panel>
 
-                        <p:dataTable id="setor" value="#{setorMNG.lista}" emptyMessage="Não há registros" var="setor" paginator="true" rows="4" style="width: 820px">
+                        <p:dataTable id="sala" value="#{setorMNG.lista}" emptyMessage="Não há registros" var="setor" paginator="true" rows="4" style="width: 820px">
                              <p:column headerText="Nome" filterBy="#{setor.lista}">
                                     <h:outputText value="#{setor.nome}"/>
                                 </p:column>
@@ -30,12 +30,9 @@
                     </h:panelGrid> 
 
                 </h:form>
-
+                
             </center>
 
         </ui:define>
     </ui:composition>
 </html>
-
-
-

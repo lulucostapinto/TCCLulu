@@ -21,6 +21,19 @@ import javax.persistence.Query;
 public class UsuarioDAO implements UsuarioDAORemote {
     @PersistenceContext
     private EntityManager em;
+    
+    @Override
+    public boolean gravar(Usuario usuario) {
+        boolean sucesso = false;
+        try {
+            em.merge(usuario);
+            sucesso = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return sucesso;
+    }
 
     public Usuario findByLogin(String login) {
         Query query = em.createNamedQuery("Usuario.findLogin");
@@ -34,15 +47,15 @@ public class UsuarioDAO implements UsuarioDAORemote {
 
     
     public List<Usuario> listar() {
-        List<Usuario> sala = null;
+        List<Usuario> usuario = null;
         try {
             Query query = em.createQuery("Select u from Usuario u");
-            sala = query.getResultList();
+            usuario = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return sala;
+        return usuario;
     }
 
 }

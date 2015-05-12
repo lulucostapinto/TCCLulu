@@ -14,6 +14,7 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface UsuarioDAORemote {
+    public boolean gravar(Usuario usuario);
     Usuario findByLogin(String login);
     public java.util.List<Usuario> listar();
 }

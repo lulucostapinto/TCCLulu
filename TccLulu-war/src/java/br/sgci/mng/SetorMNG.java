@@ -7,9 +7,11 @@ package br.sgci.mng;
 
 import br.sgci.bean.Setor;
 import br.sgci.dao.SetorDAORemote;
-import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ActionEvent;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -20,26 +22,11 @@ import javax.inject.Named;
 @RequestScoped
 public class SetorMNG {
 
+    @EJB
     private SetorDAORemote setorDAO;
     private int id;
     private String nome;
     private List<Setor> lista;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public SetorDAORemote getSetorDAO() {
         return setorDAO;
@@ -60,13 +47,40 @@ public class SetorMNG {
         return setorDAO.listar();
     }
 
-    public void save(ActionEvent actionEvent) {
-        Setor st = new Setor();
-        st.setNome(this.getNome());
-
-        setorDAO.gravar(st);
-        this.setNome(null);
-
+    public int getId() {
+        return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void save(ActionEvent actionEvent) {
+        Setor s = new Setor();
+        s.setNome(this.getNome());
+
+        setorDAO.gravar(s);
+
+        this.setNome(null);
+    }
+    
+    public void editar(ActionEvent actionEvent) {
+        
+    }
+
+    public void remove(ActionEvent actionEvent) {
+        int index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir").toString());
+        Setor set = new Setor();
+        set.setId(index);
+        setorDAO.remover(set);       
+        
+    }
 }

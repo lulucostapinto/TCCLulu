@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
 /**
@@ -24,13 +25,26 @@ public class UsuarioMNG {
 
     public static final String USER_SESSION_KEY = "sessaousuario";
     @EJB
-    UsuarioDAORemote dao;
+    private UsuarioDAORemote usuarioDAO;
+    private Long codigo;
     private String login;
     private String senha;
     private List<Usuario> lista;
 
-    /** Creates a new instance of UsuarioMNG */
-    public UsuarioMNG() {
+    public Long getId() {
+        return codigo;
+    }
+
+    public void setId(Long id) {
+        this.codigo = id;
+    }
+
+    public UsuarioDAORemote getUsuarioDAO() {
+        return usuarioDAO;
+    }
+
+    public void setUsuarioDAO(UsuarioDAORemote usuarioDAO) {
+        this.usuarioDAO = usuarioDAO;
     }
 
     public String getLogin() {
@@ -48,12 +62,11 @@ public class UsuarioMNG {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    
+
     public String valida() {
         System.out.println("Tentando logar");
         FacesContext context = FacesContext.getCurrentInstance();
-        Usuario usuario = dao.findByLogin(login);
+        Usuario usuario = usuarioDAO.findByLogin(login);
         if (usuario != null) {
             if (!usuario.getSenha().equals(senha)) {
                 this.msgInvalidLogin(context);
@@ -72,5 +85,24 @@ public class UsuarioMNG {
         System.out.println("não deu para logar");
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha na autenticação!", "Usuário ou senha inválidos");
         context.addMessage(null, message);
+    }
+
+    public List<Usuario> getLista() {
+        return usuarioDAO.listar();
+    }
+    
+    public void setLista(List<Usuario> lista) {
+        this.lista = lista;
+    }
+            
+
+    public void save(ActionEvent actionEvent) {
+        Usuario u = new Usuario();
+        u.setLogin(this.getLogin());
+        u.setSenha(this.getSenha());
+        usuarioDAO.gravar(u);
+
+        this.setLogin(null);
+        this.setSenha(null);
     }
 }

@@ -5,7 +5,7 @@
  */
 package br.sgci.dao;
 
-import br.sgci.bean.Setor;
+import br.sgci.bean.Curso_externo;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,40 +17,15 @@ import javax.persistence.Query;
  * @author Lulu
  */
 @Stateless
-public class SetorDAO implements SetorDAORemote {
+public class Curso_externoDAO implements Curso_externoDAORemote {
 @PersistenceContext
     private EntityManager em;
 
     @Override
-    public boolean gravar(Setor setor) {
+    public boolean gravar(Curso_externo curso_externo) {
         boolean sucesso = false;
         try {
-            em.merge(setor);
-            sucesso = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return sucesso;
-    }
-    @Override
-    public Setor selecionar(int id) {
-        Setor setor = null;
-        try {
-            setor = em.find(Setor.class, id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return setor;
-    }
-
-    @Override
-    public boolean remover(Setor setor) {
-        boolean sucesso = false;
-        try {
-            setor = em.find(Setor.class, setor.getId());
-            em.remove(setor);
+            em.merge(curso_externo);
             sucesso = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,20 +35,46 @@ public class SetorDAO implements SetorDAORemote {
     }
 
     @Override
-    public List<Setor> listar() {
-        List<Setor> setor = null;
+    public Curso_externo selecionar(int id) {
+        Curso_externo curso_externo = null;
         try {
-            Query query = em.createQuery("Select s from Setor s");
-            setor = query.getResultList();
+            curso_externo = em.find(Curso_externo.class, id);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return setor;
+        return curso_externo;
     }
 
     @Override
-    public Setor retrieve(Setor value) {
+    public boolean remover(Curso_externo curso_externo) {
+        boolean sucesso = false;
+        try {
+            curso_externo = em.find(Curso_externo.class, curso_externo.getId());
+            em.remove(curso_externo);
+            sucesso = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return sucesso;
+    }
+
+    @Override
+    public List<Curso_externo> listar() {
+        List<Curso_externo> curso_externo = null;
+        try {
+            Query query = em.createQuery("Select p from Curso_externo p");
+            curso_externo = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return curso_externo;
+    }
+
+    @Override
+    public Curso_externo retrieve(Curso_externo value) {
         return this.selecionar(value.getId());
     }
 

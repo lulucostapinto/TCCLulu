@@ -15,18 +15,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ *
+ * @author Lulu
+ */
 @Entity
-@Table(name = "pessoa")
-public class Pessoa implements Serializable {
+@Table(name = "curso_externo")
+public class Curso_externo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nome, cargo;
+    private String arquivo;  
+    
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_setor", nullable = false)
-    private Setor setor;
+    @JoinColumn(name = "id_pessoa", nullable = false)
+    private Pessoa pessoa;
 
     public int getId() {
         return id;
@@ -36,35 +41,21 @@ public class Pessoa implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-
-    public Setor getSetor() {
-        return setor;
-    }
-
-    public void setSetor(Setor setor) {
-        this.setor = setor;
-    }
-    
+   
     
 
-    @Override
+
+   @Override
     public String toString() {
-        return nome;
+        return arquivo;
     }
 
     @Override
@@ -82,11 +73,10 @@ public class Pessoa implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Pessoa other = (Pessoa) obj;
+        final Curso_externo other = (Curso_externo) obj;
         if (this.id != other.id) {
             return false;
         }
         return true;
     }
-
 }

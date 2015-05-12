@@ -16,16 +16,17 @@
                                 <h:panelGrid columns="2">
                                     <h:outputLabel value="Nome"/> 
                                     <p:inputText id="nome" value="#{pessoaMNG.nome}"/>
-                                    <h:outputLabel value="Nome"/> 
-                                    <p:inputText id="nome" value="#{pessoaMNG.cargo}"/>
+                                    <h:outputLabel value="Cargo"/> 
+                                    <p:inputText id="cargo" value="#{pessoaMNG.cargo}"/>
+                                    <p:outputLabel value="Setor"/> 
                                     <p:selectOneMenu id="setor" converter="setorConverter" value="#{pessoaMNG.setor}">
-                                      <f:selectItems value="#{pessoaMNG.setores}" var ="vSetor"
-                                               itemLabel="#{vSetor.nome}"
-                                               itemValue="#{vSetor}"/>
-                                </p:selectOneMenu>           
+                                        <f:selectItems value="#{pessoaMNG.setores}" var ="vSetor"
+                                                       itemLabel="#{vSetor.nome}"
+                                                       itemValue="#{vSetor}"/>
+                                    </p:selectOneMenu>           
                                     <p:commandButton value="GRAVAR" actionListener="#{pessoaMNG.save}" ajax="false"/>
                                     <p:commandButton value="LIMPAR" type="reset"/>
-                                    <p:commandButton value="CANCELAR" id="cancelar"  action="sala"/> 
+                                    <p:commandButton value="CANCELAR" id="cancelar"  action="pessoa"/> 
                                 </h:panelGrid>
                             </p:panel>
                         </h:panelGrid> 

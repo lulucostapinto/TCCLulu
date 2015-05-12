@@ -22,17 +22,58 @@ import javax.inject.Named;
 @Named(value = "pessoaMNG")
 @RequestScoped
 public class PessoaMNG {
-    
-    
+
     @EJB
     PessoaDAORemote pessoaDAO;
     @EJB
-    SetorDAORemote setorDAO;  
+    SetorDAORemote setorDAO;
     private int id;
     private String nome, cargo;
+    private List<Pessoa> lista;
     private Setor setor = new Setor();
     private List<Setor> setores;
+    
+    public void save(ActionEvent actionEvent) {
+        Pessoa p = new Pessoa();
+        p.setNome(this.getNome());
+        p.setCargo(this.getCargo());
 
+        setor = setorDAO.selecionar(setor.getId());
+        p.setSetor(setor);
+        pessoaDAO.gravar(p);
+
+    }
+
+    public PessoaDAORemote getPessoaDAO() {
+        return pessoaDAO;
+    }
+
+    public void setPessoaDAO(PessoaDAORemote salaDAO) {
+        this.pessoaDAO = pessoaDAO;
+    }
+    
+     public Setor getSetor() {
+        return setor;
+    }
+
+    public void setSetor(Setor setor) {
+        this.setor = setor;
+    }
+    
+    public SetorDAORemote getSetorDAO() {
+        return setorDAO;
+    }
+
+    public void setSetorDAO(SetorDAORemote setorDAO) {
+        this.setorDAO = setorDAO;
+    }
+    
+    public Pessoa getPessoa(int id) {
+        Pessoa pes = new Pessoa();
+        pes.setId(id);
+
+        return pessoaDAO.retrieve(pes);
+    }
 
     public int getId() {
         return id;
@@ -57,65 +98,23 @@ public class PessoaMNG {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }  
-
-    public Setor getSetor() {
-        return setor;
-    }
-
-    public void setSetor(Setor setor) {
-        this.setor = setor;
-    }
-
-    public SetorDAORemote getSetorDAO() {
-        return setorDAO;
-    }
-
-    public void setSetorDAO(SetorDAORemote setorDAO) {
-        this.setorDAO = setorDAO;
-    }
-
-    public List<Setor> getSetores() {
-        return setores;
-    }
-
-    public void setSetores(List<Setor> setores) {
-        this.setores = setores;
-    }
     
-        
-    
-    public PessoaDAORemote getPessoaDAO() {
-        return pessoaDAO;
-    }
-
-    public void setPessoaDAO(PessoaDAORemote salaDAO) {
-        this.pessoaDAO = pessoaDAO;
-    }
-
-    public Pessoa getPessoa(int id) {
-        Pessoa pes = new Pessoa();
-        pes.setId(id);
-
-        return pessoaDAO.retrieve(pes);
-    }
-
     public List<Pessoa> getLista() {
         return pessoaDAO.listar();
     }
 
-    public void save(ActionEvent actionEvent) {
-        Pessoa p = new Pessoa();
-        p.setNome(this.getNome());
-        p.setCargo(this.getCargo());
-
-        setor = setorDAO.selecionar(setor.getId());
-        p.setSetor(setor);
-        pessoaDAO.gravar(p);  
-
-        this.setNome(null);
+    public void setLista(List<Pessoa> lista) {
+        this.lista = lista;
+    }
+    
+    
+    public List<Setor> getSetores() {
+        return setorDAO.listar();
     }
 
+    public void setSetores(List<Setor> setores) {
+        this.setores = setores;
+    }    
+
+   
 }
-
-    
-

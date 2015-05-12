@@ -7,8 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">     
     <ui:composition template="/padrao.xhtml">
         <ui:define name="centro">
-            <center margin-top='-500' style="top:-900px;">
-
+           <center margin-top='-200' style="top:-500px;position: relative">
 
 
                 <h:form id="formulario" >
@@ -19,13 +18,13 @@
                                 <p:growl id="growl" life="1000" />     
                                 <p:commandButton value="Incluir" id="incluir"  action="incluir_curso"/>
                                 <p:commandButton value="Editar" id="editar" action="editar"/>                        
-                                <p:commandButton value="Excluir" id="excluir" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
+                                <p:commandButton value="Excluir" id="excluir" action="#{curso.remover}" />
                                 <p:commandButton value="Inscritos" id="inscritos" action="inscritos" />
                                 <p:commandButton value="Conteúdo" id="conteudo" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
                                 <p:commandButton value="Inscrição" id="inscricao" action="inscricao" />
                             </h:form>  
 
-                            <p:dataTable id="curso" value="#{cursoMNG.lista}" emptyMessage="Não há registros" var="curso" paginator="true" rows="4" rowKey="#{curso.id}">
+                            <p:dataTable id="curso" value="#{cursoMNG.lista}" emptyMessage="Não há registros" var="curso" paginator="true" rows="10" rowKey="#{curso.id}" style="width:800px">
                                 <p:column selectionMode="single" style="width:15px;text-align:center"/>
                                 <p:column style="width:95px" headerText="Data Inicio">
                                     <h:outputText value="#{curso.data_inicio}">
@@ -40,16 +39,16 @@
                                 <p:column headerText="Nome" filterBy="#{curso.lista}">
                                     <h:outputText value="#{curso.nome}"/>
                                 </p:column>
-                                <p:column style="width:130px" headerText="Sala">
+                                <p:column headerText="Sala">
                                     <h:outputText value="#{curso.sala}"/>
                                 </p:column>
-                                <p:column style="width:95px" headerText="Horas">
+                                <p:column  headerText="Horas">
                                     <h:outputText value="#{curso.duracao}"/>
                                 </p:column>
-                                <p:column style="width:95px" headerText="Vagas">
+                                <p:column headerText="Vagas">
                                     <h:outputText value="#{curso.qtdVagas}"/>
                                 </p:column>                           
-                                <p:column style="width:130px" headerText="Público alvo" filterBy="#{cursoMNG.lista}">
+                                <p:column  headerText="Público alvo" filterBy="#{cursoMNG.lista}">
                                     <h:outputText value="#{curso.pub_alvo}"/>
                                 </p:column>
                             </p:dataTable>

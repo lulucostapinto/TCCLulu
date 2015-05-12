@@ -23,7 +23,7 @@
                             <p:menuitem value="Matriz de cursos" outcome="matriz" />                            
                         </p:submenu>
                         <p:submenu label="CURRÍCULO">
-                            <p:menuitem value="Incluir curso externo" />
+                            <p:menuitem value="Incluir curso externo" outcome="curso_externo"/>
                             <p:menuitem value="Relatório de horas" />
                             <p:menuitem value="Certificados" />                    
                         </p:submenu>
@@ -31,20 +31,14 @@
                             <p:menuitem value="Vídeos" />
                             <p:menuitem value="Monografias" />
                             <p:menuitem value="TCC's" />                    
-                        </p:submenu>
-                        <p:submenu label="AVALIAÇÕES DE DESEMPENHO">
-                            <p:menuitem value="2014" />
-                            <p:menuitem value="2013" />
-                            <p:menuitem value="2012" />                    
-                        </p:submenu>
-                        <p:submenu label="CADASTROS">
+                        </p:submenu>                       
+                        <p:submenu label="CONFIGURAÇÕES">
                             <p:menuitem value="Usuários" outcome="usuario"/>
                             <p:menuitem value="Salas" outcome="sala"/>
                             <p:menuitem value="Setores" outcome="setor"/>
                             <p:menuitem value="Colaboradores" outcome="pessoa"/>
-                        </p:submenu>
-                        <p:submenu label="SAIR">                           
-                        </p:submenu>
+                            <p:menuitem value="SAIR" outcome="index"/>
+                        </p:submenu>                      
                     </p:menu>
                 </h:form>              
                     
