@@ -68,6 +68,8 @@ public class Curso_externoMNG {
         if(arquivo != null) {
             FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
+            
+            arquivo.getContents();
         }
     }
 

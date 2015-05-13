@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">     
     <ui:composition template="/padrao.xhtml">
         <ui:define name="centro">
-           <center margin-top='-200' style="top:-500px;position: relative">
+            <center margin-top='-200' style="top:-500px;position: relative">
 
 
                 <h:form id="formulario" >
@@ -16,16 +16,14 @@
                         <p:panel header="Matriz de cursos"> 
                             <h:form>
                                 <p:growl id="growl" life="1000" />     
-                                <p:commandButton value="Incluir" id="incluir"  action="incluir_curso"/>
-                                <p:commandButton value="Editar" id="editar" action="editar"/>                        
-                                <p:commandButton value="Excluir" id="excluir" action="#{curso.remover}" />
+                                <p:commandButton value="Incluir" id="incluir"  action="incluir_curso"/>                                
                                 <p:commandButton value="Inscritos" id="inscritos" action="inscritos" />
                                 <p:commandButton value="Conteúdo" id="conteudo" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
                                 <p:commandButton value="Inscrição" id="inscricao" action="inscricao" />
                             </h:form>  
 
                             <p:dataTable id="curso" value="#{cursoMNG.lista}" emptyMessage="Não há registros" var="curso" paginator="true" rows="10" rowKey="#{curso.id}" style="width:800px">
-                                <p:column selectionMode="single" style="width:15px;text-align:center"/>
+                                
                                 <p:column style="width:95px" headerText="Data Inicio">
                                     <h:outputText value="#{curso.data_inicio}">
                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
@@ -46,10 +44,16 @@
                                     <h:outputText value="#{curso.duracao}"/>
                                 </p:column>
                                 <p:column headerText="Vagas">
-                                    <h:outputText value="#{curso.qtdVagas}"/>
+                                    <h:outputText value="#{curso.qtd_vagas}"/>
                                 </p:column>                           
                                 <p:column  headerText="Público alvo" filterBy="#{cursoMNG.lista}">
                                     <h:outputText value="#{curso.pub_alvo}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Editar" actionListener="#{cursoMNG.update}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Excluir" actionListener="#{cursoMNG.remove}"/>
                                 </p:column>
                             </p:dataTable>
                         </p:panel>

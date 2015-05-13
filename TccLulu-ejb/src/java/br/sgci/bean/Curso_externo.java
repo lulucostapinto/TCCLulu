@@ -26,7 +26,7 @@ public class Curso_externo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String arquivo;  
+    private byte[] arquivo;  
     
     
     @ManyToOne(fetch = FetchType.EAGER)
@@ -48,16 +48,11 @@ public class Curso_externo implements Serializable {
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
-
-   
+  
     
 
 
-   @Override
-    public String toString() {
-        return arquivo;
-    }
-
+   
     @Override
     public int hashCode() {
         int hash = 3;

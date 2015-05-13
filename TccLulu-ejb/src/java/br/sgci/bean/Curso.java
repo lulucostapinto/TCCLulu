@@ -34,7 +34,7 @@ public class Curso implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;    
     private String nome, pub_alvo;
-    private int qtdVagas, duracao;
+    private int qtd_vagas, duracao;
     @Temporal(TemporalType.DATE)
     private Date data_inicio, data_fim;
     
@@ -58,12 +58,12 @@ public class Curso implements Serializable {
         this.nome = nome;
     }
     
-    public int getQtdVagas() {
-        return qtdVagas;
+    public int getQtd_vagas() {
+        return qtd_vagas;
     }
 
-    public void setQtdVagas(int qtdVagas) {
-        this.qtdVagas = qtdVagas;
+    public void setQtd_vagas(int qtd_vagas) {
+        this.qtd_vagas = qtd_vagas;
     }
 
     public Date getData_inicio() {

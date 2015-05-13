@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
@@ -30,20 +31,20 @@ public class CursoMNG {
     SalaDAORemote salaDAO;
     private int id;
     private String nome, pub_alvo; 
-    private int qtdVagas, duracao;
+    private int qtd_vagas, duracao;
     private List<Curso> lista;
     private Date data_inicio;
     private Date data_fim;   
     private Sala sala = new Sala();
     private List<Sala> salas;
-    
+    private Curso curso;
 
     public void save(ActionEvent actionEvent) {
         Curso c = new Curso();
         c.setNome(this.getNome());      
         c.setDuracao (this.getDuracao());
         c.setPub_alvo (this.getPub_alvo());
-        c.setQtdVagas(this.getQtdVagas());
+        c.setQtd_vagas(this.getQtd_vagas());
         c.setData_inicio(this.getData_inicio());
         c.setData_fim(this.getData_fim());
 
@@ -52,7 +53,59 @@ public class CursoMNG {
         c.setSala(sala);
         cursoDAO.gravar(c);       
      
+    }  
+    
+    public void remove(){
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir").toString());
+        Curso curso = new Curso();
+        curso.setId(index);
+        cursoDAO.remover(curso);
+        this.clear();      
     }
+    
+    public void clear() {
+        Curso curso = new Curso();
+    }
+    
+    public String prepUpdate() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar").toString());
+        Curso curso = new Curso();
+        curso.setId(index);
+        curso = cursoDAO.retrieve(curso);
+        this.id = curso.getId();
+        this.nome = curso.getNome();
+        this.pub_alvo = curso.getPub_alvo();        
+        this.qtd_vagas = curso.getQtd_vagas();
+        this.duracao = curso.getDuracao();
+        this.data_inicio = curso.getData_inicio();
+        this.data_fim = curso.getData_fim();
+        
+
+        return "cursoAlterar";
+    }
+
+    public String update() {
+        Curso curso = new Curso();
+        curso.setId(id);
+        curso.setNome(nome);
+        curso.setPub_alvo(pub_alvo);
+        curso.setQtd_vagas(Integer.valueOf(qtd_vagas));
+        curso.setDuracao(Integer.valueOf(duracao));
+        curso.setData_inicio(data_inicio);
+        curso.setData_fim(data_fim);        
+        cursoDAO.update(curso);
+
+        return "ok";
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+        
 
     public CursoDAORemote getCursoDAO() {
         return cursoDAO;
@@ -103,12 +156,12 @@ public class CursoMNG {
     }
  
 
-    public int getQtdVagas() {
-        return qtdVagas;
+    public int getQtd_vagas() {
+        return qtd_vagas;
     }
 
-    public void setQtdVagas(int qtdVagas) {
-        this.qtdVagas = qtdVagas;
+    public void setQtd_vagas(int qtd_vagas) {
+        this.qtd_vagas = qtd_vagas;
     }
 
     public int getDuracao() {

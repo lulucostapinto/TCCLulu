@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.sgci.dao;
 
 import br.sgci.bean.Curso;
@@ -15,7 +14,7 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface CursoDAORemote {
-    
+
     public boolean gravar(Curso curso);
 
     public Curso selecionar(int id);
@@ -23,5 +22,11 @@ public interface CursoDAORemote {
     public boolean remover(Curso curso);
 
     public java.util.List<Curso> listar();
-    
+
+    Curso retrieve(Curso value);
+
+    void update(Curso value);
+
+    boolean valida(Curso value);
+
 }
