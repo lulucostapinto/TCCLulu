@@ -50,10 +50,12 @@
                                     <h:outputText value="#{curso.pub_alvo}"/>
                                 </p:column>
                                 <p:column>
-                                    <p:commandButton value="Editar" actionListener="#{cursoMNG.update}"/>
+                                    <p:commandButton value="Editar" action="#{cursoMNG.prepUpdate()}"/>
+                                    <f:param name="codEditar" value="#{curso.id}"/>
                                 </p:column>
                                 <p:column>
-                                    <p:commandButton value="Excluir" actionListener="#{cursoMNG.remove}"/>
+                                    <p:commandButton update="" value="Excluir" actionListener="#{cursoMNG.remove()}"/>
+                                    <f:param name="codExcluir" value="#{curso.id}"/>
                                 </p:column>
                             </p:dataTable>
                         </p:panel>

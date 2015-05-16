@@ -19,7 +19,7 @@ public interface CursoDAORemote {
 
     public Curso selecionar(int id);
 
-    public boolean remover(Curso curso);
+    void deletar(Curso value);
 
     public java.util.List<Curso> listar();
 

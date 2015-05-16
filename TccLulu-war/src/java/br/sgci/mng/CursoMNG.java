@@ -9,6 +9,7 @@ import br.sgci.bean.Curso;
 import br.sgci.dao.CursoDAORemote;
 import br.sgci.bean.Sala;
 import br.sgci.dao.SalaDAORemote;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -23,65 +24,65 @@ import javax.inject.Named;
  */
 @Named(value = "cursoMNG")
 @RequestScoped
-public class CursoMNG {
+public class CursoMNG implements Serializable {
 
     @EJB
     CursoDAORemote cursoDAO;
     @EJB
     SalaDAORemote salaDAO;
     private int id;
-    private String nome, pub_alvo; 
+    private String nome, pub_alvo;
     private int qtd_vagas, duracao;
     private List<Curso> lista;
     private Date data_inicio;
-    private Date data_fim;   
+    private Date data_fim;
     private Sala sala = new Sala();
     private List<Sala> salas;
     private Curso curso;
 
     public void save(ActionEvent actionEvent) {
         Curso c = new Curso();
-        c.setNome(this.getNome());      
-        c.setDuracao (this.getDuracao());
-        c.setPub_alvo (this.getPub_alvo());
+        c.setNome(this.getNome());
+        c.setDuracao(this.getDuracao());
+        c.setPub_alvo(this.getPub_alvo());
         c.setQtd_vagas(this.getQtd_vagas());
         c.setData_inicio(this.getData_inicio());
         c.setData_fim(this.getData_fim());
 
-        
         sala = salaDAO.selecionar(sala.getId());
         c.setSala(sala);
-        cursoDAO.gravar(c);       
-     
-    }  
-    
-    public void remove(){
-        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir").toString());
+        cursoDAO.gravar(c);
+
+    }
+
+    public void remove() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir".toString()));
         Curso curso = new Curso();
         curso.setId(index);
-        cursoDAO.remover(curso);
-        this.clear();      
+        cursoDAO.deletar(curso);
+        this.clear();
     }
-    
+
     public void clear() {
         Curso curso = new Curso();
     }
-    
+
     public String prepUpdate() {
-        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar").toString());
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar"));
         Curso curso = new Curso();
         curso.setId(index);
         curso = cursoDAO.retrieve(curso);
         this.id = curso.getId();
-        this.nome = curso.getNome();
-        this.pub_alvo = curso.getPub_alvo();        
-        this.qtd_vagas = curso.getQtd_vagas();
-        this.duracao = curso.getDuracao();
         this.data_inicio = curso.getData_inicio();
         this.data_fim = curso.getData_fim();
+        this.nome = curso.getNome();
+        this.sala = curso.getSala();
+        this.duracao = curso.getDuracao();
+        this.qtd_vagas = curso.getQtd_vagas();
+        this.pub_alvo = curso.getPub_alvo();
         
-
         return "cursoAlterar";
+
     }
 
     public String update() {
@@ -92,7 +93,8 @@ public class CursoMNG {
         curso.setQtd_vagas(Integer.valueOf(qtd_vagas));
         curso.setDuracao(Integer.valueOf(duracao));
         curso.setData_inicio(data_inicio);
-        curso.setData_fim(data_fim);        
+        curso.setData_fim(data_fim);
+        curso.setSala(sala);
         cursoDAO.update(curso);
 
         return "ok";
@@ -105,7 +107,6 @@ public class CursoMNG {
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
-        
 
     public CursoDAORemote getCursoDAO() {
         return cursoDAO;
@@ -154,7 +155,6 @@ public class CursoMNG {
     public void setPub_alvo(String pub_alvo) {
         this.pub_alvo = pub_alvo;
     }
- 
 
     public int getQtd_vagas() {
         return qtd_vagas;
@@ -203,9 +203,5 @@ public class CursoMNG {
     public void setSalas(List<Sala> salas) {
         this.salas = salas;
     }
-
-   
-  
-   
 
 }
