@@ -50,7 +50,7 @@
                                     <h:outputText value="#{curso.pub_alvo}"/>
                                 </p:column>
                                 <p:column>
-                                    <p:commandButton value="Editar" action="#{cursoMNG.prepUpdate()}"/>
+                                    <p:commandButton value="Editar" actionListener="#{cursoMNG.prepUpdate()}"/>
                                     <f:param name="codEditar" value="#{curso.id}"/>
                                 </p:column>
                                 <p:column>

@@ -68,7 +68,7 @@ public class CursoMNG implements Serializable {
     }
 
     public String prepUpdate() {
-        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar"));
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
         Curso curso = new Curso();
         curso.setId(index);
         curso = cursoDAO.retrieve(curso);
