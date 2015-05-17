@@ -81,7 +81,7 @@ public class CursoMNG implements Serializable {
         this.qtd_vagas = curso.getQtd_vagas();
         this.pub_alvo = curso.getPub_alvo();
         
-        return "cursoAlterar";
+        return "curso_alterar";
 
     }
 
@@ -90,12 +90,12 @@ public class CursoMNG implements Serializable {
         curso.setId(id);
         curso.setNome(nome);
         curso.setPub_alvo(pub_alvo);
-        curso.setQtd_vagas(Integer.valueOf(qtd_vagas));
-        curso.setDuracao(Integer.valueOf(duracao));
+        curso.setQtd_vagas(qtd_vagas);
+        curso.setDuracao(duracao);
         curso.setData_inicio(data_inicio);
         curso.setData_fim(data_fim);
         curso.setSala(sala);
-        cursoDAO.update(curso);
+        cursoDAO.alterar(curso);
 
         return "ok";
     }

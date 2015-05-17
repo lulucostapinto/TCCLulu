@@ -23,13 +23,13 @@
                             </h:form>  
 
                             <p:dataTable id="curso" value="#{cursoMNG.lista}" emptyMessage="Não há registros" var="curso" paginator="true" rows="10" rowKey="#{curso.id}" style="width:800px">
-                                
-                                <p:column style="width:95px" headerText="Data Inicio">
+
+                                <p:column style="width:80px" headerText="Data Inicio">
                                     <h:outputText value="#{curso.data_inicio}">
                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                     </h:outputText>
                                 </p:column>
-                                <p:column style="width:95px" headerText="Data Fim">
+                                <p:column style="width:80px" headerText="Data Fim">
                                     <h:outputText value="#{curso.data_fim}">
                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                     </h:outputText>
@@ -40,22 +40,28 @@
                                 <p:column headerText="Sala">
                                     <h:outputText value="#{curso.sala}"/>
                                 </p:column>
-                                <p:column  headerText="Horas">
+                                <p:column style="width:45px" headerText="Horas">
                                     <h:outputText value="#{curso.duracao}"/>
                                 </p:column>
-                                <p:column headerText="Vagas">
+                                <p:column style="width:45px" headerText="Vagas">
                                     <h:outputText value="#{curso.qtd_vagas}"/>
                                 </p:column>                           
                                 <p:column  headerText="Público alvo" filterBy="#{cursoMNG.lista}">
                                     <h:outputText value="#{curso.pub_alvo}"/>
                                 </p:column>
                                 <p:column>
-                                    <p:commandButton value="Editar" actionListener="#{cursoMNG.prepUpdate()}"/>
-                                    <f:param name="codEditar" value="#{curso.id}"/>
+                                    <p:commandButton value="Editar" action="#{cursoMNG.prepUpdate()}" ajax="false">
+                                        <f:param name="codEditar" value="#{curso.id}"/>                              
+                                    </p:commandButton>
                                 </p:column>
                                 <p:column>
-                                    <p:commandButton update="" value="Excluir" actionListener="#{cursoMNG.remove()}"/>
-                                    <f:param name="codExcluir" value="#{curso.id}"/>
+
+                                    <p:commandButton value="Excluir" title="#{msgs.btRemove}"
+                                                     actionListener="#{cursoMNG.remove()}"                                             
+                                                     onclick="if (!confirm('#{msgs.msgConfRemove}'))
+                                                                 return false" >
+                                        <f:param name="codExcluir" value="#{curso.id}"/>
+                                    </p:commandButton>
                                 </p:column>
                             </p:dataTable>
                         </p:panel>

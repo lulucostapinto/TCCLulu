@@ -25,7 +25,7 @@ public interface CursoDAORemote {
 
     Curso retrieve(Curso value);
 
-    void update(Curso value);
+    void alterar(Curso value);
 
     boolean valida(Curso value);
 

@@ -8,7 +8,6 @@ package br.sgci.dao;
 import br.sgci.bean.Curso;
 import java.util.List;
 import javax.ejb.Stateless;
-import static javax.management.Query.value;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -90,7 +89,7 @@ public class CursoDAO implements CursoDAORemote {
     }
 
     @Override
-    public void update(Curso value) {
+    public void alterar(Curso value) {
         if (this.valida(value)) {
             em.merge(value);
         }
