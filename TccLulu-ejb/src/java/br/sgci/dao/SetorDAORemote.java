@@ -20,7 +20,7 @@ public interface SetorDAORemote {
     
     public Setor retrieve(Setor value);
 
-    public boolean remover(Setor setor);
+    void deletar(Setor value);
 
     public java.util.List<Setor> listar();
     

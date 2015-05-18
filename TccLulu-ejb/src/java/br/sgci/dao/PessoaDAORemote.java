@@ -21,7 +21,7 @@ public interface PessoaDAORemote {
     
     public Pessoa retrieve(Pessoa value);
 
-    public boolean remover(Pessoa pessoa);
+    void deletar(Pessoa value);
 
     public java.util.List<Pessoa> listar();
     

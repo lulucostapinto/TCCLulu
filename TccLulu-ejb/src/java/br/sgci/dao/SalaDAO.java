@@ -47,17 +47,9 @@ public class SalaDAO implements SalaDAORemote {
     }
 
     @Override
-    public boolean remover(Sala sala) {
-        boolean sucesso = false;
-        try {
-            sala = em.find(Sala.class, sala.getId());
-            em.remove(sala);
-            sucesso = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return sucesso;
+    public void deletar(Sala value) {
+        value = this.retrieve(value);
+        em.remove(value);
     }
 
     @Override

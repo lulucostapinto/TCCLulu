@@ -27,6 +27,29 @@ public class SetorMNG {
     private int id;
     private String nome;
     private List<Setor> lista;
+    
+    public void save(ActionEvent actionEvent) {
+        Setor s = new Setor();
+        s.setNome(this.getNome());
+
+        setorDAO.gravar(s);
+
+        this.setNome(null);
+    }   
+    
+    public void remove() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir".toString()));
+        Setor setor = new Setor();
+        setor.setId(index);
+        setorDAO.deletar(setor);
+        this.clear();
+    }
+    
+    
+    public void clear() {
+        Setor setor = new Setor();
+    }
+    
 
     public SetorDAORemote getSetorDAO() {
         return setorDAO;
@@ -63,24 +86,5 @@ public class SetorMNG {
         this.nome = nome;
     }
 
-    public void save(ActionEvent actionEvent) {
-        Setor s = new Setor();
-        s.setNome(this.getNome());
-
-        setorDAO.gravar(s);
-
-        this.setNome(null);
-    }
     
-    public void editar(ActionEvent actionEvent) {
-        
-    }
-
-    public void remove(ActionEvent actionEvent) {
-        int index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir").toString());
-        Setor set = new Setor();
-        set.setId(index);
-        setorDAO.remover(set);       
-        
-    }
 }

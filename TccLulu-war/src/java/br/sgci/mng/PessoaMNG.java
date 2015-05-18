@@ -12,6 +12,7 @@ import br.sgci.dao.SetorDAORemote;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
@@ -43,6 +44,18 @@ public class PessoaMNG {
         
         pessoaDAO.gravar(p);
 
+    }
+    
+    public void remove() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir".toString()));
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(index);
+        pessoaDAO.deletar(pessoa);
+        this.clear();
+    }
+
+    public void clear() {
+        Pessoa pessoa = new Pessoa();
     }
 
     public PessoaDAORemote getPessoaDAO() {

@@ -5,6 +5,7 @@
  */
 package br.sgci.dao;
 
+import br.sgci.bean.Sala;
 import br.sgci.bean.Setor;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -46,18 +47,11 @@ public class SetorDAO implements SetorDAORemote {
     }
 
     @Override
-    public boolean remover(Setor setor) {
-        boolean sucesso = false;
-        try {
-            setor = em.find(Setor.class, setor.getId());
-            em.remove(setor);
-            sucesso = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return sucesso;
+    public void deletar(Setor value) {
+        value = this.retrieve(value);
+        em.remove(value);
     }
+    
 
     @Override
     public List<Setor> listar() {

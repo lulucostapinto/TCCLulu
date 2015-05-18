@@ -39,7 +39,7 @@ public class VideoMNG {
 
         Video v = new Video();
         v.setNome(this.getNome());
-        v.setArquivo(this.getArquivo());
+        //v.setArquivo(this.getArquivo());
 
         videoDAO.gravar(v);
 

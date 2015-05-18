@@ -47,18 +47,11 @@ public class PessoaDAO implements PessoaDAORemote {
     }
 
     @Override
-    public boolean remover(Pessoa pessoa) {
-        boolean sucesso = false;
-        try {
-            pessoa = em.find(Pessoa.class, pessoa.getId());
-            em.remove(pessoa);
-            sucesso = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return sucesso;
+    public void deletar(Pessoa value) {
+        value = this.retrieve(value);
+        em.remove(value);
     }
+    
 
     @Override
     public List<Pessoa> listar() {

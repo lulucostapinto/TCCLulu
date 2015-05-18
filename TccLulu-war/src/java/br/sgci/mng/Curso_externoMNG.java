@@ -38,7 +38,7 @@ public class Curso_externoMNG {
     
     public void save(ActionEvent actionEvent) {
         Curso_externo ce = new Curso_externo();
-        ce.setArquivo(this.getArquivo());
+       
 
         pessoa = pessoaDAO.selecionar(pessoa.getId());
         ce.setPessoa(pessoa);
@@ -56,11 +56,11 @@ public class Curso_externoMNG {
     
     
  
-    public UploadedFile getFile() {
+    public UploadedFile getArquivo() {
         return arquivo;
     }
  
-    public void setFile(UploadedFile arquivo) {
+    public void setArquivo(UploadedFile arquivo) {
         this.arquivo = arquivo;
     }
      

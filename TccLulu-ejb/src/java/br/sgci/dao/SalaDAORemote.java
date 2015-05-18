@@ -20,7 +20,7 @@ public interface SalaDAORemote {
     
     public Sala retrieve(Sala value);
 
-    public boolean remover(Sala sala);
+    void deletar(Sala value);
 
     public java.util.List<Sala> listar();
     

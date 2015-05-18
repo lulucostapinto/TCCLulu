@@ -10,6 +10,7 @@ import br.sgci.dao.SalaDAORemote;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
@@ -26,6 +27,27 @@ public class SalaMNG {
     private int id;
     private String nome;
     private List<Sala> lista;
+    
+    public void save(ActionEvent actionEvent) {
+        Sala s = new Sala();
+        s.setNome(this.getNome());
+
+        salaDAO.gravar(s);
+
+        this.setNome(null);
+    }
+    
+    public void remove() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir".toString()));
+        Sala sala = new Sala();
+        sala.setId(index);
+        salaDAO.deletar(sala);
+        this.clear();
+    }
+
+    public void clear() {
+        Sala sala = new Sala();
+    }
 
     public SalaDAORemote getSalaDAO() {
         return salaDAO;
@@ -62,13 +84,6 @@ public class SalaMNG {
         this.nome = nome;
     }
 
-    public void save(ActionEvent actionEvent) {
-        Sala s = new Sala();
-        s.setNome(this.getNome());
-
-        salaDAO.gravar(s);
-
-        this.setNome(null);
-    }
+    
 
 }
