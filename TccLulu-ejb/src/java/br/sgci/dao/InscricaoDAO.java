@@ -74,4 +74,9 @@ public class InscricaoDAO implements InscricaoDAORemote {
 
         return inscricoes;
     }
+    
+    @Override
+    public Inscricao retrieve(Inscricao value) {
+        return this.selecionar(value.getId());
+    }
 }

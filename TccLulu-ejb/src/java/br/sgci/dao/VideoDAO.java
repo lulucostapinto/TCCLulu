@@ -5,7 +5,7 @@
  */
 package br.sgci.dao;
 
-import br.sgci.bean.Agenda;
+import br.sgci.bean.Video;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,16 +17,15 @@ import javax.persistence.Query;
  * @author Lulu
  */
 @Stateless
-public class AgendaDAO implements AgendaDAORemote {
-
-    @PersistenceContext
+public class VideoDAO implements VideoDAORemote {
+@PersistenceContext
     private EntityManager em;
 
     @Override
-    public boolean gravar(Agenda agenda) {
+    public boolean gravar(Video video) {
         boolean sucesso = false;
         try {
-            em.merge(agenda);
+            em.merge(video);
             sucesso = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,23 +35,23 @@ public class AgendaDAO implements AgendaDAORemote {
     }
 
     @Override
-    public Agenda selecionar(int id) {
-        Agenda agenda = null;
+    public Video selecionar(int id) {
+        Video video = null;
         try {
-            agenda = em.find(Agenda.class, id);
+            video = em.find(Video.class, id);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return agenda;
+        return video;
     }
 
     @Override
-    public boolean remover(Agenda agenda) {
+    public boolean remover(Video video) {
         boolean sucesso = false;
         try {
-            agenda = em.find(Agenda.class, agenda.getId());
-            em.remove(agenda);
+            video = em.find(Video.class, video.getId());
+            em.remove(video);
             sucesso = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,16 +61,21 @@ public class AgendaDAO implements AgendaDAORemote {
     }
 
     @Override
-    public List<Agenda> listar() {
-        List<Agenda> agenda = null;
+    public List<Video> listar() {
+        List<Video> video = null;
         try {
-            Query query = em.createQuery("Select a from Agenda a");
-            agenda = query.getResultList();
+            Query query = em.createQuery("Select p from Video p");
+            video = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return agenda;
+        return video;
+    }
+
+    @Override
+    public Video retrieve(Video value) {
+        return this.selecionar(value.getId());
     }
 
 }

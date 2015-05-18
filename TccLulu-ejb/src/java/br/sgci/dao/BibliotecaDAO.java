@@ -6,7 +6,7 @@
 
 package br.sgci.dao;
 
-import br.sgci.bean.Agenda;
+
 import br.sgci.bean.Biblioteca;
 import java.util.List;
 import javax.ejb.Stateless;

@@ -22,4 +22,6 @@ public interface InscricaoDAORemote {
 
     public java.util.List<Inscricao> listar();
     
+    public Inscricao retrieve(Inscricao value);
+    
 }

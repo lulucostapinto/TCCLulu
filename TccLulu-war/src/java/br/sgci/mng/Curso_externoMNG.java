@@ -38,7 +38,7 @@ public class Curso_externoMNG {
     
     public void save(ActionEvent actionEvent) {
         Curso_externo ce = new Curso_externo();
-        
+        ce.setArquivo(this.getArquivo());
 
         pessoa = pessoaDAO.selecionar(pessoa.getId());
         ce.setPessoa(pessoa);

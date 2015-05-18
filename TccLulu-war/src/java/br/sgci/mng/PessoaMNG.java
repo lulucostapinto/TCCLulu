@@ -40,6 +40,7 @@ public class PessoaMNG {
 
         setor = setorDAO.selecionar(setor.getId());
         p.setSetor(setor);
+        
         pessoaDAO.gravar(p);
 
     }
@@ -48,7 +49,7 @@ public class PessoaMNG {
         return pessoaDAO;
     }
 
-    public void setPessoaDAO(PessoaDAORemote salaDAO) {
+    public void setPessoaDAO(PessoaDAORemote pessoaDAO) {
         this.pessoaDAO = pessoaDAO;
     }
     

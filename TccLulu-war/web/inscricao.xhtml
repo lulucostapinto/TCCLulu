@@ -14,16 +14,18 @@
                         <h:panelGrid>
                             <p:panel header="Inscrição">
                                 <h:panelGrid columns="2">
-                                    <h:outputLabel value="Nome"/>
-                                    <p:inputText id="nome" value="#{inscricaoMNG.nome}"/>
-                                    <h:outputLabel value="Crachá"/>
-                                    <p:inputText id="pub_alvo" value="#{inscricaoMNG.cracha}"/> 
-                                    <h:outputLabel value="Setor"/>
-                                    <p:inputText id="qtdVagas" value="#{inscricaoMNG.setor}"/>
-                                    <h:outputLabel value="Função"/>
-                                    <p:inputText id="duracao" value="#{inscricaoMNG.funcao}"/> 
-                                    <h:outputLabel value="Centro de custo"/>
-                                    <p:inputText id="local" value="#{inscricaoMNG.centro_custo}"/>                                     
+                                    <p:selectOneMenu id="curso" converter="cursoConverter" value="#{inscricaoMNG.curso}">
+                                        <f:selectItems value="#{inscricaoMNG.cursos}" var ="vCurso"
+                                                       itemLabel="#{vCurso.nome}"
+                                                       itemValue="#{vCurso}"/>
+                                    </p:selectOneMenu>
+                                    
+                                    <p:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{inscricaoMNG.pessoa}">
+                                        <f:selectItems value="#{inscricaoMNG.pessoas}" var ="vPessoa"
+                                                       itemLabel="#{vPessoa.nome}"
+                                                       itemValue="#{vPessoa}"/>
+                                    </p:selectOneMenu>
+                                                                        
                                     <p:commandButton value="GRAVAR" actionListener="#{inscricaoMNG.save}" ajax="false"/>
                                     <p:commandButton value="LIMPAR" type="reset"/> 
                                 </h:panelGrid>

@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.sgci.dao;
 
-import br.sgci.bean.Agenda;
+import br.sgci.bean.Video;
 import javax.ejb.Remote;
 
 /**
@@ -14,13 +13,16 @@ import javax.ejb.Remote;
  * @author Lulu
  */
 @Remote
-public interface AgendaDAORemote {
-    public boolean gravar(Agenda agenda);
+public interface VideoDAORemote {
+    
+    public boolean gravar(Video video);
 
-    public Agenda selecionar(int id);
+    public Video selecionar(int id);
+    
+    public Video retrieve(Video value);
 
-    public boolean remover(Agenda agenda);
+    public boolean remover(Video video);
 
-    public java.util.List<Agenda> listar();
+    public java.util.List<Video> listar();
     
 }
