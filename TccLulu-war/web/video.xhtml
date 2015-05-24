@@ -19,7 +19,7 @@
                             </h:form> 
                         </p:panel>
 
-                        <p:dataTable id="sala" value="#{videoMNG.lista}" emptyMessage="Não há registros" var="video" paginator="true" rows="4" style="width: 820px">
+                        <p:dataTable id="video" value="#{videoMNG.lista}" emptyMessage="Não há registros" var="video" paginator="true" rows="4" style="width: 820px">
                              <p:column headerText="Nome" filterBy="#{video.lista}">
                                     <h:outputText value="#{video.nome}"/>
                                 </p:column>

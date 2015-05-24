@@ -81,7 +81,7 @@ public class CursoMNG implements Serializable {
         this.qtd_vagas = curso.getQtd_vagas();
         this.pub_alvo = curso.getPub_alvo();
         
-        return "curso_alterar";
+        return "alterar_curso";
 
     }
 

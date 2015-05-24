@@ -5,19 +5,11 @@
  */
 package br.sgci.mng;
 
-import br.sgci.bean.Curso_externo;
-import br.sgci.bean.Pessoa;
-import br.sgci.bean.Setor;
 import br.sgci.bean.Video;
-import br.sgci.dao.Curso_externoDAORemote;
-import br.sgci.dao.PessoaDAORemote;
-import br.sgci.dao.SetorDAORemote;
 import br.sgci.dao.VideoDAORemote;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import org.primefaces.model.UploadedFile;
@@ -34,12 +26,12 @@ public class VideoMNG {
     VideoDAORemote videoDAO;
     private UploadedFile arquivo;
     private String nome;
+    private List<Video> lista;
 
     public void save(ActionEvent actionEvent) {
-
         Video v = new Video();
         v.setNome(this.getNome());
-        //v.setArquivo(this.getArquivo());
+        v.setArquivo(this.getArquivo().getContents());
 
         videoDAO.gravar(v);
 
@@ -70,5 +62,14 @@ public class VideoMNG {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public List<Video> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<Video> lista) {
+        this.lista = lista;
+    }
+        
 
 }

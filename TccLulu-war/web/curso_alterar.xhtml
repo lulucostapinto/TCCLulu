@@ -46,18 +46,19 @@
                                     </p:selectOneMenu>
                                     <p:message for="cmbSala" showDetail="true"/>
 
-                                    <h:outputLabel for="txtDuracao" value="#{msgs.lbUsuNome}"/>
+                                    <h:outputLabel for="txtDuracao" />
                                     <p:inputText id="txtDuracao" value="#{cursoMNG.duracao}"/>
                                     <p:message for="txtDuracao" showDetail="true"/>
 
-                                    <h:outputLabel for="txtQtd_vagas" value="#{msgs.lbUsuNome}"/>
+                                    <h:outputLabel for="txtQtd_vagas" />
                                     <p:inputText id="txtQtd_vagas" value="#{cursoMNG.qtd_vagas}"/>
                                     <p:message for="txtQtd_vagas" showDetail="true"/>
 
-                                    <h:outputLabel for="txtPub_alvo" value="#{msgs.lbUsuNome}"/>
+                                    <h:outputLabel for="txtPub_alvo" />
                                     <p:inputText id="txtPub_alvo" value="#{cursoMNG.pub_alvo}"/>
                                     <p:message for="txtPub_alvo" showDetail="true"/>
-                                    <p:commandButton value="Salvar" actionListener="#{cursoMNG.update}" update="grid"/>
+                                    
+                                    <p:commandButton value="Alterar" action="#{cursoMNG.update}" update="grid"/>
                                 </h:panelGrid>
                             </p:panel>
 

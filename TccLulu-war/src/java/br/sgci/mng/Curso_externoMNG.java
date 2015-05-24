@@ -32,6 +32,7 @@ public class Curso_externoMNG {
     @EJB
     PessoaDAORemote pessoaDAO;
     private UploadedFile arquivo;
+    private int qtd_horas;
     private Pessoa pessoa = new Pessoa();
     private List<Pessoa> pessoas;
     
@@ -69,10 +70,19 @@ public class Curso_externoMNG {
             FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
             
-            arquivo.getContents();
+            //arquivo.getContents();
         }
     }
 
+    public int getQtd_horas() {
+        return qtd_horas;
+    }
+
+    public void setQtd_horas(int qtd_horas) {
+        this.qtd_horas = qtd_horas;
+    }
+
+    
     public PessoaDAORemote getPessoaDAO() {
         return pessoaDAO;
     }

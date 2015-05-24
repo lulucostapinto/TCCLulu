@@ -16,10 +16,8 @@
                         <p:panel header="Matriz de cursos"> 
                             <h:form>
                                 <p:growl id="growl" life="1000" />     
-                                <p:commandButton value="Incluir" id="incluir"  action="incluir_curso"/>                                
-                                <p:commandButton value="Inscritos" id="inscritos" action="inscritos" />
-                                <p:commandButton value="Conteúdo" id="conteudo" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
-                                <p:commandButton value="Inscrição" id="inscricao" action="inscricao" />
+                                <p:commandButton value="Incluir" id="incluir"  action="incluir_curso"/>      
+                                <p:commandButton value="Conteúdo" id="conteudo" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />                                
                             </h:form>  
 
                             <p:dataTable id="curso" value="#{cursoMNG.lista}" emptyMessage="Não há registros" var="curso" paginator="true" rows="10" rowKey="#{curso.id}" style="width:800px">

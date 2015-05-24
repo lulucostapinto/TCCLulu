@@ -26,7 +26,8 @@ public class Curso_externo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private byte[] arquivo;  
+    private byte[] arquivo;
+    private int qtd_horas;
     
     
     @ManyToOne(fetch = FetchType.EAGER)
@@ -48,7 +49,24 @@ public class Curso_externo implements Serializable {
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
+
+    public int getQtd_horas() {
+        return qtd_horas;
+    }
+
+    public void setQtd_horas(int qtd_horas) {
+        this.qtd_horas = qtd_horas;
+    }
+
+    public byte[] getArquivo() {
+        return arquivo;
+    }
+
+    public void setArquivo(byte[] arquivo) {
+        this.arquivo = arquivo;
+    }
   
+    
     
 
 

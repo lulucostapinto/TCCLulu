@@ -84,8 +84,8 @@ public class CursoDAO implements CursoDAORemote {
 
     @Override
     public Curso retrieve(Curso value) {
-        Curso curso = em.find(Curso.class, value.getId());
-        return curso;
+        Curso ret = em.find(Curso.class, value.getId());
+        return ret;
     }
 
     @Override
