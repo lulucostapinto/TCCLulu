@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.sgci.bean;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -21,23 +22,24 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "usuario")
-@NamedQuery(name = "Usuario.findLogin", query = "SELECT o FROM Usuario o WHERE o.login = :login")
+@NamedQuery(name = "Usuario.procuraPorLogin", query = "SELECT u FROM Usuario u WHERE u.login = :login")
 public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo;
-    @Column(nullable = false, length = 400,unique=true)
+    private int id;
     private String login;
-    @Column(nullable = false, length = 400)
     private String senha;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_permissao", nullable = false)
+    private Permissao permissao;
 
-    public Long getCodigo() {
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(Long codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -56,25 +58,22 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Usuario other = (Usuario) obj;
-        if (this.codigo != other.codigo && (this.codigo == null || !this.codigo.equals(other.codigo))) {
-            return false;
-        }
-        return true;
+    public Permissao getPermissao() {
+        return permissao;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + (this.codigo != null ? this.codigo.hashCode() : 0);
-        return hash;
+    public void setPermissao(Permissao permissao) {
+        this.permissao = permissao;
+    }
+
+    public boolean validaSenha(String senha) {
+        boolean ret = false;
+        try {
+            if (this.senha.equals(senha)) {
+                ret = true;
+            }
+        } catch (NullPointerException ex) {
+        }
+        return ret;
     }
 }

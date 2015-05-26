@@ -5,15 +5,16 @@
  */
 package br.sgci.mng;
 
+import br.sgci.bean.Permissao;
 import br.sgci.bean.Usuario;
 import br.sgci.dao.UsuarioDAORemote;
-import java.util.List;
+import java.io.IOException;
 import javax.ejb.EJB;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -21,31 +22,27 @@ import javax.inject.Named;
  */
 @Named(value = "usuarioMNG")
 @RequestScoped
-public class UsuarioMNG {
+public class UsuarioMNG{
 
+    @Dependent
     public static final String USER_SESSION_KEY = "sessaousuario";
     @EJB
-    private UsuarioDAORemote usuarioDAO;
-    private Long codigo;
+    UsuarioDAORemote usuarioDAO;
+    private int id;    
     private String login;
     private String senha;
-    private List<Usuario> lista;
+    private Permissao permissao;
+    
 
-    public Long getId() {
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setId(Long id) {
-        this.codigo = id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public UsuarioDAORemote getUsuarioDAO() {
-        return usuarioDAO;
-    }
-
-    public void setUsuarioDAO(UsuarioDAORemote usuarioDAO) {
-        this.usuarioDAO = usuarioDAO;
-    }
+    
 
     public String getLogin() {
         return login;
@@ -63,46 +60,33 @@ public class UsuarioMNG {
         this.senha = senha;
     }
 
-    public String valida() {
-        System.out.println("Tentando logar");
-        FacesContext context = FacesContext.getCurrentInstance();
-        Usuario usuario = usuarioDAO.findByLogin(login);
-        if (usuario != null) {
-            if (!usuario.getSenha().equals(senha)) {
-                this.msgInvalidLogin(context);
-                return null;
+    public Permissao getPermissao() {
+        return permissao;
+    }
+
+    public void setPermissao(Permissao permissao) {
+        this.permissao = permissao;
+    }
+
+   
+
+    public void valida() throws IOException {
+        Usuario u = usuarioDAO.selecionarPorLogin(this.getLogin());
+        if (u != null) {
+            if (u.getSenha().equals(this.getSenha())) {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getSessionMap().put(USER_SESSION_KEY, u);
+                System.out.println("LOGADO");
+                context.getCurrentInstance().getExternalContext().redirect("matriz.jsf");
             }
-            context.getExternalContext().getSessionMap().put(USER_SESSION_KEY, usuario);
-            System.out.println("Logado");
-            return "padrao";
-        } else {
-            this.msgInvalidLogin(context);
-            return null;
         }
     }
-
-    private void msgInvalidLogin(FacesContext context) {
-        System.out.println("não deu para logar");
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha na autenticação!", "Usuário ou senha inválidos");
-        context.addMessage(null, message);
-    }
-
-    public List<Usuario> getLista() {
-        return usuarioDAO.listar();
-    }
     
-    public void setLista(List<Usuario> lista) {
-        this.lista = lista;
-    }
-            
-
-    public void save(ActionEvent actionEvent) {
-        Usuario u = new Usuario();
-        u.setLogin(this.getLogin());
-        u.setSenha(this.getSenha());
-        usuarioDAO.gravar(u);
-
-        this.setLogin(null);
-        this.setSenha(null);
+    public void invalida () throws IOException{
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
     }
 }

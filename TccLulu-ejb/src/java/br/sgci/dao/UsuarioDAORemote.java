@@ -6,6 +6,7 @@
 package br.sgci.dao;
 
 import br.sgci.bean.Usuario;
+import java.util.List;
 import javax.ejb.Remote;
 
 /**
@@ -14,7 +15,14 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface UsuarioDAORemote {
+
     public boolean gravar(Usuario usuario);
-    Usuario findByLogin(String login);
+
+    public Usuario selecionar(int id);
+
+    public Usuario selecionarPorLogin(String nome);
+
+    public boolean remover(Usuario usuario);
+
     public java.util.List<Usuario> listar();
 }

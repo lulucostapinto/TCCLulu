@@ -5,7 +5,7 @@
  */
 package br.sgci.dao;
 
-import br.sgci.bean.Usuario;
+import br.sgci.bean.Permissao;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,17 +16,18 @@ import javax.persistence.Query;
  *
  * @author Lulu
  */
+
 @Stateless
-public class UsuarioDAO implements UsuarioDAORemote {
+public class PermissaoDAO implements PermissaoDAORemote{
 
     @PersistenceContext
     private EntityManager em;
 
     @Override
-    public boolean gravar(Usuario usuario) {
+    public boolean gravar(Permissao permissao){
         boolean sucesso = false;
         try {
-            em.merge(usuario);
+            em.merge(permissao);
             sucesso = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,23 +37,23 @@ public class UsuarioDAO implements UsuarioDAORemote {
     }
 
     @Override
-    public Usuario selecionar(int id) {
-        Usuario usuario = null;
+    public Permissao selecionar(int id){
+       Permissao permissao = null;
         try {
-            usuario = em.find(Usuario.class, id);
+            permissao = em.find(Permissao.class, id);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return usuario;
+        return permissao;
     }
 
     @Override
-    public boolean remover(Usuario usuario) {
+    public boolean remover(Permissao permissao){
         boolean sucesso = false;
         try {
-            usuario = em.find(Usuario.class, usuario.getId());
-            em.remove(usuario);
+            permissao = em.find(Permissao.class, permissao.getId());
+            em.remove(permissao);
             sucesso = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,29 +63,15 @@ public class UsuarioDAO implements UsuarioDAORemote {
     }
 
     @Override
-    public List<Usuario> listar() {
-        List<Usuario> usuarios = null;
+    public List<Permissao> listar() {
+        List<Permissao> permissao = null;
         try {
-            Query query = em.createQuery("Select u from Usuario u");
-            usuarios = query.getResultList();
+            Query query = em.createQuery("Select p from Permissao p");
+            permissao = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return usuarios;
-    }
-
-    @Override
-    public Usuario selecionarPorLogin(String login) {
-
-        try {
-            Query query = em.createNamedQuery("Usuario.procuraPorLogin");
-            Usuario usuario = (Usuario) query.setParameter("login", login).getSingleResult();
-            return usuario;
-        } catch (Exception e) {
-            return null;
-        }
-
-
+        
+        return permissao;
     }
 }
