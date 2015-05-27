@@ -37,6 +37,15 @@ public class Video implements Serializable {
         this.id = id;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+   
     public byte[] getArquivo() {
         return arquivo;
     }
@@ -45,13 +54,7 @@ public class Video implements Serializable {
         this.arquivo = arquivo;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    
      
      
     

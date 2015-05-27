@@ -10,6 +10,8 @@ import br.sgci.dao.VideoDAORemote;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import org.primefaces.model.UploadedFile;
@@ -30,14 +32,12 @@ public class VideoMNG {
 
     public void save(ActionEvent actionEvent) {
         Video v = new Video();
-        v.setNome(this.getNome());
-        v.setArquivo(this.getArquivo().getContents());
-
+        v.setNome(nome);
         videoDAO.gravar(v);
-
         this.setNome(null);
 
     }
+    
 
     public VideoDAORemote getVideoDAO() {
         return videoDAO;
@@ -70,6 +70,13 @@ public class VideoMNG {
     public void setLista(List<Video> lista) {
         this.lista = lista;
     }
-        
+
+    public void upload() {
+        if (arquivo != null) {
+            FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            arquivo.getContents();
+        }
+    }
 
 }

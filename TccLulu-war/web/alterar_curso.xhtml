@@ -12,8 +12,9 @@
                 <h:form id="formulario">
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid>
+                        <h:inputHidden value="#{cursoMNG.id}"/> 
                         <p:panel header="ALTERAR CURSO">
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="2">                                                               
                                 <h:outputLabel value="Nome"/>
                                 <p:inputText id="nome" value="#{cursoMNG.nome}"/>
                                 <h:outputLabel value="Público Alvo"/>

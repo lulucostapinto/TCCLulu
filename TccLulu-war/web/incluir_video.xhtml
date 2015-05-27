@@ -8,26 +8,20 @@
     <ui:composition template="/padrao.xhtml">
         <ui:define name="centro">
             <center margin-top='-200' style="top:-500px;position: relative">
-
-                <h:form id="formulario">
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid>
                         <p:panel header="INCLUIR VIDEOS">
-                            <h:panelGrid columns="2">
-                                <h:outputLabel value="Nome"/>
+                            <h:form enctype="multipart/form-data">
+                                <h:outputLabel value="Nome"/> 
                                 <p:inputText id="nome" value="#{videoMNG.nome}"/>
-                                <h:outputLabel value="Video"/>                                    
+                                <p:growl id="messages" showDetail="true" />                               
                                 <p:fileUpload value="#{videoMNG.arquivo}" mode="simple" />
-                                <p:commandButton value="GRAVAR" ajax="false" actionListener="#{videoMNG.save()}" />
+                                <p:commandButton value="GRAVAR" ajax="false" actionListener="#{videoMNG.upload()}" />
                                 <p:commandButton value="LIMPAR" type="reset"/> 
-                            </h:panelGrid>
-                        </p:panel>
-                    </h:panelGrid> 
-
-                </h:form>
-
+                            </h:form>                           
+                        </p:panel>   
+                    </h:panelGrid>
             </center>
-
         </ui:define>
     </ui:composition>
 </html>
