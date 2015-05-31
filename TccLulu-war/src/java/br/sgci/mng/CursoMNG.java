@@ -103,7 +103,6 @@ public class CursoMNG implements Serializable {
    public Curso getCurso(int id) {
         Curso cur = new Curso();
         curso.setId(id);
-
         return cursoDAO.retrieve(cur);
     }
    
@@ -193,8 +192,9 @@ public class CursoMNG implements Serializable {
 
     public void setData_fim(Date data_fim) {
         this.data_fim = data_fim;
-    }
+    } 
 
+        
     public List<Sala> getSalas() {
         return salaDAO.listar();
     }

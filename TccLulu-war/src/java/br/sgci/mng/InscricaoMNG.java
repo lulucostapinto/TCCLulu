@@ -32,7 +32,7 @@ public class InscricaoMNG {
     @EJB
     PessoaDAORemote pessoaDAO;
     private int id;
-    private int numero;
+    
     private Pessoa pessoa = new Pessoa();
     private Curso curso = new Curso();
     private List<Pessoa> pessoas;
@@ -40,16 +40,11 @@ public class InscricaoMNG {
 
     public void save(ActionEvent actionEvent) {
         Inscricao i = new Inscricao();
-        i.setNumero(this.getNumero());
-
         pessoa = pessoaDAO.selecionar(pessoa.getId());
         i.setPessoa(pessoa);
-
         curso = cursoDAO.selecionar(curso.getId());
         i.setCurso(curso);
-
         inscricaoDAO.gravar(i);
-
     }
 
     public InscricaoDAORemote getInscricaoDAO() {
@@ -84,14 +79,7 @@ public class InscricaoMNG {
         this.id = id;
     }
 
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
+   
     public Pessoa getPessoa() {
         return pessoa;
     }
@@ -111,7 +99,6 @@ public class InscricaoMNG {
     public Inscricao getInscricao(int id) {
         Inscricao ins = new Inscricao();
         ins.setId(id);
-
         return inscricaoDAO.retrieve(ins);
     }
     

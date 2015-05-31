@@ -14,7 +14,7 @@
                         <h:panelGrid>
                             <p:panel header="Inscrição">
                                 <h:panelGrid columns="2">
-                                    <p:selectOneMenu id="curso" converter="cursoConverter" value="#{inscricaoMNG.curso}">
+                                    <p:selectOneMenu id="curso" converter="inscricao_cursoConverter" value="#{inscricaoMNG.curso}">
                                         <f:selectItems value="#{inscricaoMNG.cursos}" var ="vCurso"
                                                        itemLabel="#{vCurso.nome}"
                                                        itemValue="#{vCurso}"/>

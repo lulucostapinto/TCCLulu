@@ -27,17 +27,25 @@ public class VideoMNG {
     @EJB
     VideoDAORemote videoDAO;
     private UploadedFile arquivo;
-    private String nome;
+    private String nome, autor, descricao;
     private List<Video> lista;
 
     public void save(ActionEvent actionEvent) {
         Video v = new Video();
         v.setNome(nome);
+        v.setArquivo(arquivo.getContents());
         videoDAO.gravar(v);
         this.setNome(null);
 
     }
     
+    public void upload() {
+        if (arquivo != null) {
+            FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            arquivo.getContents();
+        }
+    }
 
     public VideoDAORemote getVideoDAO() {
         return videoDAO;
@@ -71,12 +79,22 @@ public class VideoMNG {
         this.lista = lista;
     }
 
-    public void upload() {
-        if (arquivo != null) {
-            FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            arquivo.getContents();
-        }
+    public String getAutor() {
+        return autor;
     }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    
 
 }

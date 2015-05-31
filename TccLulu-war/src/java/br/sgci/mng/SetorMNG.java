@@ -50,6 +50,28 @@ public class SetorMNG {
         Setor setor = new Setor();
     }
     
+    public String prepUpdate() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
+        Setor setor = new Setor();
+        setor.setId(index);
+        setor = setorDAO.retrieve(setor);
+        this.id = setor.getId();        
+        this.nome = setor.getNome();
+      
+        return "alterar_setor";
+
+    }
+
+    public String update() {
+        Setor setor = new Setor();
+        setor.setId(id);
+        setor.setNome(nome);
+        
+        setorDAO.alterar(setor);
+
+        return "ok";
+    }
+    
 
     public SetorDAORemote getSetorDAO() {
         return setorDAO;
@@ -62,7 +84,6 @@ public class SetorMNG {
     public Setor getSetor(int id) {
         Setor set = new Setor();
         set.setId(id);
-
         return setorDAO.retrieve(set);
     }
 

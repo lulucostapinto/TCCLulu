@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">     
+    <ui:composition template="/padrao.xhtml">
+        <ui:define name="centro">
+            <center margin-top='-200' style="top:-500px;position: relative">
+                <h:form id="formulario">
+                    <p:messages autoUpdate="true"/>
+                    <h:panelGrid>
+                        <h:inputHidden value="#{setorMNG.id}"/> 
+                        <p:panel header="ALTERAR SETOR">
+                            <h:panelGrid columns="2">                                                               
+                                <h:outputLabel value="Nome"/>
+                                <p:inputText id="nome" value="#{setorMNG.nome}"/>                                
+                                <p:commandButton value="GRAVAR" actionListener="#{setorMNG.update}" ajax="false" update="grid"/>
+                                <p:commandButton value="LIMPAR" type="reset"/>
+                                <p:commandButton value="CANCELAR" id="cancelar"  action="setor"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:panelGrid> 
+                </h:form>
+            </center>
+        </ui:define>
+    </ui:composition>
+</html>
+
+

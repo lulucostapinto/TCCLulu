@@ -59,8 +59,7 @@ public class Pessoa implements Serializable {
     public void setSetor(Setor setor) {
         this.setor = setor;
     }
-    
-    
+        
 
     @Override
     public String toString() {

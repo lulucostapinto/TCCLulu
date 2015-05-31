@@ -77,7 +77,7 @@ public class UsuarioMNG{
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().getSessionMap().put(USER_SESSION_KEY, u);
                 System.out.println("LOGADO");
-                context.getCurrentInstance().getExternalContext().redirect("matriz.jsf");
+                context.getCurrentInstance().getExternalContext().redirect("padrao.jsf");
             }
         }
     }

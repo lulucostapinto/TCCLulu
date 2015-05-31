@@ -24,8 +24,7 @@ public class Inscricao implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
-    private int id; 
-    private int numero;
+    private int id;    
     @ManyToOne
     @JoinColumn(name = "id_curso", referencedColumnName = "ID")
     private Curso curso;
@@ -59,13 +58,7 @@ public class Inscricao implements Serializable {
         this.pessoa = pessoa;
     }
 
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
+ 
     
         
 

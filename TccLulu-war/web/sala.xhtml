@@ -13,28 +13,29 @@
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid>
                         <p:panel header="CADASTRO DE SALAS">
-                          <h:form>
+                            <h:form>
                                 <p:growl id="growl" life="2000" />     
-                                <p:commandButton value="Incluir" id="incluir"  action="incluir_sala"/>
-                                <p:commandButton value="Editar" id="editar" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />                                
-                            </h:form> 
-                        </p:panel>
-
-                        <p:dataTable id="sala" value="#{salaMNG.lista}" emptyMessage="Não há registros" var="sala" paginator="true" rows="4" style="width: 820px">
-                             <p:column headerText="Nome" filterBy="#{sala.lista}">
+                                <p:commandButton value="Incluir" id="incluir"  action="incluir_sala"/>                                        
+                            </h:form>                         
+                            <p:dataTable id="sala" value="#{salaMNG.lista}" emptyMessage="Não há registros" var="sala" paginator="true" rows="4" style="width: 820px">
+                                <p:column headerText="Nome" filterBy="#{sala.lista}">
                                     <h:outputText value="#{sala.nome}"/>
                                 </p:column>
-                            
-                            <p:column>
-                                <p:commandButton value="Excluir" title="#{msgs.btRemove}"
-                                                 actionListener="#{salaMNG.remove()}"                                             
-                                                 onclick="if (!confirm('#{msgs.msgConfRemove}'))
+                                <p:column>
+                                    <p:commandButton value="Editar" action="#{salaMNG.prepUpdate()}" ajax="false">
+                                        <f:param name="codEditar" value="#{sala.id}"/>                              
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Excluir" title="#{msgs.btRemove}"
+                                                     actionListener="#{salaMNG.remove()}"                                             
+                                                     onclick="if (!confirm('#{msgs.msgConfRemove}'))
                                                                  return false" >
-                                    <f:param name="codExcluir" value="#{sala.id}"/>
-                                </p:commandButton>                                
-                            </p:column>                            
-                        </p:dataTable>
-
+                                        <f:param name="codExcluir" value="#{sala.id}"/>
+                                    </p:commandButton>                                
+                                </p:column>                            
+                            </p:dataTable>
+                        </p:panel>
                     </h:panelGrid> 
                 </h:form>
             </center>

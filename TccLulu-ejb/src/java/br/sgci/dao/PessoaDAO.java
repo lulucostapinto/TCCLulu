@@ -70,5 +70,21 @@ public class PessoaDAO implements PessoaDAORemote {
     public Pessoa retrieve(Pessoa value) {
         return this.selecionar(value.getId());
     }
+    
+    @Override
+    public void alterar(Pessoa value) {
+        if (this.valida(value)) {
+            em.merge(value);
+        }
+    }
+    
+    @Override
+    public boolean valida(Pessoa value) {
+        boolean ret = false;
+        if (value != null) {
+            ret = true;
+        }
+        return ret;
+    }
 
 }

@@ -4,10 +4,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.sgci.bean;
-
-
 
 import java.io.Serializable;
 import java.util.Date;
@@ -32,16 +29,16 @@ public class Curso implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;    
+    private int id;
     private String nome, pub_alvo;
     private int qtd_vagas, duracao;
     @Temporal(TemporalType.DATE)
     private Date data_inicio, data_fim;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_sala", nullable = false)
     private Sala sala;
-    
+
     public int getId() {
         return id;
     }
@@ -49,7 +46,7 @@ public class Curso implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-  
+
     public String getNome() {
         return nome;
     }
@@ -57,7 +54,7 @@ public class Curso implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
     public int getQtd_vagas() {
         return qtd_vagas;
     }
@@ -97,7 +94,7 @@ public class Curso implements Serializable {
     public void setDuracao(int duracao) {
         this.duracao = duracao;
     }
-    
+
     public Sala getSala() {
         return sala;
     }
@@ -105,7 +102,32 @@ public class Curso implements Serializable {
     public void setSala(Sala sala) {
         this.sala = sala;
     }
-  
-  
-       
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 11 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Curso other = (Curso) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
 }

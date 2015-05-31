@@ -48,6 +48,28 @@ public class SalaMNG {
     public void clear() {
         Sala sala = new Sala();
     }
+    
+    public String prepUpdate() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
+        Sala sala = new Sala();
+        sala.setId(index);
+        sala = salaDAO.retrieve(sala);
+        this.id = sala.getId();        
+        this.nome = sala.getNome();
+      
+        return "alterar_sala";
+
+    }
+
+    public String update() {
+        Sala sala = new Sala();
+        sala.setId(id);
+        sala.setNome(nome);
+        
+        salaDAO.alterar(sala);
+
+        return "ok";
+    }
 
     public SalaDAORemote getSalaDAO() {
         return salaDAO;

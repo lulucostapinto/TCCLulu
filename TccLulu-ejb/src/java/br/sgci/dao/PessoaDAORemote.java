@@ -18,11 +18,15 @@ public interface PessoaDAORemote {
     public boolean gravar(Pessoa pessoa);
 
     public Pessoa selecionar(int id);
-    
-    public Pessoa retrieve(Pessoa value);
 
     void deletar(Pessoa value);
 
     public java.util.List<Pessoa> listar();
+
+    Pessoa retrieve(Pessoa value);
+
+    void alterar(Pessoa value);
+
+    boolean valida(Pessoa value);
     
 }

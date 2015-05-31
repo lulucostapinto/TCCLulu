@@ -15,32 +15,31 @@
                         <p:panel header="CADASTRO DE SETORES">
                             <h:form>
                                 <p:growl id="growl" life="2000" />     
-                                <p:commandButton value="Incluir" id="incluir"  action="incluir_setor"/>
-                                <p:commandButton value="Editar" id="editar" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />                                
-                            </h:form> 
+                                <p:commandButton value="Incluir" id="incluir"  action="incluir_setor"/>                                        
+                            </h:form>                         
+                            <p:dataTable id="setor" value="#{setorMNG.lista}" emptyMessage="Não há registros" var="setor" paginator="true" rows="4" style="width: 820px">
+                                <p:column headerText="Nome" filterBy="#{setor.lista}">
+                                    <h:outputText value="#{setor.nome}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Editar" action="#{setorMNG.prepUpdate()}" ajax="false">
+                                        <f:param name="codEditar" value="#{setor.id}"/>                              
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Excluir" title="#{msgs.btRemove}"
+                                                     actionListener="#{setorMNG.remove()}"                                             
+                                                     onclick="if (!confirm('#{msgs.msgConfRemove}'))
+                                                                 return false" >
+                                        <f:param name="codExcluir" value="#{setor.id}"/>
+                                    </p:commandButton>                                
+                                </p:column>                            
+                            </p:dataTable>
                         </p:panel>
-
-                        <p:dataTable id="sala" value="#{setorMNG.lista}" emptyMessage="Não há registros" var="setor" paginator="true" rows="4" style="width: 820px">
-                            <p:column headerText="Nome" filterBy="#{setor.lista}">
-                                <h:outputText value="#{setor.nome}"/>
-                            </p:column>
-
-                            <p:column>
-                                <p:commandButton value="Excluir" title="#{msgs.btRemove}"
-                                                 actionListener="#{setorMNG.remove()}"                                             
-                                                 onclick="if (!confirm('#{msgs.msgConfRemove}'))
-                                                             return false" >
-                                    <f:param name="codExcluir" value="#{setor.id}"/>
-                                </p:commandButton>                                
-                            </p:column> 
-                        </p:dataTable>
-
                     </h:panelGrid> 
-
                 </h:form>
-
             </center>
-
         </ui:define>
     </ui:composition>
 </html>
+

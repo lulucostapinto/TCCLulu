@@ -5,7 +5,6 @@
  */
 package br.sgci.dao;
 
-import br.sgci.bean.Sala;
 import br.sgci.bean.Setor;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -34,6 +33,7 @@ public class SetorDAO implements SetorDAORemote {
 
         return sucesso;
     }
+
     @Override
     public Setor selecionar(int id) {
         Setor setor = null;
@@ -52,12 +52,27 @@ public class SetorDAO implements SetorDAORemote {
         em.remove(value);
     }
     
+    @Override
+    public void alterar(Setor value) {
+        if (this.valida(value)) {
+            em.merge(value);
+        }
+    }
+    
+    @Override
+    public boolean valida(Setor value) {
+        boolean ret = false;
+        if (value != null) {
+            ret = true;
+        }
+        return ret;
+    }
 
     @Override
     public List<Setor> listar() {
         List<Setor> setor = null;
         try {
-            Query query = em.createQuery("Select s from Setor s");
+            Query query = em.createQuery("Select st from Setor st");
             setor = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();

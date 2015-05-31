@@ -51,6 +51,22 @@ public class SalaDAO implements SalaDAORemote {
         value = this.retrieve(value);
         em.remove(value);
     }
+    
+    @Override
+    public void alterar(Sala value) {
+        if (this.valida(value)) {
+            em.merge(value);
+        }
+    }
+    
+    @Override
+    public boolean valida(Sala value) {
+        boolean ret = false;
+        if (value != null) {
+            ret = true;
+        }
+        return ret;
+    }
 
     @Override
     public List<Sala> listar() {

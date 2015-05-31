@@ -13,22 +13,21 @@
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid>
                         <p:panel header="VIDEOS">
-                          <h:form>
+                            <h:form>
                                 <p:growl id="growl" life="2000" />     
                                 <p:commandButton value="Incluir" id="incluir"  action="incluir_video"/>                               
-                            </h:form> 
-                        </p:panel>
+                            </h:form>                             
 
-                        <p:dataTable id="video" value="#{videoMNG.lista}" emptyMessage="Não há registros" var="video" paginator="true" rows="4" style="width: 820px">
-                             <p:column headerText="Nome" filterBy="#{video.lista}">
+                            <p:dataTable id="video" value="#{videoMNG.lista}" emptyMessage="Não há registros" var="video" paginator="true" rows="4" style="width: 820px">
+                                <p:column headerText="Nome" filterBy="#{video.lista}">
                                     <h:outputText value="#{video.nome}"/>
                                 </p:column>
-                        </p:dataTable>
-
+                            </p:dataTable>
+                        </p:panel>
                     </h:panelGrid> 
 
                 </h:form>
-                
+
             </center>
 
         </ui:define>

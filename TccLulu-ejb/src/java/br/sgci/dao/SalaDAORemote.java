@@ -14,14 +14,19 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface SalaDAORemote {
+
     public boolean gravar(Sala sala);
 
     public Sala selecionar(int id);
-    
+
     public Sala retrieve(Sala value);
 
     void deletar(Sala value);
 
     public java.util.List<Sala> listar();
-    
+
+    void alterar(Sala value);
+
+    boolean valida(Sala value);
+
 }

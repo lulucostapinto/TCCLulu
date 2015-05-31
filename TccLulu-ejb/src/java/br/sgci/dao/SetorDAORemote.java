@@ -17,11 +17,15 @@ public interface SetorDAORemote {
     public boolean gravar(Setor setor);
 
     public Setor selecionar(int id);
-    
+
     public Setor retrieve(Setor value);
 
     void deletar(Setor value);
 
     public java.util.List<Setor> listar();
+
+    void alterar(Setor value);
+
+    boolean valida(Setor value);
     
 }

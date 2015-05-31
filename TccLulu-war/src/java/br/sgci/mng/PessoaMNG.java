@@ -57,6 +57,31 @@ public class PessoaMNG {
     public void clear() {
         Pessoa pessoa = new Pessoa();
     }
+    
+    public String prepUpdate() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(index);
+        pessoa = pessoaDAO.retrieve(pessoa);
+        this.id = pessoa.getId();        
+        this.nome = pessoa.getNome();
+        this.cargo = pessoa.getCargo();
+        this.setor = pessoa.getSetor();
+        
+        return "alterar_pessoa";
+
+    }
+
+    public String update() {
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(id);
+        pessoa.setNome(nome);
+        pessoa.setCargo(cargo);        
+        pessoa.setSetor(setor);
+        pessoaDAO.alterar(pessoa);
+
+        return "ok";
+    }
 
     public PessoaDAORemote getPessoaDAO() {
         return pessoaDAO;

@@ -16,7 +16,8 @@
                                 <p:inputText id="nome" value="#{videoMNG.nome}"/>
                                 <p:growl id="messages" showDetail="true" />                               
                                 <p:fileUpload value="#{videoMNG.arquivo}" mode="simple" />
-                                <p:commandButton value="GRAVAR" ajax="false" actionListener="#{videoMNG.upload()}" />
+                                <p:commandButton value="Upload" ajax="false" actionListener="#{videoMNG.upload()}" />
+                                <p:commandButton value="GRAVAR" ajax="false" actionListener="#{videoMNG.save()}" />
                                 <p:commandButton value="LIMPAR" type="reset"/> 
                             </h:form>                           
                         </p:panel>   
