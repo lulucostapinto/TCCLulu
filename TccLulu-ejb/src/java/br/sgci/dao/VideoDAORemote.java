@@ -14,15 +14,19 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface VideoDAORemote {
-    
+
     public boolean gravar(Video video);
 
     public Video selecionar(int id);
-    
+
     public Video retrieve(Video value);
 
-    public boolean remover(Video video);
+    void deletar(Video value);
 
     public java.util.List<Video> listar();
-    
+
+    void alterar(Video value);
+
+    boolean valida(Video value);
+
 }

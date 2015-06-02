@@ -24,7 +24,7 @@ public class Video implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome, autor, descricao;
-    private byte[] arquivo;   
+    //private byte[] arquivo;   
     
 
     public int getId() {
@@ -60,14 +60,13 @@ public class Video implements Serializable {
     }
     
        
-    public byte[] getArquivo() {
+    /*public byte[] getArquivo() {
         return arquivo;
     }
 
     public void setArquivo(byte[] arquivo) {
         this.arquivo = arquivo;
-    }
-
+    }*/
     
      
    

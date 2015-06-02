@@ -8,30 +8,29 @@
     <ui:composition template="/padrao.xhtml">
         <ui:define name="centro">
             <center margin-top='-200' style="top:-500px;position: relative">
-                
                 <h:form id="formulario">
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid>
-                        <p:panel header="INCLUIR VIDEO">
-                            <h:panelGrid columns="2" id="grid">
-                                <h:outputLabel value="Nome"/> 
+                        <h:inputHidden value="#{salaMNG.id}"/> 
+                        <p:panel header="ALTERAR VIDEO">
+                            <h:panelGrid columns="2">                                                               
+                                <h:outputLabel value="Nome"/>
                                 <p:inputText id="nome" value="#{videoMNG.nome}"/>
-                                <h:outputLabel value="Autor"/> 
+                                <h:outputLabel value="Autor"/>
                                 <p:inputText id="autor" value="#{videoMNG.autor}"/>
-                                <h:outputLabel value="Descrição"/> 
-                                <p:inputText id="descricao" value="#{videoMNG.descricao}"/>
-                                <p:growl id="messages" showDetail="true" />                               
-                                    <p:fileUpload value="#{videoMNG.arquivo}" mode="simple" />
-                                    <p:commandButton value="Upload" ajax="false" actionListener="#{videoMNG.upload()}" />
-                                <p:commandButton value="GRAVAR" actionListener="#{videoMNG.save}" ajax="false"/>
+                                <h:outputLabel value="Descrição"/>
+                                <p:inputText id="descricao" value="#{videoMNG.descricao}"/> 
+                                <p:commandButton value="GRAVAR" actionListener="#{videoMNG.update}" ajax="false" update="grid"/>
                                 <p:commandButton value="LIMPAR" type="reset"/>
-                                <p:commandButton value="CANCELAR" id="cancelar"  action="video"/> 
+                                <p:commandButton value="CANCELAR" id="cancelar"  action="video"/>
                             </h:panelGrid>
                         </p:panel>
-                    </h:panelGrid>                             
-                </h:form>                
+                    </h:panelGrid> 
+                </h:form>
             </center>
         </ui:define>
     </ui:composition>
 </html>
+
+
 

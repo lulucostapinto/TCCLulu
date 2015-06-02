@@ -12,24 +12,45 @@
                 <h:form id="formulario">
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid>
-                        <p:panel header="VIDEOS">
+                        <p:panel header="CADASTRO DE VIDEOS">
                             <h:form>
                                 <p:growl id="growl" life="2000" />     
-                                <p:commandButton value="Incluir" id="incluir"  action="incluir_video"/>                               
-                            </h:form>                             
-
-                            <p:dataTable id="video" value="#{videoMNG.lista}" emptyMessage="Não há registros" var="video" paginator="true" rows="4" style="width: 820px">
+                                <p:commandButton value="Incluir" id="incluir"  action="incluir_video"/>                                        
+                            </h:form>                         
+                            <p:dataTable id="sala" value="#{videoMNG.lista}" emptyMessage="Não há registros" var="video" paginator="true" rows="4" style="width: 820px">
                                 <p:column headerText="Nome" filterBy="#{video.lista}">
                                     <h:outputText value="#{video.nome}"/>
                                 </p:column>
+                                <p:column headerText="Autor" filterBy="#{video.autor}">
+                                    <h:outputText value="#{video.autor}"/>
+                                </p:column>
+                                <p:column headerText="Descrição" filterBy="#{video.descricao}">
+                                    <h:outputText value="#{video.descricao}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Editar" action="#{videoMNG.prepUpdate()}" ajax="false">
+                                        <f:param name="codEditar" value="#{video.id}"/>                              
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Upload" action="incluir_arquivoVideo" ajax="false">
+                                        <f:param name="codEditar" value="#{video.id}"/>                              
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Excluir" title="#{msgs.btRemove}"
+                                                     actionListener="#{videoMNG.remove()}"                                             
+                                                     onclick="if (!confirm('#{msgs.msgConfRemove}'))
+                                                                 return false" >
+                                        <f:param name="codExcluir" value="#{video.id}"/>
+                                    </p:commandButton>                                
+                                </p:column>                            
                             </p:dataTable>
                         </p:panel>
                     </h:panelGrid> 
-
                 </h:form>
-
             </center>
-
         </ui:define>
     </ui:composition>
 </html>
+

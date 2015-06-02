@@ -5,7 +5,7 @@
  */
 package br.sgci.dao;
 
-import br.sgci.bean.Video;
+import br.sgci.bean.Solicitacao;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,16 +17,15 @@ import javax.persistence.Query;
  * @author Lulu
  */
 @Stateless
-public class VideoDAO implements VideoDAORemote {
-
-    @PersistenceContext
+public class SolicitacaoDAO implements SolicitacaoDAORemote {
+@PersistenceContext
     private EntityManager em;
 
     @Override
-    public boolean gravar(Video video) {
+    public boolean gravar(Solicitacao solicitacao) {
         boolean sucesso = false;
         try {
-            em.merge(video);
+            em.merge(solicitacao);
             sucesso = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,32 +35,32 @@ public class VideoDAO implements VideoDAORemote {
     }
 
     @Override
-    public Video selecionar(int id) {
-        Video video = null;
+    public Solicitacao selecionar(int id) {
+        Solicitacao solicitacao = null;
         try {
-            video = em.find(Video.class, id);
+            solicitacao = em.find(Solicitacao.class, id);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return video;
+        return solicitacao;
     }
 
     @Override
-    public void deletar(Video value) {
+    public void deletar(Solicitacao value) {
         value = this.retrieve(value);
         em.remove(value);
     }
-
+    
     @Override
-    public void alterar(Video value) {
+    public void alterar(Solicitacao value) {
         if (this.valida(value)) {
             em.merge(value);
         }
     }
-
+    
     @Override
-    public boolean valida(Video value) {
+    public boolean valida(Solicitacao value) {
         boolean ret = false;
         if (value != null) {
             ret = true;
@@ -70,20 +69,20 @@ public class VideoDAO implements VideoDAORemote {
     }
 
     @Override
-    public List<Video> listar() {
-        List<Video> video = null;
+    public List<Solicitacao> listar() {
+        List<Solicitacao> solicitacao = null;
         try {
-            Query query = em.createQuery("Select v from Video v");
-            video = query.getResultList();
+            Query query = em.createQuery("Select sl from Solicitacao sl");
+            solicitacao = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return video;
+        return solicitacao;
     }
 
     @Override
-    public Video retrieve(Video value) {
+    public Solicitacao retrieve(Solicitacao value) {
         return this.selecionar(value.getId());
     }
 

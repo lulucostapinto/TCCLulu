@@ -10,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,18 +17,13 @@ import javax.persistence.Table;
  * @author Lulu
  */
 @Entity
-@Table(name = "inscricao")
-public class Inscricao implements Serializable {
+@Table(name = "solicitacao")
+public class Solicitacao implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;    
-    @ManyToOne
-    @JoinColumn(name = "id_curso", referencedColumnName = "ID")
-    private Curso curso;
-    @ManyToOne
-    @JoinColumn(name = "id_pessoa", referencedColumnName = "ID")
-    private Pessoa pessoa;
+    private String curso, justificativa;
     
 
     public int getId() {
@@ -41,22 +34,23 @@ public class Inscricao implements Serializable {
         this.id = id;
     }
 
-    public Curso getCurso() {
+    public String getCurso() {
         return curso;
     }
 
-    public void setCurso(Curso curso) {
+    public void setCurso(String curso) {
         this.curso = curso;
     }
 
+    public String getJustificativa() {
+        return justificativa;
+    }
+
+    public void setJustificativa(String justificativa) {
+        this.justificativa = justificativa;
+    }
    
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
-
+   
+    
 }

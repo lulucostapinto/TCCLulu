@@ -37,6 +37,7 @@ public class InscricaoMNG {
     private Curso curso = new Curso();
     private List<Pessoa> pessoas;
     private List<Curso> cursos;
+    private List<Inscricao> lista;
 
     public void save(ActionEvent actionEvent) {
         Inscricao i = new Inscricao();
@@ -116,6 +117,12 @@ public class InscricaoMNG {
 
     public void setPessoas(List<Pessoa> pessoas) {
         this.pessoas = pessoas;
-    }    
+    } 
+
+    public List<Inscricao> getLista() {
+        return inscricaoDAO.listar();
+    }
+    
+    
 
 }

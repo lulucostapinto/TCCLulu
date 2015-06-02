@@ -27,17 +27,21 @@ public class VideoMNG {
     @EJB
     VideoDAORemote videoDAO;
     private UploadedFile arquivo;
+    private int id;
     private String nome, autor, descricao;
     private List<Video> lista;
 
     public void save(ActionEvent actionEvent) {
         Video v = new Video();
         v.setNome(nome);
-        v.setArquivo(arquivo.getContents());
+        v.setAutor(autor);
+        v.setDescricao(descricao);
+       // v.setArquivo(arquivo.getContents());
         videoDAO.gravar(v);
-        this.setNome(null);
-
+        this.setNome(null);      
+        
     }
+    
     
     public void upload() {
         if (arquivo != null) {
@@ -47,6 +51,43 @@ public class VideoMNG {
         }
     }
 
+    public void remove() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir".toString()));
+        Video video = new Video();
+        video.setId(index);
+        videoDAO.deletar(video);
+        this.clear();
+    }
+
+    public void clear() {
+        Video video = new Video();
+    }
+    
+    public String prepUpdate() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
+        Video video = new Video();
+        video.setId(index);        
+        video = videoDAO.retrieve(video);
+        this.id = video.getId();        
+        this.nome = video.getNome();
+        this.autor = video.getAutor();
+        this.descricao = video.getDescricao();
+      
+        return "alterar_video";
+
+    }
+
+    public String update() {
+        Video video = new Video();
+        video.setId(id);
+        video.setNome(nome);
+        video.setAutor(autor);
+        video.setDescricao(descricao);
+        
+        videoDAO.alterar(video);
+
+        return "ok";
+    }
     public VideoDAORemote getVideoDAO() {
         return videoDAO;
     }
@@ -63,6 +104,15 @@ public class VideoMNG {
         this.arquivo = arquivo;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
     public String getNome() {
         return nome;
     }
@@ -72,12 +122,9 @@ public class VideoMNG {
     }
 
     public List<Video> getLista() {
-        return lista;
+        return videoDAO.listar();
     }
-
-    public void setLista(List<Video> lista) {
-        this.lista = lista;
-    }
+   
 
     public String getAutor() {
         return autor;

@@ -13,7 +13,7 @@
                     <h:panelGrid>
                         <h:inputHidden value="#{setorMNG.id}"/> 
                         <p:panel header="ALTERAR SETOR">
-                            <h:panelGrid columns="2">                                                               
+                            <h:panelGrid columns="2" id="grid">                                                               
                                 <h:outputLabel value="Nome"/>
                                 <p:inputText id="nome" value="#{setorMNG.nome}"/>                                
                                 <p:commandButton value="GRAVAR" actionListener="#{setorMNG.update}" ajax="false" update="grid"/>
