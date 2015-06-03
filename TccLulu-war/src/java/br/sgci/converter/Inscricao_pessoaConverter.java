@@ -6,7 +6,7 @@
 package br.sgci.converter;
 
 import br.sgci.bean.Curso;
-import br.sgci.mng.CursoMNG;
+import br.sgci.bean.Pessoa;
 import br.sgci.mng.InscricaoMNG;
 import javax.el.ValueExpression;
 import javax.faces.application.FacesMessage;
@@ -20,21 +20,19 @@ import javax.faces.convert.FacesConverter;
  *
  * @author Lulu
  */
-@FacesConverter(value = "inscricao_cursoConverter")
-public class Inscricao_cursoConverter implements Converter{
-    //vai ter o mesmo do curso, porém para a inscrição contendo o curso
-
-    @Override
+@FacesConverter(value = "inscricao_pessoaConverter")
+public class Inscricao_pessoaConverter implements Converter{
+   @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         FacesContext ctx = FacesContext.getCurrentInstance();
         ValueExpression vExp = ctx.getApplication().getExpressionFactory().createValueExpression(ctx.getELContext(), "#{inscricaoMNG}", InscricaoMNG.class);
         InscricaoMNG inscricaoMNG = (InscricaoMNG) vExp.getValue(ctx.getELContext());
-        Curso cur = inscricaoMNG.getCurso();
-        if (cur == null) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Valor desconhecido", "Curso não foi encontrado");
+        Pessoa pessoa = inscricaoMNG.getPessoa();
+        if (pessoa == null) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Valor desconhecido", "Pessoa não foi encontrado");
             throw new ConverterException(msg);
         }
-        return cur;
+        return pessoa;
     }
 
     @Override
@@ -42,9 +40,10 @@ public class Inscricao_cursoConverter implements Converter{
         if (value == null) {
             return "0";
         } else {
-            Curso curso = (Curso) value;
-            return String.valueOf(curso.getId());
+            Pessoa pessoa = (Pessoa) value;
+            return String.valueOf(pessoa.getId());
 //            return ((Sala) value).getId().toString();
         }
     }
+    
 }

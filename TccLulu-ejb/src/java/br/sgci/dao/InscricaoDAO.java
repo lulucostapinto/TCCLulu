@@ -66,7 +66,7 @@ public class InscricaoDAO implements InscricaoDAORemote {
     public List<Inscricao> listar() {
         List<Inscricao> inscricoes = null;
         try {
-            Query query = em.createQuery("Select i from Incricao i");
+            Query query = em.createQuery("Select i from Inscricao i");
             inscricoes = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();

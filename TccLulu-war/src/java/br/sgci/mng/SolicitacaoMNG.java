@@ -113,5 +113,8 @@ public class SolicitacaoMNG {
     public List<Solicitacao> getLista() {
         return solicitacaoDAO.listar();
     }
-
+    
+    public void setLista(List<Solicitacao> lista) {
+        this.lista = lista;
+    }
 }

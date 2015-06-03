@@ -87,4 +87,19 @@ public class VideoDAO implements VideoDAORemote {
         return this.selecionar(value.getId());
     }
 
+    @Override
+    public boolean gravarArquivo(Video video) {
+        Video videoTemp = this.selecionar(video.getId());
+        videoTemp.setArquivo(video.getArquivo());
+        boolean sucesso = false;
+        try {
+            em.merge(videoTemp);
+            sucesso = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return sucesso;
+    }
+
 }

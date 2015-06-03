@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -36,18 +37,24 @@ public class VideoMNG {
         v.setNome(nome);
         v.setAutor(autor);
         v.setDescricao(descricao);
-       // v.setArquivo(arquivo.getContents());
+        // v.setArquivo(arquivo.getContents());
         videoDAO.gravar(v);
-        this.setNome(null);      
-        
+        this.setNome(null);
+
     }
-    
-    
+
     public void upload() {
         if (arquivo != null) {
+            Video video = new Video();
+
+            video.setId(id);
+            video.setArquivo(arquivo.getContents());
+
+            videoDAO.gravarArquivo(video);
+
             FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
-            arquivo.getContents();
+            //byte[] contents = arquivo.getContents();
         }
     }
 
@@ -62,19 +69,25 @@ public class VideoMNG {
     public void clear() {
         Video video = new Video();
     }
-    
+
     public String prepUpdate() {
         Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
         Video video = new Video();
-        video.setId(index);        
+        video.setId(index);
         video = videoDAO.retrieve(video);
-        this.id = video.getId();        
+        this.id = video.getId();
         this.nome = video.getNome();
         this.autor = video.getAutor();
         this.descricao = video.getDescricao();
-      
+
         return "alterar_video";
 
+    }
+
+    public String prepUpdate2() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
+        this.id = index;
+        return "incluir_arquivoVideo";
     }
 
     public String update() {
@@ -83,11 +96,12 @@ public class VideoMNG {
         video.setNome(nome);
         video.setAutor(autor);
         video.setDescricao(descricao);
-        
+
         videoDAO.alterar(video);
 
         return "ok";
     }
+
     public VideoDAORemote getVideoDAO() {
         return videoDAO;
     }
@@ -112,7 +126,6 @@ public class VideoMNG {
         this.id = id;
     }
 
-    
     public String getNome() {
         return nome;
     }
@@ -124,7 +137,6 @@ public class VideoMNG {
     public List<Video> getLista() {
         return videoDAO.listar();
     }
-   
 
     public String getAutor() {
         return autor;
@@ -141,7 +153,5 @@ public class VideoMNG {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-    
 
 }

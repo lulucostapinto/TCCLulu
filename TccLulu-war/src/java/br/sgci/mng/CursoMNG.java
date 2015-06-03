@@ -102,7 +102,8 @@ public class CursoMNG implements Serializable {
 
    public Curso getCurso(int id) {
         Curso cur = new Curso();
-        curso.setId(id);
+        cur.setId(id);
+//        curso.setId(id);
         return cursoDAO.retrieve(cur);
     }
    

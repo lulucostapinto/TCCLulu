@@ -16,6 +16,8 @@ import javax.ejb.Remote;
 public interface VideoDAORemote {
 
     public boolean gravar(Video video);
+    
+    public boolean gravarArquivo(Video video);
 
     public Video selecionar(int id);
 

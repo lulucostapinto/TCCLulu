@@ -31,8 +31,7 @@ public class InscricaoMNG {
     CursoDAORemote cursoDAO;
     @EJB
     PessoaDAORemote pessoaDAO;
-    private int id;
-    
+    private int id;    
     private Pessoa pessoa = new Pessoa();
     private Curso curso = new Curso();
     private List<Pessoa> pessoas;
