@@ -5,8 +5,8 @@
  */
 package br.sgci.mng;
 
-import br.sgci.bean.Video;
-import br.sgci.dao.VideoDAORemote;
+import br.sgci.bean.Monografia;
+import br.sgci.dao.MonografiaDAORemote;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -20,36 +20,36 @@ import org.primefaces.model.UploadedFile;
  *
  * @author Lulu
  */
-@Named(value = "videoMNG")
+@Named(value = "monografiaMNG")
 @RequestScoped
-public class VideoMNG {
+public class MonografiaMNG {
 
     @EJB
-    VideoDAORemote videoDAO;
+    MonografiaDAORemote monografiaDAO;
     private UploadedFile arquivo;
     private int id;
     private String nome, autor, descricao;
-    private List<Video> lista;
+    private List<Monografia> lista;
 
     public void save(ActionEvent actionEvent) {
-        Video v = new Video();
-        v.setNome(nome);
-        v.setAutor(autor);
-        v.setDescricao(descricao);
+        Monografia m = new Monografia();
+        m.setNome(nome);
+        m.setAutor(autor);
+        m.setDescricao(descricao);
         // v.setArquivo(arquivo.getContents());
-        videoDAO.gravar(v);
+        monografiaDAO.gravar(m);
         this.setNome(null);
 
     }
 
     public void upload() {
         if (arquivo != null) {
-            Video video = new Video();
+            Monografia monografia = new Monografia();
 
-            video.setId(id);
-            video.setArquivo(arquivo.getContents());
+            monografia.setId(id);
+            monografia.setArquivo(arquivo.getContents());
 
-            videoDAO.gravarArquivo(video);
+            monografiaDAO.gravarArquivo(monografia);
 
             FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -59,54 +59,54 @@ public class VideoMNG {
 
     public void remove() {
         Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir".toString()));
-        Video video = new Video();
-        video.setId(index);
-        videoDAO.deletar(video);
+        Monografia monografia = new Monografia();
+        monografia.setId(index);
+        monografiaDAO.deletar(monografia);
         this.clear();
     }
 
     public void clear() {
-        Video video = new Video();
+        Monografia monografia = new Monografia();
     }
 
     public String prepUpdate() {
         Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
-        Video video = new Video();
-        video.setId(index);
-        video = videoDAO.retrieve(video);
-        this.id = video.getId();
-        this.nome = video.getNome();
-        this.autor = video.getAutor();
-        this.descricao = video.getDescricao();
+        Monografia monografia = new Monografia();
+        monografia.setId(index);
+        monografia = monografiaDAO.retrieve(monografia);
+        this.id = monografia.getId();
+        this.nome = monografia.getNome();
+        this.autor = monografia.getAutor();
+        this.descricao = monografia.getDescricao();
 
-        return "alterar_video";
+        return "alterar_monografia";
 
     }
 
     public String prepUpdate2() {
         Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
         this.id = index;
-        return "incluir_arquivoVideo";
+        return "incluir_arquivoMonografia";
     }
 
     public String update() {
-        Video video = new Video();
-        video.setId(id);
-        video.setNome(nome);
-        video.setAutor(autor);
-        video.setDescricao(descricao);
+        Monografia monografia = new Monografia();
+        monografia.setId(id);
+        monografia.setNome(nome);
+        monografia.setAutor(autor);
+        monografia.setDescricao(descricao);
 
-        videoDAO.alterar(video);
+        monografiaDAO.alterar(monografia);
 
         return "ok";
     }
 
-    public VideoDAORemote getVideoDAO() {
-        return videoDAO;
+    public MonografiaDAORemote getMonografiaDAO() {
+        return monografiaDAO;
     }
 
-    public void setVideoDAO(VideoDAORemote videoDAO) {
-        this.videoDAO = videoDAO;
+    public void setMonografiaDAO(MonografiaDAORemote monografiaDAO) {
+        this.monografiaDAO = monografiaDAO;
     }
 
     public UploadedFile getArquivo() {
@@ -133,8 +133,8 @@ public class VideoMNG {
         this.nome = nome;
     }
 
-    public List<Video> getLista() {
-        return videoDAO.listar();
+    public List<Monografia> getLista() {
+        return monografiaDAO.listar();
     }
 
     public String getAutor() {

@@ -12,17 +12,17 @@
                 <h:form id="formulario">
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid>
-                        <p:panel header="INCLUIR VIDEO">
+                        <p:panel header="INCLUIR MONOGRAFIA">
                             <h:panelGrid columns="2" id="grid">
                                 <h:outputLabel value="Nome"/> 
-                                <p:inputText id="nome" value="#{videoMNG.nome}"/>
+                                <p:inputText id="nome" value="#{monografiaMNG.nome}"/>
                                 <h:outputLabel value="Autor"/> 
-                                <p:inputText id="autor" value="#{videoMNG.autor}"/>
+                                <p:inputText id="autor" value="#{monografiaMNG.autor}"/>
                                 <h:outputLabel value="Descrição"/> 
-                                <p:inputText id="descricao" value="#{videoMNG.descricao}"/>                                
-                                <p:commandButton value="GRAVAR" actionListener="#{videoMNG.save}" ajax="false"/>
+                                <p:inputText id="descricao" value="#{monografiaMNG.descricao}"/>                                
+                                <p:commandButton value="GRAVAR" actionListener="#{monografiaMNG.save}" ajax="false"/>
                                 <p:commandButton value="LIMPAR" type="reset"/>
-                                <p:commandButton value="CANCELAR" id="cancelar"  action="video"/> 
+                                <p:commandButton value="CANCELAR" id="cancelar"  action="monografia"/> 
                             </h:panelGrid>
                         </p:panel>
                     </h:panelGrid>                             
@@ -31,4 +31,3 @@
         </ui:define>
     </ui:composition>
 </html>
-

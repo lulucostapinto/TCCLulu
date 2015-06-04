@@ -19,7 +19,7 @@
                             </h:form>                                 
                                                 
                             <p:dataTable id="solicitacao" value="#{solicitacaoMNG.lista}" emptyMessage="Não há registros" var="solicitacao" paginator="true" rows="4" style="width: 820px">
-                                <p:column headerText="Nome" filterBy="#{solicitacao.lista}">
+                                <p:column headerText="Curso" filterBy="#{solicitacao.lista}">
                                     <h:outputText value="#{solicitacao.curso}"/>
                                 </p:column>
                                 <p:column headerText="Justificativa">

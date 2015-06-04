@@ -11,37 +11,37 @@
                 <h:form id="formulario">
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid>
-                        <p:panel header="CADASTRO DE VIDEOS">
+                        <p:panel header="CADASTRO DE MONOGRAFIA">
                             <h:form>
                                 <p:growl id="growl" life="2000" />     
-                                <p:commandButton value="Incluir" id="incluir"  action="incluir_video"/>                                        
+                                <p:commandButton value="Incluir" id="incluir"  action="incluir_monografia"/>                                        
                             </h:form>                         
-                            <p:dataTable id="sala" value="#{videoMNG.lista}" emptyMessage="Não há registros" var="video" paginator="true" rows="4" style="width: 820px">
-                                <p:column headerText="Nome" filterBy="#{video.lista}">
-                                    <h:outputText value="#{video.nome}"/>
+                            <p:dataTable id="sala" value="#{monografiaMNG.lista}" emptyMessage="Não há registros" var="monografia" paginator="true" rows="4" style="width: 820px">
+                                <p:column headerText="Nome" filterBy="#{monografia.lista}">
+                                    <h:outputText value="#{monografia.nome}"/>
                                 </p:column>
-                                <p:column headerText="Autor" filterBy="#{video.autor}">
-                                    <h:outputText value="#{video.autor}"/>
+                                <p:column headerText="Autor" filterBy="#{monografia.lista}">
+                                    <h:outputText value="#{monografia.autor}"/>
                                 </p:column>
-                                <p:column headerText="Descrição" filterBy="#{video.descricao}">
-                                    <h:outputText value="#{video.descricao}"/>
+                                <p:column headerText="Descrição">
+                                    <h:outputText value="#{monografia.descricao}"/>
                                 </p:column>
                                 <p:column>
-                                    <p:commandButton value="Editar" action="#{videoMNG.prepUpdate()}" ajax="false">
-                                        <f:param name="codEditar" value="#{video.id}"/>                              
+                                    <p:commandButton value="Editar" action="#{monografiaMNG.prepUpdate()}" ajax="false">
+                                        <f:param name="codEditar" value="#{monografia.id}"/>                              
                                     </p:commandButton>
                                 </p:column>
                                 <p:column>
-                                    <p:commandButton value="Upload" action="#{videoMNG.prepUpdate2()}" ajax="false">
-                                        <f:param name="codEditar" value="#{video.id}"/>                              
+                                    <p:commandButton value="Upload" action="#{monografiaMNG.prepUpdate2()}" ajax="false">
+                                        <f:param name="codEditar" value="#{monografia.id}"/>                              
                                     </p:commandButton>
                                 </p:column>
                                 <p:column>
                                     <p:commandButton value="Excluir" title="#{msgs.btRemove}"
-                                                     actionListener="#{videoMNG.remove()}"                                             
+                                                     actionListener="#{monografiaMNG.remove()}"                                             
                                                      onclick="if (!confirm('#{msgs.msgConfRemove}'))
                                                                  return false" >
-                                        <f:param name="codExcluir" value="#{video.id}"/>
+                                        <f:param name="codExcluir" value="#{monografia.id}"/>
                                     </p:commandButton>                                
                                 </p:column>                            
                             </p:dataTable>
@@ -52,4 +52,5 @@
         </ui:define>
     </ui:composition>
 </html>
+
 
