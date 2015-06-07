@@ -5,33 +5,30 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">     
-    <ui:composition template="/padrao.xhtml">
-        <ui:define name="centro">
-            <center margin-top='-200' style="top:-500px;position: relative">
-
-                <h:form id="formulario">
-                    <p:messages autoUpdate="true"/>
-                    <h:panelGrid>
-                        <p:panel header="Inscrição">
-                            <h:panelGrid columns="2">
-                                <p:selectOneMenu id="curso" converter="cursoConverter" value="#{inscricaoMNG.curso}">
-                                    <f:selectItems value="#{inscricaoMNG.cursos}" var ="vCurso"
-                                                   itemLabel="#{vCurso.nome}"
-                                                   itemValue="#{vCurso}"/>
-                                </p:selectOneMenu>                                    
-                                <p:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{inscricaoMNG.pessoa}">
-                                    <f:selectItems value="#{inscricaoMNG.pessoas}" var ="vPessoa"
-                                                   itemLabel="#{vPessoa.nome}"
-                                                   itemValue="#{vPessoa}"/>
-                                </p:selectOneMenu>                                                                        
-                                <p:commandButton value="GRAVAR" actionListener="#{inscricaoMNG.save}" ajax="false"/>
-                                <p:commandButton value="LIMPAR" type="reset"/>
-                                <p:commandButton value="CANCELAR" id="cancelar"  action="inscritos"/> 
-                            </h:panelGrid>
-                        </p:panel>
-                    </h:panelGrid>                             
-                </h:form>                
-            </center>
+    <ui:composition template="/WEB-INF/templates/default.xhtml">
+        <ui:define name="conteudo">
+            <h:form id="formulario">
+                <p:messages autoUpdate="true"/>
+                <h:panelGrid>
+                    <p:panel header="Inscrição">
+                        <h:panelGrid columns="2">
+                            <p:selectOneMenu id="curso" converter="cursoConverter" value="#{inscricaoMNG.curso}">
+                                <f:selectItems value="#{inscricaoMNG.cursos}" var ="vCurso"
+                                               itemLabel="#{vCurso.nome}"
+                                               itemValue="#{vCurso}"/>
+                            </p:selectOneMenu>                                    
+                            <p:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{inscricaoMNG.pessoa}">
+                                <f:selectItems value="#{inscricaoMNG.pessoas}" var ="vPessoa"
+                                               itemLabel="#{vPessoa.nome}"
+                                               itemValue="#{vPessoa}"/>
+                            </p:selectOneMenu>                                                                        
+                            <p:commandButton value="GRAVAR" actionListener="#{inscricaoMNG.save}" ajax="false"/>
+                            <p:commandButton value="LIMPAR" type="reset"/>
+                            <p:commandButton value="CANCELAR" id="cancelar"  action="inscritos"/> 
+                        </h:panelGrid>
+                    </p:panel>
+                </h:panelGrid>                             
+            </h:form>            
         </ui:define>
     </ui:composition>
 </html>

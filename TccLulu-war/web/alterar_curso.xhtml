@@ -5,49 +5,43 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">     
-    <ui:composition template="/padrao.xhtml">
-        <ui:define name="centro">
-            <center margin-top='-200' style="top:-500px;position: relative">
-
-                <h:form id="formulario">
-                    <p:messages autoUpdate="true"/>
-                    <h:panelGrid>
-                        <h:inputHidden value="#{cursoMNG.id}"/> 
-                        <p:panel header="ALTERAR CURSO">
-                            <h:panelGrid columns="2">                                                               
-                                <h:outputLabel value="Nome"/>
-                                <p:inputText id="nome" value="#{cursoMNG.nome}"/>
-                                <h:outputLabel value="Público Alvo"/>
-                                <p:inputText id="pub_alvo" value="#{cursoMNG.pub_alvo}"/> 
-                                <h:outputLabel value="Quantidade Vagas"/>
-                                <p:inputText id="qtd_vagas" value="#{cursoMNG.qtd_vagas}"/>
-                                <h:outputLabel value="Duração"/>
-                                <p:inputText id="duracao" value="#{cursoMNG.duracao}"/> 
-                                <p:outputLabel  value="Local"/> 
-                                <p:selectOneMenu id="local" converter="salaConverter" value="#{cursoMNG.sala}">
-                                      <f:selectItems value="#{cursoMNG.salas}" var ="vSala"
+    <ui:composition template="/WEB-INF/templates/default.xhtml">
+        <ui:define name="conteudo">
+            <h:form id="formulario">
+                <p:messages autoUpdate="true"/>
+                <h:panelGrid>
+                    <h:inputHidden value="#{cursoMNG.id}"/> 
+                    <p:panel header="ALTERAR CURSO">
+                        <h:panelGrid columns="2">                                                               
+                            <h:outputLabel value="Nome"/>
+                            <p:inputText id="nome" value="#{cursoMNG.nome}"/>
+                            <h:outputLabel value="Público Alvo"/>
+                            <p:inputText id="pub_alvo" value="#{cursoMNG.pub_alvo}"/> 
+                            <h:outputLabel value="Quantidade Vagas"/>
+                            <p:inputText id="qtd_vagas" value="#{cursoMNG.qtd_vagas}"/>
+                            <h:outputLabel value="Duração"/>
+                            <p:inputText id="duracao" value="#{cursoMNG.duracao}"/> 
+                            <p:outputLabel  value="Local"/> 
+                            <p:selectOneMenu id="local" converter="salaConverter" value="#{cursoMNG.sala}">
+                                <f:selectItems value="#{cursoMNG.salas}" var ="vSala"
                                                itemLabel="#{vSala.nome}"
                                                itemValue="#{vSala}"/>
-                                </p:selectOneMenu>               
-                                <h:outputLabel value="Data Inicial"/>
-                                <p:inputMask id="data_inicio" value="#{cursoMNG.data_inicio}" mask="99/99/9999">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                </p:inputMask>
-                                <h:outputLabel value="Data Final"/>
-                                <p:inputMask id="data_fim" value="#{cursoMNG.data_fim}" mask="99/99/9999">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>                                        
-                                </p:inputMask>
-                                <p:commandButton value="GRAVAR" actionListener="#{cursoMNG.update}" ajax="false" update="grid"/>
-                                <p:commandButton value="LIMPAR" type="reset"/>
-                                <p:commandButton value="CANCELAR" id="cancelar"  action="matriz"/>
-                            </h:panelGrid>
-                        </p:panel>
-                    </h:panelGrid> 
-
-                </h:form>
-
-            </center>
-
+                            </p:selectOneMenu>               
+                            <h:outputLabel value="Data Inicial"/>
+                            <p:inputMask id="data_inicio" value="#{cursoMNG.data_inicio}" mask="99/99/9999">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </p:inputMask>
+                            <h:outputLabel value="Data Final"/>
+                            <p:inputMask id="data_fim" value="#{cursoMNG.data_fim}" mask="99/99/9999">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>                                        
+                            </p:inputMask>
+                            <p:commandButton value="GRAVAR" actionListener="#{cursoMNG.update}" ajax="false" update="grid"/>
+                            <p:commandButton value="LIMPAR" type="reset"/>
+                            <p:commandButton value="CANCELAR" id="cancelar"  action="matriz"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:panelGrid> 
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>
