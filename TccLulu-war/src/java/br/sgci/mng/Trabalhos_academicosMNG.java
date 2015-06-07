@@ -5,8 +5,8 @@
  */
 package br.sgci.mng;
 
-import br.sgci.bean.Monografia;
-import br.sgci.dao.MonografiaDAORemote;
+import br.sgci.bean.Trabalhos_academicos;
+import br.sgci.dao.Trabalhos_academicosDAORemote;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -20,36 +20,37 @@ import org.primefaces.model.UploadedFile;
  *
  * @author Lulu
  */
-@Named(value = "monografiaMNG")
+@Named(value = "trabalhos_academicosMNG")
+
 @RequestScoped
-public class MonografiaMNG {
+public class Trabalhos_academicosMNG {
 
     @EJB
-    MonografiaDAORemote monografiaDAO;
+    Trabalhos_academicosDAORemote trabalhos_academicosDAO;
     private UploadedFile arquivo;
     private int id;
     private String nome, autor, descricao;
-    private List<Monografia> lista;
+    private List<Trabalhos_academicos> lista;
 
     public void save(ActionEvent actionEvent) {
-        Monografia m = new Monografia();
-        m.setNome(nome);
-        m.setAutor(autor);
-        m.setDescricao(descricao);
+        Trabalhos_academicos ta = new Trabalhos_academicos();
+        ta.setNome(nome);
+        ta.setAutor(autor);
+        ta.setDescricao(descricao);
         // v.setArquivo(arquivo.getContents());
-        monografiaDAO.gravar(m);
+        trabalhos_academicosDAO.gravar(ta);
         this.setNome(null);
 
     }
 
     public void upload() {
         if (arquivo != null) {
-            Monografia monografia = new Monografia();
+            Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
 
-            monografia.setId(id);
-            monografia.setArquivo(arquivo.getContents());
+            trabalhos_academicos.setId(id);
+            trabalhos_academicos.setArquivo(arquivo.getContents());
 
-            monografiaDAO.gravarArquivo(monografia);
+            trabalhos_academicosDAO.gravarArquivo(trabalhos_academicos);
 
             FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -59,54 +60,54 @@ public class MonografiaMNG {
 
     public void remove() {
         Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir".toString()));
-        Monografia monografia = new Monografia();
-        monografia.setId(index);
-        monografiaDAO.deletar(monografia);
+        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
+        trabalhos_academicos.setId(index);
+        trabalhos_academicosDAO.deletar(trabalhos_academicos);
         this.clear();
     }
 
     public void clear() {
-        Monografia monografia = new Monografia();
+        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
     }
 
     public String prepUpdate() {
         Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
-        Monografia monografia = new Monografia();
-        monografia.setId(index);
-        monografia = monografiaDAO.retrieve(monografia);
-        this.id = monografia.getId();
-        this.nome = monografia.getNome();
-        this.autor = monografia.getAutor();
-        this.descricao = monografia.getDescricao();
+        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
+        trabalhos_academicos.setId(index);
+        trabalhos_academicos = trabalhos_academicosDAO.retrieve(trabalhos_academicos);
+        this.id = trabalhos_academicos.getId();
+        this.nome = trabalhos_academicos.getNome();
+        this.autor = trabalhos_academicos.getAutor();
+        this.descricao = trabalhos_academicos.getDescricao();
 
-        return "alterar_monografia";
+        return "alterar_trabalhosAcademicos";
 
     }
 
     public String prepUpdate2() {
         Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
         this.id = index;
-        return "incluir_arquivoMonografia";
+        return "incluir_arquivoTrabalhosAcademicos";
     }
 
     public String update() {
-        Monografia monografia = new Monografia();
-        monografia.setId(id);
-        monografia.setNome(nome);
-        monografia.setAutor(autor);
-        monografia.setDescricao(descricao);
+        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
+        trabalhos_academicos.setId(id);
+        trabalhos_academicos.setNome(nome);
+        trabalhos_academicos.setAutor(autor);
+        trabalhos_academicos.setDescricao(descricao);
 
-        monografiaDAO.alterar(monografia);
+        trabalhos_academicosDAO.alterar(trabalhos_academicos);
 
         return "ok";
     }
 
-    public MonografiaDAORemote getMonografiaDAO() {
-        return monografiaDAO;
+    public Trabalhos_academicosDAORemote gettrabalhos_academicosDAO() {
+        return trabalhos_academicosDAO;
     }
 
-    public void setMonografiaDAO(MonografiaDAORemote monografiaDAO) {
-        this.monografiaDAO = monografiaDAO;
+    public void settrabalhos_academicosDAO(Trabalhos_academicosDAORemote trabalhos_academicosDAO) {
+        this.trabalhos_academicosDAO = trabalhos_academicosDAO;
     }
 
     public UploadedFile getArquivo() {
@@ -133,8 +134,8 @@ public class MonografiaMNG {
         this.nome = nome;
     }
 
-    public List<Monografia> getLista() {
-        return monografiaDAO.listar();
+    public List<Trabalhos_academicos> getLista() {
+        return trabalhos_academicosDAO.listar();
     }
 
     public String getAutor() {

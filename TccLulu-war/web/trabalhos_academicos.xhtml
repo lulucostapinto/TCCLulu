@@ -10,37 +10,37 @@
             <h:form id="formulario">
                 <p:messages autoUpdate="true"/>
                 <h:panelGrid>
-                    <p:panel header="CADASTRO DE MONOGRAFIA">
+                    <p:panel header="CADASTRO DE TRABALHOS ACADEMICOS">
                         <h:form>
                             <p:growl id="growl" life="2000" />     
-                            <p:commandButton value="Incluir" id="incluir"  action="incluir_monografia"/>                                        
+                            <p:commandButton value="Incluir" id="incluir"  action="incluir_trabalhosAcademicos"/>                                        
                         </h:form>                         
-                        <p:dataTable id="sala" value="#{monografiaMNG.lista}" emptyMessage="Não há registros" var="monografia" paginator="true" rows="4" style="width: 820px">
-                            <p:column headerText="Nome" filterBy="#{monografia.lista}">
-                                <h:outputText value="#{monografia.nome}"/>
+                        <p:dataTable id="sala" value="#{trabalhos_academicosMNG.lista}" emptyMessage="Não há registros" var="trabalhos_academicos" paginator="true" rows="4" style="width: 820px">
+                            <p:column headerText="Nome" filterBy="#{trabalhos_academicos.lista}">
+                                <h:outputText value="#{trabalhos_academicos.nome}"/>
                             </p:column>
-                            <p:column headerText="Autor" filterBy="#{monografia.lista}">
-                                <h:outputText value="#{monografia.autor}"/>
+                            <p:column headerText="Autor" filterBy="#{trabalhos_academicos.lista}">
+                                <h:outputText value="#{trabalhos_academicos.autor}"/>
                             </p:column>
                             <p:column headerText="Descrição">
-                                <h:outputText value="#{monografia.descricao}"/>
+                                <h:outputText value="#{trabalhos_academicos.descricao}"/>
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Editar" action="#{monografiaMNG.prepUpdate()}" ajax="false">
-                                    <f:param name="codEditar" value="#{monografia.id}"/>                              
+                                <p:commandButton value="Editar" action="#{trabalhos_academicosMNG.prepUpdate()}" ajax="false">
+                                    <f:param name="codEditar" value="#{trabalhos_academicos.id}"/>                              
                                 </p:commandButton>
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Upload" action="#{monografiaMNG.prepUpdate2()}" ajax="false">
-                                    <f:param name="codEditar" value="#{monografia.id}"/>                              
+                                <p:commandButton value="Upload" action="#{trabalhos_academicosMNG.prepUpdate2()}" ajax="false">
+                                    <f:param name="codEditar" value="#{trabalhos_academicos.id}"/>                              
                                 </p:commandButton>
                             </p:column>
                             <p:column>
                                 <p:commandButton value="Excluir" title="#{msgs.btRemove}"
-                                                 actionListener="#{monografiaMNG.remove()}"                                             
+                                                 actionListener="#{trabalhos_academicosMNG.remove()}"                                             
                                                  onclick="if (!confirm('#{msgs.msgConfRemove}'))
                                                              return false" >
-                                    <f:param name="codExcluir" value="#{monografia.id}"/>
+                                    <f:param name="codExcluir" value="#{trabalhos_academicos.id}"/>
                                 </p:commandButton>                                
                             </p:column>                            
                         </p:dataTable>

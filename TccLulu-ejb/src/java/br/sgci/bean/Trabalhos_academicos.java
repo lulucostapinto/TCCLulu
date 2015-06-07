@@ -18,8 +18,8 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "monografia")
-public class Monografia implements Serializable{
+@Table(name = "trabalhos_academicos")
+public class Trabalhos_academicos implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,7 +86,7 @@ public class Monografia implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Monografia other = (Monografia) obj;
+        final Trabalhos_academicos other = (Trabalhos_academicos) obj;
         if (this.id != other.id) {
             return false;
         }

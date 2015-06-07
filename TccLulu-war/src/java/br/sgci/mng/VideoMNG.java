@@ -7,7 +7,13 @@ package br.sgci.mng;
 
 import br.sgci.bean.Video;
 import br.sgci.dao.VideoDAORemote;
+import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -45,15 +51,23 @@ public class VideoMNG {
     public void upload() {
         if (arquivo != null) {
             Video video = new Video();
-
             video.setId(id);
-            video.setArquivo(arquivo.getContents());
-
+            try {
+                InputStream is = arquivo.getInputstream();
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                int nRead;
+                byte[] data = new byte[16384];
+                while ((nRead = is.read(data, 0, data.length)) != -1) {
+                    buffer.write(data, 0, nRead);
+                }
+                buffer.flush();
+                video.setArquivo(buffer.toByteArray());
+            } catch (IOException ex) {
+                Logger.getLogger(VideoMNG.class.getName()).log(Level.SEVERE, null, ex);
+            }
             videoDAO.gravarArquivo(video);
-
-            FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded.");
+            FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded. Size: " + arquivo.getSize());
             FacesContext.getCurrentInstance().addMessage(null, message);
-            //byte[] contents = arquivo.getContents();
         }
     }
 

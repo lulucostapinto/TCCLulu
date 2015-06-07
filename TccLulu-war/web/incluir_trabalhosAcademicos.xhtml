@@ -10,17 +10,17 @@
             <h:form id="formulario">
                 <p:messages autoUpdate="true"/>
                 <h:panelGrid>
-                    <p:panel header="INCLUIR MONOGRAFIA">
+                    <p:panel header="INCLUIR TRABALHOS ACADEMICOS">
                         <h:panelGrid columns="2" id="grid">
                             <h:outputLabel value="Nome"/> 
-                            <p:inputText id="nome" value="#{monografiaMNG.nome}"/>
+                            <p:inputText id="nome" value="#{trabalhos_academicosMNG.nome}"/>
                             <h:outputLabel value="Autor"/> 
-                            <p:inputText id="autor" value="#{monografiaMNG.autor}"/>
+                            <p:inputText id="autor" value="#{trabalhos_academicosMNG.autor}"/>
                             <h:outputLabel value="Descrição"/> 
-                            <p:inputText id="descricao" value="#{monografiaMNG.descricao}"/>                                
-                            <p:commandButton value="GRAVAR" actionListener="#{monografiaMNG.save}" ajax="false"/>
+                            <p:inputText id="descricao" value="#{trabalhos_academicosMNG.descricao}"/>                                
+                            <p:commandButton value="GRAVAR" actionListener="#{trabalhos_academicosMNG.save}" ajax="false"/>
                             <p:commandButton value="LIMPAR" type="reset"/>
-                            <p:commandButton value="CANCELAR" id="cancelar"  action="monografia"/> 
+                            <p:commandButton value="CANCELAR" id="cancelar"  action="trabalhos_academicos"/> 
                         </h:panelGrid>
                     </p:panel>
                 </h:panelGrid>                             
