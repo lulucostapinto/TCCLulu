@@ -5,10 +5,53 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
- <ui:composition template="/WEB-INF/templates/default.xhtml">
-        <ui:define name="conteudo">
-           
-        </ui:define>
-    </ui:composition>
-</html>   
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>SGCI</title>
+            </f:facet>
+        </h:head>
+
+
+        <h:body>
+            <h3 style="margin-top:0">SGCI</h3>
+            <ui:insert name="menu">
+                <h:form>
+                    <p:menu>
+                        <p:submenu label="CURSOS">
+                            <p:menuitem value="Matriz de cursos" outcome="matriz" />
+                            <p:menuitem value="Inscrições" outcome="inscritos" /> 
+                            <p:menuitem value="Solicitar Curso" outcome="solicitacao" /> 
+                        </p:submenu>
+                        <p:submenu label="CURRÍCULO">
+                            <p:menuitem value="Incluir curso externo" outcome="incluir_cursoExterno"/>
+                            <p:menuitem value="Relatório de horas" />
+                            <p:menuitem value="Certificados" />                    
+                        </p:submenu>
+                        <p:submenu label="BIBLOTECA VIRTUAL">
+                            <p:menuitem value="Vídeos" outcome="video"/>
+                            <p:menuitem value="Monografias" outcome="monografia" />
+                            <p:menuitem value="TCC's" />                    
+                        </p:submenu>                       
+                        <p:submenu label="CONFIGURAÇÕES">
+                            <p:menuitem value="Usuários" outcome="usuario"/>
+                            <p:menuitem value="Salas" outcome="sala"/>
+                            <p:menuitem value="Setores" outcome="setor"/>
+                            <p:menuitem value="Colaboradores" outcome="pessoa"/>
+                            <p:menuitem value="SAIR" outcome="index"/>
+                        </p:submenu>                      
+                    </p:menu>
+                </h:form>              
+                    
+               
+            </ui:insert>
+            
+            <ui:insert name="centro">
+            </ui:insert>    
+
+        </h:body>
+
+    </f:view>
+</html>
 

@@ -5,27 +5,34 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"> 
-    <ui:composition template="/WEB-INF/templates/default.xhtml">
-        <ui:define name="conteudo">
-            <h:form id="formulario">
-                <p:messages autoUpdate="true"/>
-                <h:panelGrid>
-                    <p:panel header="CADASTRO DE USUARIOS">
-                        <h:form>
-                            <p:growl id="growl" life="2000" />     
-                            <p:commandButton value="Incluir" id="incluir"  action="incluir_usuario"/>
-                            <p:commandButton value="Editar" id="editar" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
-                            <p:commandButton value="Excluir" id="excluir" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
-                        </h:form> 
-                    </p:panel>
+    <ui:composition template="/padrao.xhtml">
+        <ui:define name="centro">
+            <center margin-top='-200' style="top:-500px;position: relative">
 
-                    <p:dataTable id="usuario" value="#{usuarioMNG.lista}" emptyMessage="Não há registros" var="usuario" paginator="true" rows="4" style="width: 820px">
-                        <p:column headerText="Nome" filterBy="#{usuario}">
-                            <h:outputText value="#{usuarioMNG.login}"/>
-                        </p:column>
-                    </p:dataTable>
-                </h:panelGrid> 
-            </h:form>
+                <h:form id="formulario">
+                    <p:messages autoUpdate="true"/>
+                    <h:panelGrid>
+                        <p:panel header="CADASTRO DE USUARIOS">
+                          <h:form>
+                                <p:growl id="growl" life="2000" />     
+                                <p:commandButton value="Incluir" id="incluir"  action="incluir_usuario"/>
+                                <p:commandButton value="Editar" id="editar" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
+                                <p:commandButton value="Excluir" id="excluir" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
+                            </h:form> 
+                        </p:panel>
+
+                        <p:dataTable id="usuario" value="#{usuarioMNG.lista}" emptyMessage="Não há registros" var="usuario" paginator="true" rows="4" style="width: 820px">
+                             <p:column headerText="Nome" filterBy="#{usuario}">
+                                    <h:outputText value="#{usuarioMNG.login}"/>
+                                </p:column>
+                        </p:dataTable>
+
+                    </h:panelGrid> 
+
+                </h:form>
+
+            </center>
+
         </ui:define>
     </ui:composition>
 </html>

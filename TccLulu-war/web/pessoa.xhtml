@@ -5,44 +5,47 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"> 
-    <ui:composition template="/WEB-INF/templates/default.xhtml">
-        <ui:define name="conteudo">
-            <h:form id="formulario">
-                <p:messages autoUpdate="true"/>
-                <h:panelGrid>
-                    <p:panel header="CADASTRO DE COLABORADORES">
-                        <h:form>
-                            <p:growl id="growl" life="2000" />     
-                            <p:commandButton value="Incluir" id="incluir"  action="incluir_pessoa"/>                            
-                        </h:form>                       
+    <ui:composition template="/padrao.xhtml">
+        <ui:define name="centro">
+            <center margin-top='-200' style="top:-500px;position: relative">
 
-                        <p:dataTable id="sala" value="#{pessoaMNG.lista}" emptyMessage="Não há registros" var="pessoa" paginator="true" rows="4" style="width: 720px">
-                            <p:column style="width:330px" headerText="Nome" filterBy="#{pessoa.lista}">
-                                <h:outputText value="#{pessoa.nome}"/>
-                            </p:column>
-                            <p:column headerText="Cargo">
-                                <h:outputText value="#{pessoa.cargo}"/>
-                            </p:column>                            
-                            <p:column headerText="Setor">
-                                <h:outputText value="#{pessoa.setor}"/>
-                            </p:column>
-                            <p:column>
-                                <p:commandButton value="Editar" action="#{pessoaMNG.prepUpdate()}" ajax="false">
-                                    <f:param name="codEditar" value="#{pessoa.id}"/>                              
-                                </p:commandButton>
-                            </p:column>
-                            <p:column>
-                                <p:commandButton value="Excluir" title="#{msgs.btRemove}"
-                                                 actionListener="#{pessoaMNG.remove()}"                                             
-                                                 onclick="if (!confirm('#{msgs.msgConfRemove}'))
+                <h:form id="formulario">
+                    <p:messages autoUpdate="true"/>
+                    <h:panelGrid>
+                        <p:panel header="CADASTRO DE COLABORADORES">
+                            <h:form>
+                                <p:growl id="growl" life="2000" />     
+                                <p:commandButton value="Incluir" id="incluir"  action="incluir_pessoa"/>                            
+                            </h:form>                       
+
+                            <p:dataTable id="sala" value="#{pessoaMNG.lista}" emptyMessage="Não há registros" var="pessoa" paginator="true" rows="4" style="width: 820px">
+                                <p:column headerText="Nome" filterBy="#{pessoa.lista}">
+                                    <h:outputText value="#{pessoa.nome}"/>
+                                </p:column>
+                                <p:column headerText="Cargo">
+                                    <h:outputText value="#{pessoa.cargo}"/>
+                                </p:column>                            
+                                <p:column headerText="Setor">
+                                    <h:outputText value="#{pessoa.setor}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Editar" action="#{pessoaMNG.prepUpdate()}" ajax="false">
+                                        <f:param name="codEditar" value="#{pessoa.id}"/>                              
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Excluir" title="#{msgs.btRemove}"
+                                                     actionListener="#{pessoaMNG.remove()}"                                             
+                                                     onclick="if (!confirm('#{msgs.msgConfRemove}'))
                                                              return false" >
-                                    <f:param name="codExcluir" value="#{pessoa.id}"/>
-                                </p:commandButton>
-                            </p:column>
-                        </p:dataTable>
-                    </p:panel>
-                </h:panelGrid> 
-            </h:form>           
+                                        <f:param name="codExcluir" value="#{pessoa.id}"/>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </h:panelGrid> 
+                </h:form>
+            </center>
         </ui:define>
     </ui:composition>
 </html>
