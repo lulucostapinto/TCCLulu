@@ -5,29 +5,27 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">     
-    <ui:composition template="/padrao.xhtml">
-        <ui:define name="centro">
-            <center margin-top='-200' style="top:-500px;position: relative">
-                <h:form id="formulario">
-                    <p:messages autoUpdate="true"/>
-                    <h:panelGrid>
-                        <h:inputHidden value="#{videoMNG.id}"/> 
-                        <p:panel header="ALTERAR VIDEO">
-                            <h:panelGrid columns="2">                                                               
-                                <h:outputLabel value="Nome"/>
-                                <p:inputText id="nome" value="#{videoMNG.nome}"/>
-                                <h:outputLabel value="Autor"/>
-                                <p:inputText id="autor" value="#{videoMNG.autor}"/>
-                                <h:outputLabel value="Descrição"/>
-                                <p:inputText id="descricao" value="#{videoMNG.descricao}"/> 
-                                <p:commandButton value="GRAVAR" actionListener="#{videoMNG.update}" ajax="false" update="grid"/>
-                                <p:commandButton value="LIMPAR" type="reset"/>
-                                <p:commandButton value="CANCELAR" id="cancelar"  action="video"/>
-                            </h:panelGrid>
-                        </p:panel>
-                    </h:panelGrid> 
-                </h:form>
-            </center>
+    <ui:composition template="/WEB-INF/templates/default.xhtml">
+        <ui:define name="conteudo">            
+            <h:form id="formulario">
+                <p:messages autoUpdate="true"/>
+                <h:panelGrid>
+                    <h:inputHidden value="#{videoMNG.id}"/> 
+                    <p:panel header="ALTERAR VIDEO">
+                        <h:panelGrid columns="2">                                                               
+                            <h:outputLabel value="Nome"/>
+                            <p:inputText id="nome" value="#{videoMNG.nome}"/>
+                            <h:outputLabel value="Autor"/>
+                            <p:inputText id="autor" value="#{videoMNG.autor}"/>
+                            <h:outputLabel value="Descrição"/>
+                            <p:inputText id="descricao" value="#{videoMNG.descricao}"/> 
+                            <p:commandButton value="GRAVAR" actionListener="#{videoMNG.update}" ajax="false" update="grid"/>
+                            <p:commandButton value="LIMPAR" type="reset"/>
+                            <p:commandButton value="CANCELAR" id="cancelar"  action="video"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:panelGrid> 
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>

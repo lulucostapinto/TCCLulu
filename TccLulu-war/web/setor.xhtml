@@ -5,40 +5,38 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"> 
-    <ui:composition template="/padrao.xhtml">
-        <ui:define name="centro">
-            <center margin-top='-200' style="top:-500px;position: relative">
+    <ui:composition template="/WEB-INF/templates/default.xhtml">
+        <ui:define name="conteudo">            
 
-                <h:form id="formulario">
-                    <p:messages autoUpdate="true"/>
-                    <h:panelGrid>
-                        <p:panel header="CADASTRO DE SETORES">
-                            <h:form>
-                                <p:growl id="growl" life="2000" />     
-                                <p:commandButton value="Incluir" id="incluir"  action="incluir_setor"/>                                        
-                            </h:form>                         
-                            <p:dataTable id="setor" value="#{setorMNG.lista}" emptyMessage="Não há registros" var="setor" paginator="true" rows="4" style="width: 820px">
-                                <p:column headerText="Nome" filterBy="#{setor.lista}">
-                                    <h:outputText value="#{setor.nome}"/>
-                                </p:column>
-                                <p:column>
-                                    <p:commandButton value="Editar" action="#{setorMNG.prepUpdate()}" ajax="false">
-                                        <f:param name="codEditar" value="#{setor.id}"/>                              
-                                    </p:commandButton>
-                                </p:column>
-                                <p:column>
-                                    <p:commandButton value="Excluir" title="#{msgs.btRemove}"
-                                                     actionListener="#{setorMNG.remove()}"                                             
-                                                     onclick="if (!confirm('#{msgs.msgConfRemove}'))
-                                                                 return false" >
-                                        <f:param name="codExcluir" value="#{setor.id}"/>
-                                    </p:commandButton>                                
-                                </p:column>                            
-                            </p:dataTable>
-                        </p:panel>
-                    </h:panelGrid> 
-                </h:form>
-            </center>
+            <h:form id="formulario">
+                <p:messages autoUpdate="true"/>
+                <h:panelGrid>
+                    <p:panel header="CADASTRO DE SETORES">
+                        <h:form>
+                            <p:growl id="growl" life="2000" />     
+                            <p:commandButton value="Incluir" id="incluir"  action="incluir_setor"/>                                        
+                        </h:form>                         
+                        <p:dataTable id="setor" value="#{setorMNG.lista}" emptyMessage="Não há registros" var="setor" paginator="true" rows="4" style="width: 620px">
+                            <p:column style="width:380px" headerText="Nome" filterBy="#{setor.lista}">
+                                <h:outputText value="#{setor.nome}"/>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Editar" action="#{setorMNG.prepUpdate()}" ajax="false">
+                                    <f:param name="codEditar" value="#{setor.id}"/>                              
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Excluir" title="#{msgs.btRemove}"
+                                                 actionListener="#{setorMNG.remove()}"                                             
+                                                 onclick="if (!confirm('#{msgs.msgConfRemove}'))
+                                                             return false" >
+                                    <f:param name="codExcluir" value="#{setor.id}"/>
+                                </p:commandButton>                                
+                            </p:column>                            
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGrid> 
+            </h:form>            
         </ui:define>
     </ui:composition>
 </html>

@@ -5,26 +5,24 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">     
-    <ui:composition template="/padrao.xhtml">
-        <ui:define name="centro">
-            <center margin-top='-200' style="top:-500px;position: relative">             
-                    <h:form id="formulario">
-                        <p:messages autoUpdate="true"/>
-                        <h:panelGrid>
-                            <p:panel header="Solicitar curso">
-                                <h:panelGrid columns="2">
-                                    <h:outputLabel value="Curso"/>
-                                    <p:inputText id="curso" value="#{solicitacaoMNG.curso}"/>                                    
-                                    <h:outputLabel value="Justificativa"/>
-                                    <p:inputText id="justificativa" value="#{solicitacaoMNG.justificativa}"/>                                                                        
-                                    <p:commandButton value="GRAVAR" actionListener="#{solicitacaoMNG.save}" ajax="false"/>
-                                    <p:commandButton value="LIMPAR" type="reset"/>
-                                    <p:commandButton value="CANCELAR" id="cancelar"  action="solicitacao"/> 
-                                </h:panelGrid>
-                            </p:panel>                      
+    <ui:composition template="/WEB-INF/templates/default.xhtml">
+        <ui:define name="conteudo">                        
+            <h:form id="formulario">
+                <p:messages autoUpdate="true"/>
+                <h:panelGrid>
+                    <p:panel header="Solicitar curso">
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Curso"/>
+                            <p:inputText id="curso" value="#{solicitacaoMNG.curso}"/>                                    
+                            <h:outputLabel value="Justificativa"/>
+                            <p:inputText id="justificativa" value="#{solicitacaoMNG.justificativa}"/>                                                                        
+                            <p:commandButton value="GRAVAR" actionListener="#{solicitacaoMNG.save}" ajax="false"/>
+                            <p:commandButton value="LIMPAR" type="reset"/>
+                            <p:commandButton value="CANCELAR" id="cancelar"  action="solicitacao"/> 
                         </h:panelGrid>
-                    </h:form>                
-            </center>
+                    </p:panel>                      
+                </h:panelGrid>
+            </h:form>                
         </ui:define>
     </ui:composition>
 </html>

@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+    <ui:composition template="/WEB-INF/templates/default.xhtml">
+        <ui:define name="conteudo">            
+                <h:form id="formulario">
+                    <p:messages autoUpdate="true"/>
+                    <h:panelGrid>
+                        <p:panel header="TRABALHOS ACADÊMICOS">
+                            <h:form>
+                                <p:growl id="growl" life="2000" />     
+                                <p:commandButton value="Incluir" id="incluir"  action="incluir_trabalho"/>                                        
+                            </h:form>                         
+                            <p:dataTable id="sala" value="#{trabalhoMNG.lista}" emptyMessage="Não há registros" var="trabalho" paginator="true" rows="4" style="width: 820px">
+                                <p:column headerText="Nome" filterBy="#{trabalho.lista}">
+                                    <h:outputText value="#{trabalho.nome}"/>
+                                </p:column>
+                                <p:column headerText="Autor" filterBy="#{trabalho.lista}">
+                                    <h:outputText value="#{trabalho.autor}"/>
+                                </p:column>
+                                <p:column headerText="Descrição">
+                                    <h:outputText value="#{trabalho.descricao}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Editar" action="#{trabalhoMNG.prepUpdate()}" ajax="false">
+                                        <f:param name="codEditar" value="#{trabalho.id}"/>                              
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Upload" action="#{trabalhoMNG.prepUpdate2()}" ajax="false">
+                                        <f:param name="codEditar" value="#{trabalho.id}"/>                              
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Excluir" title="#{msgs.btRemove}"
+                                                     actionListener="#{trabalhoMNG.remove()}"                                             
+                                                     onclick="if (!confirm('#{msgs.msgConfRemove}'))
+                                                                 return false" >
+                                        <f:param name="codExcluir" value="#{trabalho.id}"/>
+                                    </p:commandButton>                                
+                                </p:column>                            
+                            </p:dataTable>
+                        </p:panel>
+                    </h:panelGrid> 
+                </h:form>          
+        </ui:define>
+    </ui:composition>
+</html>
+
+
