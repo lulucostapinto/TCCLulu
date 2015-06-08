@@ -9,6 +9,7 @@ import br.sgci.bean.Permissao;
 import br.sgci.bean.Usuario;
 import br.sgci.dao.UsuarioDAORemote;
 import java.io.IOException;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
@@ -32,6 +33,7 @@ public class UsuarioMNG{
     private String login;
     private String senha;
     private Permissao permissao;
+    private List<Usuario> lista;
     
 
     public int getId() {
@@ -87,5 +89,9 @@ public class UsuarioMNG{
             session.invalidate();
         }
         FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+    }
+    
+    public List<Usuario> getLista() {
+        return usuarioDAO.listar();
     }
 }

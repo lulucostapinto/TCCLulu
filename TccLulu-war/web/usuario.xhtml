@@ -1,4 +1,3 @@
-<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -10,22 +9,32 @@
             <h:form id="formulario">
                 <p:messages autoUpdate="true"/>
                 <h:panelGrid>
-                    <p:panel header="CADASTRO DE USUARIOS">
-                        <h:form>
-                            <p:growl id="growl" life="2000" />     
-                            <p:commandButton value="Incluir" id="incluir"  action="incluir_usuario"/>
-                            <p:commandButton value="Editar" id="editar" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
-                            <p:commandButton value="Excluir" id="excluir" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
-                        </h:form> 
+                    <p:panel header="CADASTRO DE USUÁRIOS">
+                        <h:form>                               
+                            <p:commandButton value="Incluir" id="incluir"  action="incluir_usuario"/>                                        
+                        </h:form>                         
+                        <p:dataTable id="usuario" value="#{usuarioMNG.lista}" emptyMessage="Não há registros" var="sala" paginator="true" rows="4" style="width: 820px">
+                            <p:column headerText="Nome" filterBy="#{usuario.lista}">
+                                <h:outputText value="#{usuario.nome}"/>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Editar" action="#{usuarioMNG.prepUpdate()}" ajax="false">
+                                    <f:param name="codEditar" value="#{usuario.id}"/>                              
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Excluir" title="#{msgs.btRemove}"
+                                                 actionListener="#{usaruioMNG.remove()}"                                             
+                                                 onclick="if (!confirm('#{msgs.msgConfRemove}'))
+                                                             return false" >
+                                    <f:param name="codExcluir" value="#{usuario.id}"/>
+                                </p:commandButton>                                
+                            </p:column>                            
+                        </p:dataTable>
                     </p:panel>
-
-                    <p:dataTable id="usuario" value="#{usuarioMNG.lista}" emptyMessage="Não há registros" var="usuario" paginator="true" rows="4" style="width: 820px">
-                        <p:column headerText="Nome" filterBy="#{usuario}">
-                            <h:outputText value="#{usuarioMNG.login}"/>
-                        </p:column>
-                    </p:dataTable>
                 </h:panelGrid> 
-            </h:form>
+            </h:form>           
         </ui:define>
     </ui:composition>
 </html>
+
