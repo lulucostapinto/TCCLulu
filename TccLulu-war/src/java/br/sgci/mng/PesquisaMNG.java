@@ -5,9 +5,8 @@
  */
 package br.sgci.mng;
 
-import br.sgci.bean.Trabalhos_academicos;
-import br.sgci.bean.Video;
-import br.sgci.dao.Trabalhos_academicosDAORemote;
+import br.sgci.bean.Pesquisa;
+import br.sgci.dao.PesquisaDAORemote;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,33 +25,32 @@ import org.primefaces.model.UploadedFile;
  *
  * @author Lulu
  */
-@Named(value = "trabalhos_academicosMNG")
-
+@Named(value = "pesquisaMNG")
 @RequestScoped
-public class Trabalhos_academicosMNG {
+public class PesquisaMNG {
 
     @EJB
-    Trabalhos_academicosDAORemote trabalhos_academicosDAO;
+    PesquisaDAORemote pesquisaDAO;
     private UploadedFile arquivo;
     private int id;
     private String nome, autor, descricao;
-    private List<Trabalhos_academicos> lista;
+    private List<Pesquisa> lista;
 
     public void save(ActionEvent actionEvent) {
-        Trabalhos_academicos ta = new Trabalhos_academicos();
-        ta.setNome(nome);
-        ta.setAutor(autor);
-        ta.setDescricao(descricao);
+        Pesquisa pesquisa = new Pesquisa();
+        pesquisa.setNome(nome);
+        pesquisa.setAutor(autor);
+        pesquisa.setDescricao(descricao);
         // v.setArquivo(arquivo.getContents());
-        trabalhos_academicosDAO.gravar(ta);
+        pesquisaDAO.gravar(pesquisa);
         this.setNome(null);
 
     }
 
     public void upload() {
-       if (arquivo != null) {
-            Trabalhos_academicos ta = new Trabalhos_academicos();
-            ta.setId(id);
+        if (arquivo != null) {
+            Pesquisa pesquisa = new Pesquisa();
+            pesquisa.setId(id);
             try {
                 InputStream is = arquivo.getInputstream();
                 ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -62,11 +60,11 @@ public class Trabalhos_academicosMNG {
                     buffer.write(data, 0, nRead);
                 }
                 buffer.flush();
-                ta.setArquivo(buffer.toByteArray());
+                pesquisa.setArquivo(buffer.toByteArray());
             } catch (IOException ex) {
-                Logger.getLogger(VideoMNG.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PesquisaMNG.class.getName()).log(Level.SEVERE, null, ex);
             }
-            trabalhos_academicosDAO.gravarArquivo(ta);
+            pesquisaDAO.gravarArquivo(pesquisa);
             FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded. Size: " + arquivo.getSize());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
@@ -74,54 +72,54 @@ public class Trabalhos_academicosMNG {
 
     public void remove() {
         Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir".toString()));
-        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
-        trabalhos_academicos.setId(index);
-        trabalhos_academicosDAO.deletar(trabalhos_academicos);
+        Pesquisa pesquisa = new Pesquisa();
+        pesquisa.setId(index);
+        pesquisaDAO.deletar(pesquisa);
         this.clear();
     }
 
     public void clear() {
-        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
+        Pesquisa pesquisa = new Pesquisa();
     }
 
     public String prepUpdate() {
         Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
-        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
-        trabalhos_academicos.setId(index);
-        trabalhos_academicos = trabalhos_academicosDAO.retrieve(trabalhos_academicos);
-        this.id = trabalhos_academicos.getId();
-        this.nome = trabalhos_academicos.getNome();
-        this.autor = trabalhos_academicos.getAutor();
-        this.descricao = trabalhos_academicos.getDescricao();
+        Pesquisa pesquisa = new Pesquisa();
+        pesquisa.setId(index);
+        pesquisa = pesquisaDAO.retrieve(pesquisa);
+        this.id = pesquisa.getId();
+        this.nome = pesquisa.getNome();
+        this.autor = pesquisa.getAutor();
+        this.descricao = pesquisa.getDescricao();
 
-        return "alterar_trabalhosAcademicos";
+        return "alterar_pesquisa";
 
     }
 
     public String prepUpdate2() {
         Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
         this.id = index;
-        return "incluir_arquivoTrabalhosAcademicos";
+        return "incluir_arquivoPesquisa";
     }
 
     public String update() {
-        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
-        trabalhos_academicos.setId(id);
-        trabalhos_academicos.setNome(nome);
-        trabalhos_academicos.setAutor(autor);
-        trabalhos_academicos.setDescricao(descricao);
+        Pesquisa pesquisa = new Pesquisa();
+        pesquisa.setId(id);
+        pesquisa.setNome(nome);
+        pesquisa.setAutor(autor);
+        pesquisa.setDescricao(descricao);
 
-        trabalhos_academicosDAO.alterar(trabalhos_academicos);
+        pesquisaDAO.alterar(pesquisa);
 
         return "ok";
     }
 
-    public Trabalhos_academicosDAORemote gettrabalhos_academicosDAO() {
-        return trabalhos_academicosDAO;
+    public PesquisaDAORemote getPesquisaDAO() {
+        return pesquisaDAO;
     }
 
-    public void settrabalhos_academicosDAO(Trabalhos_academicosDAORemote trabalhos_academicosDAO) {
-        this.trabalhos_academicosDAO = trabalhos_academicosDAO;
+    public void setPesquisaDAO(PesquisaDAORemote pesquisaDAO) {
+        this.pesquisaDAO = pesquisaDAO;
     }
 
     public UploadedFile getArquivo() {
@@ -148,8 +146,8 @@ public class Trabalhos_academicosMNG {
         this.nome = nome;
     }
 
-    public List<Trabalhos_academicos> getLista() {
-        return trabalhos_academicosDAO.listar();
+    public List<Pesquisa> getLista() {
+        return pesquisaDAO.listar();
     }
 
     public String getAutor() {

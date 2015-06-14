@@ -6,37 +6,26 @@
 package br.sgci.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
  * @author Lulu
  */
 @Entity
-@Table(name = "curso_externo")
-public class Curso_externo implements Serializable {
+@Table(name = "pesquisa")
+public class Pesquisa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private byte[] arquivo;
-    private int qtd_horas;
-    @Temporal(TemporalType.DATE)
-    private Date data_inicio, data_fim;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_pessoa", nullable = false)
-    private Pessoa pessoa;
+    private String nome, autor, descricao;
+    private byte[] arquivo;   
+    
 
     public int getId() {
         return id;
@@ -46,22 +35,31 @@ public class Curso_externo implements Serializable {
         this.id = id;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
+    public String getNome() {
+        return nome;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public int getQtd_horas() {
-        return qtd_horas;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setQtd_horas(int qtd_horas) {
-        this.qtd_horas = qtd_horas;
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    
+       
     public byte[] getArquivo() {
         return arquivo;
     }
@@ -69,23 +67,9 @@ public class Curso_externo implements Serializable {
     public void setArquivo(byte[] arquivo) {
         this.arquivo = arquivo;
     }
-
-    public Date getData_inicio() {
-        return data_inicio;
-    }
-
-    public void setData_inicio(Date data_inicio) {
-        this.data_inicio = data_inicio;
-    }
-
-    public Date getData_fim() {
-        return data_fim;
-    }
-
-    public void setData_fim(Date data_fim) {
-        this.data_fim = data_fim;
-    }
-
+    
+     
+   
     @Override
     public int hashCode() {
         int hash = 3;
@@ -101,7 +85,7 @@ public class Curso_externo implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Curso_externo other = (Curso_externo) obj;
+        final Pesquisa other = (Pesquisa) obj;
         if (this.id != other.id) {
             return false;
         }

@@ -7,7 +7,6 @@ package br.sgci.mng;
 
 import br.sgci.bean.Video;
 import br.sgci.dao.VideoDAORemote;
-import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;

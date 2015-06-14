@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+    <ui:composition template="/WEB-INF/templates/default.xhtml">
+        <ui:define name="conteudo">           
+            <h:form id="formulario">
+                <p:messages autoUpdate="true"/>
+                <h:panelGrid>
+                    <p:panel header="CADASTRO DE CURSOS EXTERNOS">
+                        <h:form>
+                            <p:growl id="growl" life="2000" />     
+                            <p:commandButton value="Incluir" id="incluir"  action="incluir_cursoExterno"/>                                        
+                        </h:form>                         
+                        <p:dataTable id="sala" value="#{curso_externoMNG.lista}" emptyMessage="Não há registros" var="video" paginator="true" rows="4" style="width: 820px">
+                            <p:column headerText="Nome" filterBy="#{curso_externo.lista}">
+                                <h:outputText value="#{curso_externo.nome}"/>
+                            </p:column>
+                           
+                                <p:commandButton value="Editar" action="#{videoMNG.prepUpdate()}" ajax="false">
+                                    <f:param name="codEditar" value="#{video.id}"/>                              
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Upload" action="#{videoMNG.prepUpdate2()}" ajax="false">
+                                    <f:param name="codEditar" value="#{video.id}"/>                              
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Excluir" title="#{msgs.btRemove}"
+                                                 actionListener="#{videoMNG.remove()}"                                             
+                                                 onclick="if (!confirm('#{msgs.msgConfRemove}'))
+                                                             return false" >
+                                    <f:param name="codExcluir" value="#{video.id}"/>
+                                </p:commandButton>                                
+                            </p:column>                            
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGrid> 
+            </h:form>          
+        </ui:define>
+    </ui:composition>
+</html>
+
+

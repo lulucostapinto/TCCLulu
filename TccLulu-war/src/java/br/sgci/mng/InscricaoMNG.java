@@ -39,6 +39,7 @@ public class InscricaoMNG {
     private List<Inscricao> lista;
 
     public void save(ActionEvent actionEvent) {
+        
         Inscricao i = new Inscricao();
         pessoa = pessoaDAO.selecionar(pessoa.getId());
         i.setPessoa(pessoa);

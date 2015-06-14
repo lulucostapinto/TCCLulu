@@ -3,37 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">     
+      xmlns:p="http://primefaces.org/ui"  >     
     <ui:composition template="/WEB-INF/templates/default.xhtml">
         <ui:define name="conteudo">
-            <p:messages autoUpdate="true"/>                    
-            <h:panelGrid>
-                <p:panel header="INCLUIR CURSO EXTERNO">
-                    <h:panelGrid columns="2">
-                        <h:form enctype="multipart/form-data">
-                            <p:growl id="messages" showDetail="true" />
-
-                            <h:outputLabel value="Colaborador"/>
-                            <p:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{curso_externoMNG.pessoa}">
-                                <f:selectItems value="#{curso_externoMNG.pessoas}" var ="vPessoa"
-                                               itemLabel="#{vPessoa.nome}"
-                                               itemValue="#{vPessoa}"/>
-                            </p:selectOneMenu>
-                            <h:outputLabel value="Quantidade de Horas" style="width:80px"/> 
-                            <p:inputText id="nome" value="#{curso_externoMNG.qtd_horas}"/>
-
-                            <br></br>
-
+            <h:form enctype="multipart/form-data">
+                <p:messages autoUpdate="true"/>
+                <h:panelGrid>
+                    <h:inputHidden value="#{curso_externoMNG.id}"/>
+                    <p:panel header="INCLUIR CURSO EXTERNO">
+                        <h:panelGrid columns="2" id="grid">
+                            <p:growl id="messages" showDetail="true" />                               
                             <p:fileUpload value="#{curso_externoMNG.arquivo}" mode="simple" />
-                            <p:commandButton value="GRAVAR" ajax="false" actionListener="#{curso_externoMNG.upload()}" />
-                            <p:commandButton value="LIMPAR" type="reset"/> 
-
-                        </h:form>
-                    </h:panelGrid>
-                </p:panel>
-            </h:panelGrid> 
+                            <p:commandButton value="UPLOAD" ajax="false" actionListener="#{curso_externoMNG.upload()}" />
+                            <p:commandButton value="LIMPAR" type="reset"/>
+                            <p:commandButton value="CANCELAR" id="cancelar" /> 
+                        </h:panelGrid>
+                    </p:panel>
+                </h:panelGrid>                             
+            </h:form>        
         </ui:define>
     </ui:composition>
 </html>
-

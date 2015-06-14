@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+    <ui:composition template="/WEB-INF/templates/default.xhtml">
+        <ui:define name="conteudo">           
+            <h:form id="formulario">
+                <p:messages autoUpdate="true"/>
+                <h:panelGrid>
+                    <p:panel header="CADASTRO DE PESQUISAS">
+                        <h:form>
+                            <p:growl id="growl" life="2000" />     
+                            <p:commandButton value="Incluir" id="incluir"  action="incluir_pesquisa"/>                                        
+                        </h:form>                         
+                        <p:dataTable id="sala" value="#{pesquisaMNG.lista}" emptyMessage="Não há registros" var="pesquisa" paginator="true" rows="4" style="width: 820px">
+                            <p:column headerText="Nome" filterBy="#{pesquisa.lista}">
+                                <h:outputText value="#{pesquisa.nome}"/>
+                            </p:column>
+                            <p:column headerText="Autor" filterBy="#{pesquisa.autor}">
+                                <h:outputText value="#{pesquisa.autor}"/>
+                            </p:column>
+                            <p:column headerText="Descrição" filterBy="#{pesquisa.descricao}">
+                                <h:outputText value="#{pesquisa.descricao}"/>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="EDITAR" action="#{pesquisaMNG.prepUpdate()}" ajax="false">
+                                    <f:param name="codEditar" value="#{pesquisa.id}"/>                              
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="UPLOAD" action="#{pesquisaMNG.prepUpdate2()}" ajax="false">
+                                    <f:param name="codEditar" value="#{pesquisa.id}"/>                              
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="EXCLUIR" title="#{msgs.btRemove}"
+                                                 actionListener="#{pesquisaMNG.remove()}"                                             
+                                                 onclick="if (!confirm('#{msgs.msgConfRemove}'))
+                                                             return false" >
+                                    <f:param name="codExcluir" value="#{pesquisa.id}"/>
+                                </p:commandButton>                                
+                            </p:column>                            
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGrid> 
+            </h:form>          
+        </ui:define>
+    </ui:composition>
+</html>
+

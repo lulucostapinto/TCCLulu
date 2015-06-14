@@ -5,7 +5,7 @@
  */
 package br.sgci.dao;
 
-
+import br.sgci.bean.Curso;
 import br.sgci.bean.Inscricao;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -27,12 +27,17 @@ public class InscricaoDAO implements InscricaoDAORemote {
     public boolean gravar(Inscricao inscricao) {
         boolean sucesso = false;
         try {
-            em.merge(inscricao);
-            sucesso = true;
+            Query query = em.createNamedQuery("Inscricao.numeroInsc");
+            Curso curso = inscricao.getCurso();
+            query.setParameter("curso", curso);
+            Long singleResult = (Long) query.getSingleResult();
+            if (singleResult < curso.getQtd_vagas()) {
+                em.merge(inscricao);
+                sucesso = true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return sucesso;
     }
 
@@ -74,7 +79,7 @@ public class InscricaoDAO implements InscricaoDAORemote {
 
         return inscricoes;
     }
-    
+
     @Override
     public Inscricao retrieve(Inscricao value) {
         return this.selecionar(value.getId());

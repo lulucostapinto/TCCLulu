@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -20,6 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "inscricao")
+@NamedQuery(name = "Inscricao.numeroInsc", query = "select count(i) from Inscricao i where i.curso=:curso")
 public class Inscricao implements Serializable {
 
     @Id

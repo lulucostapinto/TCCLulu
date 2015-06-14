@@ -9,6 +9,7 @@ import br.sgci.bean.Curso_externo;
 import br.sgci.bean.Pessoa;
 import br.sgci.dao.Curso_externoDAORemote;
 import br.sgci.dao.PessoaDAORemote;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -25,21 +26,21 @@ import org.primefaces.model.UploadedFile;
 @Named(value = "curso_externoMNG")
 @RequestScoped
 public class Curso_externoMNG {
-    
-    
+
     @EJB
     Curso_externoDAORemote curso_externoDAO;
     @EJB
     PessoaDAORemote pessoaDAO;
+    private int id;
     private UploadedFile arquivo;
     private int qtd_horas;
     private Pessoa pessoa = new Pessoa();
     private List<Pessoa> pessoas;
-    
-    
+    private List<Curso_externo> lista;
+    private Date data_inicio, data_fim;
+
     public void save(ActionEvent actionEvent) {
         Curso_externo ce = new Curso_externo();
-       
 
         pessoa = pessoaDAO.selecionar(pessoa.getId());
         ce.setPessoa(pessoa);
@@ -54,22 +55,28 @@ public class Curso_externoMNG {
     public void setCurso_externoDAO(Curso_externoDAORemote curso_externoDAO) {
         this.curso_externoDAO = curso_externoDAO;
     }
-    
-    
- 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public UploadedFile getArquivo() {
         return arquivo;
     }
- 
+
     public void setArquivo(UploadedFile arquivo) {
         this.arquivo = arquivo;
     }
-     
+
     public void upload() {
-        if(arquivo != null) {
+        if (arquivo != null) {
             FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
-            
+
             //arquivo.getContents();
         }
     }
@@ -82,7 +89,6 @@ public class Curso_externoMNG {
         this.qtd_horas = qtd_horas;
     }
 
-    
     public PessoaDAORemote getPessoaDAO() {
         return pessoaDAO;
     }
@@ -98,16 +104,33 @@ public class Curso_externoMNG {
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
-    
-     public List<Pessoa> getPessoas() {
+
+    public List<Pessoa> getPessoas() {
         return pessoaDAO.listar();
     }
 
     public void setPessoas(List<Pessoa> pessoas) {
         this.pessoas = pessoas;
-    }    
-    
-    
-}
-    
+    }
 
+    public List<Curso_externo> getLista() {
+        return curso_externoDAO.listar();
+    }
+
+    public Date getData_inicio() {
+        return data_inicio;
+    }
+
+    public void setData_inicio(Date data_inicio) {
+        this.data_inicio = data_inicio;
+    }
+
+    public Date getData_fim() {
+        return data_fim;
+    }
+
+    public void setData_fim(Date data_fim) {
+        this.data_fim = data_fim;
+    }
+
+}

@@ -6,6 +6,7 @@
 package br.sgci.bean;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -33,6 +34,8 @@ public class Usuario implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_permissao", nullable = false)
     private Permissao permissao;
+    @Column(name="perfilAdministrador")
+    Boolean perfilAdm;
 
     public int getId() {
         return id;
@@ -65,6 +68,14 @@ public class Usuario implements Serializable {
     public void setPermissao(Permissao permissao) {
         this.permissao = permissao;
     }
+    
+    public Boolean getPerfilAdm() {
+        return perfilAdm;
+    }
+
+    public void setPerfilAdm(Boolean perfilAdm) {
+        this.perfilAdm = perfilAdm;
+    }    
 
     public boolean validaSenha(String senha) {
         boolean ret = false;

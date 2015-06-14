@@ -34,8 +34,7 @@ public class CursoMNG implements Serializable {
     private String nome, pub_alvo;
     private int qtd_vagas, duracao;
     private List<Curso> lista;
-    private Date data_inicio;
-    private Date data_fim;
+    private Date data_inicio, data_fim;   
     private Sala sala = new Sala();
     private List<Sala> salas;
     private Curso curso;
