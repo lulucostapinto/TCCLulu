@@ -15,7 +15,7 @@
                             <p:growl id="growl" life="2000" />     
                             <p:commandButton value="Incluir" id="incluir"  action="incluir_inscricao"/>                            
                         </h:form> 
-                        <p:dataTable id="inscritos" value="#{inscricaoMNG.lista}" emptyMessage="Não há registros" var="inscricao" paginator="true" rows="4" style="width: 800px">
+                        <p:dataTable id="inscritos" value="#{inscricaoMNG.lista}" emptyMessage="Não há registros" var="inscricao" paginator="true" rows="4" style="width: 600px">
                             <p:column headerText="id">
                                 <h:outputText value="#{inscricao.id}"/>
                             </p:column>

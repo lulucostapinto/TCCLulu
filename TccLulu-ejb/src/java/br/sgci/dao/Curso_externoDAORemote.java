@@ -16,6 +16,8 @@ import javax.ejb.Remote;
 public interface Curso_externoDAORemote {
     
     public boolean gravar(Curso_externo curso_externo);
+    
+    public boolean gravarArquivo(Curso_externo curso_externo);
 
     public Curso_externo selecionar(int id);
     

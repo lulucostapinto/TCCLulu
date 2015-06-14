@@ -9,8 +9,13 @@ import br.sgci.bean.Curso_externo;
 import br.sgci.bean.Pessoa;
 import br.sgci.dao.Curso_externoDAORemote;
 import br.sgci.dao.PessoaDAORemote;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -33,6 +38,7 @@ public class Curso_externoMNG {
     PessoaDAORemote pessoaDAO;
     private int id;
     private UploadedFile arquivo;
+    private String nome;
     private int qtd_horas;
     private Pessoa pessoa = new Pessoa();
     private List<Pessoa> pessoas;
@@ -41,7 +47,10 @@ public class Curso_externoMNG {
 
     public void save(ActionEvent actionEvent) {
         Curso_externo ce = new Curso_externo();
-
+        ce.setNome(nome);
+        ce.setQtd_horas(qtd_horas);
+        ce.setData_inicio(data_inicio);
+        ce.setData_fim(data_fim);
         pessoa = pessoaDAO.selecionar(pessoa.getId());
         ce.setPessoa(pessoa);
         curso_externoDAO.gravar(ce);
@@ -64,21 +73,20 @@ public class Curso_externoMNG {
         this.id = id;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public UploadedFile getArquivo() {
         return arquivo;
     }
 
     public void setArquivo(UploadedFile arquivo) {
         this.arquivo = arquivo;
-    }
-
-    public void upload() {
-        if (arquivo != null) {
-            FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-
-            //arquivo.getContents();
-        }
     }
 
     public int getQtd_horas() {
@@ -133,4 +141,46 @@ public class Curso_externoMNG {
         this.data_fim = data_fim;
     }
 
+    public void upload() {
+        if (arquivo != null) {
+            Curso_externo ce = new Curso_externo();
+            ce.setId(id);
+            try {
+                InputStream is = arquivo.getInputstream();
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                int nRead;
+                byte[] data = new byte[16384];
+                while ((nRead = is.read(data, 0, data.length)) != -1) {
+                    buffer.write(data, 0, nRead);
+                }
+                buffer.flush();
+                ce.setArquivo(buffer.toByteArray());
+            } catch (IOException ex) {
+                Logger.getLogger(VideoMNG.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            curso_externoDAO.gravarArquivo(ce);
+            FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded. Size: " + arquivo.getSize());
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+
+    public String prepUpdate() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
+        Curso_externo ce = new Curso_externo();
+        ce.setId(index);
+        ce = curso_externoDAO.retrieve(ce);
+        this.id = ce.getId();
+        this.nome = ce.getNome();
+
+        return "alterar_cursoExterno";
+
+    }
+
+    public String prepUpdate2() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
+        this.id = index;
+        return "incluir_arquivoCursoExterno";
+    }
+
+   
 }

@@ -6,7 +6,6 @@
 package br.sgci.dao;
 
 import br.sgci.bean.Conteudo;
-import br.sgci.bean.Video;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

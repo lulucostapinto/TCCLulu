@@ -87,7 +87,7 @@ public class Trabalhos_academicosDAO implements Trabalhos_academicosDAORemote {
         return this.selecionar(value.getId());
     }
 
-    @Override
+   @Override
     public boolean gravarArquivo(Trabalhos_academicos trabalhos_academicos) {
         Trabalhos_academicos trabalhos_academicosTemp = this.selecionar(trabalhos_academicos.getId());
         trabalhos_academicosTemp.setArquivo(trabalhos_academicos.getArquivo());

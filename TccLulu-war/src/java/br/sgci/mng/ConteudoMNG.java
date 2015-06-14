@@ -10,14 +10,12 @@ import br.sgci.dao.ConteudoDAORemote;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import org.primefaces.model.UploadedFile;
 
@@ -33,19 +31,7 @@ public class ConteudoMNG {
     ConteudoDAORemote conteudoDAO;
     private UploadedFile arquivo;
     private int id;
-    private String nome, autor, descricao;
-    private List<Conteudo> lista;
-
-    public void save(ActionEvent actionEvent) {
-        Conteudo conteudo = new Conteudo();
-        conteudo.setNome(nome);
-        conteudo.setAutor(autor);
-        conteudo.setDescricao(descricao);
-        // v.setArquivo(arquivo.getContents());
-        conteudoDAO.gravar(conteudo);
-        this.setNome(null);
-
-    }
+   
 
     public void upload() {
         if (arquivo != null) {
@@ -82,36 +68,10 @@ public class ConteudoMNG {
         Conteudo conteudo = new Conteudo();
     }
 
-    public String prepUpdate() {
-        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
-        Conteudo conteudo = new Conteudo();
-        conteudo.setId(index);
-        conteudo = conteudoDAO.retrieve(conteudo);
-        this.id = conteudo.getId();
-        this.nome = conteudo.getNome();
-        this.autor = conteudo.getAutor();
-        this.descricao = conteudo.getDescricao();
-
-        return "alterar_conteudo";
-
-    }
-
     public String prepUpdate2() {
         Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
         this.id = index;
         return "incluir_conteudo";
-    }
-
-    public String update() {
-        Conteudo conteudo = new Conteudo();
-        conteudo.setId(id);
-        conteudo.setNome(nome);
-        conteudo.setAutor(autor);
-        conteudo.setDescricao(descricao);
-
-        conteudoDAO.alterar(conteudo);
-
-        return "ok";
     }
 
     public ConteudoDAORemote getConteudoDAO() {
@@ -136,34 +96,6 @@ public class ConteudoMNG {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public List<Conteudo> getLista() {
-        return conteudoDAO.listar();
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
 }

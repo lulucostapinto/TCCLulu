@@ -19,6 +19,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -32,6 +35,7 @@ public class VideoMNG {
     @EJB
     VideoDAORemote videoDAO;
     private UploadedFile arquivo;
+    private StreamedContent file;
     private int id;
     private String nome, autor, descricao;
     private List<Video> lista;
@@ -68,6 +72,15 @@ public class VideoMNG {
             FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded. Size: " + arquivo.getSize());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+    }
+    
+    public void download() {        
+        InputStream stream = ((ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream("/resources/demo/images/optimus.jpg");
+        file = new DefaultStreamedContent(stream);
+    }
+ 
+    public StreamedContent getFile() {
+        return file;
     }
 
     public void remove() {

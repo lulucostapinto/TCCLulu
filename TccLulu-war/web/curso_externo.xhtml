@@ -15,26 +15,42 @@
                             <p:growl id="growl" life="2000" />     
                             <p:commandButton value="Incluir" id="incluir"  action="incluir_cursoExterno"/>                                        
                         </h:form>                         
-                        <p:dataTable id="sala" value="#{curso_externoMNG.lista}" emptyMessage="Não há registros" var="video" paginator="true" rows="4" style="width: 820px">
-                            <p:column headerText="Nome" filterBy="#{curso_externo.lista}">
+                        <p:dataTable id="curso_externo" value="#{curso_externoMNG.lista}" emptyMessage="Não há registros" var="curso_externo" paginator="true" rows="4" style="width: 820px">
+                            <p:column headerText="Colaborador" filterBy="#{curso_externo.lista}">
+                                <h:outputText value="#{curso_externo.pessoa}"/>
+                            </p:column>
+                            <p:column headerText="Nome do Curso">
                                 <h:outputText value="#{curso_externo.nome}"/>
                             </p:column>
-                           
-                                <p:commandButton value="Editar" action="#{videoMNG.prepUpdate()}" ajax="false">
-                                    <f:param name="codEditar" value="#{video.id}"/>                              
+                            <p:column headerText="Horas">
+                                <h:outputText value="#{curso_externo.qtd_horas}"/>
+                            </p:column>
+                            <p:column headerText="Data Inicio">
+                                <h:outputText value="#{curso_externo.data_inicio}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Data Fim">
+                                <h:outputText value="#{curso_externo.data_fim}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Editar" action="#{curso_externoMNG.prepUpdate()}" ajax="false">
+                                    <f:param name="codEditar" value="#{curso_externo.id}"/>                              
                                 </p:commandButton>
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Upload" action="#{videoMNG.prepUpdate2()}" ajax="false">
-                                    <f:param name="codEditar" value="#{video.id}"/>                              
+                                <p:commandButton value="Upload" action="#{curso_externoMNG.prepUpdate2()}" ajax="false">
+                                    <f:param name="codEditar" value="#{curso_externo.id}"/>                              
                                 </p:commandButton>
                             </p:column>
                             <p:column>
                                 <p:commandButton value="Excluir" title="#{msgs.btRemove}"
-                                                 actionListener="#{videoMNG.remove()}"                                             
+                                                 actionListener="#{curso_externoMNG.remove()}"                                             
                                                  onclick="if (!confirm('#{msgs.msgConfRemove}'))
                                                              return false" >
-                                    <f:param name="codExcluir" value="#{video.id}"/>
+                                    <f:param name="codExcluir" value="#{curso_externo.id}"/>
                                 </p:commandButton>                                
                             </p:column>                            
                         </p:dataTable>

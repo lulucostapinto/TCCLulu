@@ -77,5 +77,20 @@ public class Curso_externoDAO implements Curso_externoDAORemote {
     public Curso_externo retrieve(Curso_externo value) {
         return this.selecionar(value.getId());
     }
+    
+    @Override
+    public boolean gravarArquivo(Curso_externo curso_externo) {
+        Curso_externo curso_externoTemp = this.selecionar(curso_externo.getId());
+        curso_externoTemp.setArquivo(curso_externo.getArquivo());
+        boolean sucesso = false;
+        try {
+            em.merge(curso_externoTemp);
+            sucesso = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return sucesso;
+    }
 
 }

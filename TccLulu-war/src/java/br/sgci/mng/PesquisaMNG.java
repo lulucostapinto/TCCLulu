@@ -6,6 +6,7 @@
 package br.sgci.mng;
 
 import br.sgci.bean.Pesquisa;
+import br.sgci.bean.Video;
 import br.sgci.dao.PesquisaDAORemote;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -112,7 +113,8 @@ public class PesquisaMNG {
         pesquisaDAO.alterar(pesquisa);
 
         return "ok";
-    }
+    }   
+    
 
     public PesquisaDAORemote getPesquisaDAO() {
         return pesquisaDAO;
@@ -165,5 +167,7 @@ public class PesquisaMNG {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    
+     
 
 }

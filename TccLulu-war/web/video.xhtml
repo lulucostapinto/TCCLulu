@@ -24,14 +24,19 @@
                             </p:column>
                             <p:column headerText="Descrição" filterBy="#{video.descricao}">
                                 <h:outputText value="#{video.descricao}"/>
-                            </p:column>
+                            </p:column>                            
                             <p:column>
-                                <p:commandButton value="Editar" action="#{videoMNG.prepUpdate()}" ajax="false">
+                                <p:commandButton value="Upload" action="#{videoMNG.prepUpdate2()}" ajax="false">
                                     <f:param name="codEditar" value="#{video.id}"/>                              
                                 </p:commandButton>
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Upload" action="#{videoMNG.prepUpdate2()}" ajax="false">
+                                <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                    <p:fileDownload value="#{videoMNG.download()}" />                              
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton value="Editar" action="#{videoMNG.prepUpdate()}" ajax="false">
                                     <f:param name="codEditar" value="#{video.id}"/>                              
                                 </p:commandButton>
                             </p:column>

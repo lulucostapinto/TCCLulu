@@ -31,6 +31,7 @@ public class Curso_externo implements Serializable {
     private int id;
     private byte[] arquivo;
     private int qtd_horas;
+    private String nome;
     @Temporal(TemporalType.DATE)
     private Date data_inicio, data_fim;
 
@@ -45,6 +46,15 @@ public class Curso_externo implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }    
+    
 
     public Pessoa getPessoa() {
         return pessoa;

@@ -6,7 +6,6 @@
 package br.sgci.mng;
 
 import br.sgci.bean.Trabalhos_academicos;
-import br.sgci.bean.Video;
 import br.sgci.dao.Trabalhos_academicosDAORemote;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -47,73 +46,6 @@ public class Trabalhos_academicosMNG {
         trabalhos_academicosDAO.gravar(ta);
         this.setNome(null);
 
-    }
-
-    public void upload() {
-       if (arquivo != null) {
-            Trabalhos_academicos ta = new Trabalhos_academicos();
-            ta.setId(id);
-            try {
-                InputStream is = arquivo.getInputstream();
-                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-                int nRead;
-                byte[] data = new byte[16384];
-                while ((nRead = is.read(data, 0, data.length)) != -1) {
-                    buffer.write(data, 0, nRead);
-                }
-                buffer.flush();
-                ta.setArquivo(buffer.toByteArray());
-            } catch (IOException ex) {
-                Logger.getLogger(VideoMNG.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            trabalhos_academicosDAO.gravarArquivo(ta);
-            FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded. Size: " + arquivo.getSize());
-            FacesContext.getCurrentInstance().addMessage(null, message);
-        }
-    }
-
-    public void remove() {
-        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir".toString()));
-        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
-        trabalhos_academicos.setId(index);
-        trabalhos_academicosDAO.deletar(trabalhos_academicos);
-        this.clear();
-    }
-
-    public void clear() {
-        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
-    }
-
-    public String prepUpdate() {
-        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
-        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
-        trabalhos_academicos.setId(index);
-        trabalhos_academicos = trabalhos_academicosDAO.retrieve(trabalhos_academicos);
-        this.id = trabalhos_academicos.getId();
-        this.nome = trabalhos_academicos.getNome();
-        this.autor = trabalhos_academicos.getAutor();
-        this.descricao = trabalhos_academicos.getDescricao();
-
-        return "alterar_trabalhosAcademicos";
-
-    }
-
-    public String prepUpdate2() {
-        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
-        this.id = index;
-        return "incluir_arquivoTrabalhosAcademicos";
-    }
-
-    public String update() {
-        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
-        trabalhos_academicos.setId(id);
-        trabalhos_academicos.setNome(nome);
-        trabalhos_academicos.setAutor(autor);
-        trabalhos_academicos.setDescricao(descricao);
-
-        trabalhos_academicosDAO.alterar(trabalhos_academicos);
-
-        return "ok";
     }
 
     public Trabalhos_academicosDAORemote gettrabalhos_academicosDAO() {
@@ -168,4 +100,70 @@ public class Trabalhos_academicosMNG {
         this.descricao = descricao;
     }
 
+    public void upload() {
+        if (arquivo != null) {
+            Trabalhos_academicos ta = new Trabalhos_academicos();
+            ta.setId(id);
+            try {
+                InputStream is = arquivo.getInputstream();
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                int nRead;
+                byte[] data = new byte[16384];
+                while ((nRead = is.read(data, 0, data.length)) != -1) {
+                    buffer.write(data, 0, nRead);
+                }
+                buffer.flush();
+                ta.setArquivo(buffer.toByteArray());
+            } catch (IOException ex) {
+                Logger.getLogger(VideoMNG.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            trabalhos_academicosDAO.gravarArquivo(ta);
+            FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded. Size: " + arquivo.getSize());
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+
+    public void remove() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codExcluir".toString()));
+        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
+        trabalhos_academicos.setId(index);
+        trabalhos_academicosDAO.deletar(trabalhos_academicos);
+        this.clear();
+    }
+
+    public void clear() {
+        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
+    }
+
+    public String prepUpdate() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
+        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
+        trabalhos_academicos.setId(index);
+        trabalhos_academicos = trabalhos_academicosDAO.retrieve(trabalhos_academicos);
+        this.id = trabalhos_academicos.getId();
+        this.nome = trabalhos_academicos.getNome();
+        this.autor = trabalhos_academicos.getAutor();
+        this.descricao = trabalhos_academicos.getDescricao();
+
+        return "alterar_trabalhosAcademicos";
+
+    }
+
+    public String prepUpdate2() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codEditar".toString()));
+        this.id = index;
+        return "incluir_arquivoTrabalhosAcademicos";
+    }
+
+    public String update() {
+        Trabalhos_academicos ta = new Trabalhos_academicos();
+        ta.setId(id);
+        ta.setNome(nome);
+        ta.setAutor(autor);
+        ta.setDescricao(descricao);
+
+        trabalhos_academicosDAO.alterar(ta);
+
+        return "ok";
+    }
 }
