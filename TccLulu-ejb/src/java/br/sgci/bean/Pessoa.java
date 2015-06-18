@@ -22,8 +22,7 @@ public class Pessoa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nome, cargo;
-    
+    private String nome, cargo;    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_setor", nullable = false)
     private Setor setor;

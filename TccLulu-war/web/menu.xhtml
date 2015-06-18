@@ -9,7 +9,7 @@
     </h:head>
     <h:body>
         <p:menu>
-            <p:submenu label="CURSOS">
+            <p:submenu label="CURSOS" rendered="#{usuarioMNG.perfilAdm}">
                 <p:menuitem value="Matriz de cursos" outcome="matriz" />
                 <p:menuitem value="Inscrições" outcome="inscritos" /> 
                 <p:menuitem value="Solicitar Curso" outcome="solicitacao" /> 

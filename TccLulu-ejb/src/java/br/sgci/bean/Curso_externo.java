@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +25,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "curso_externo")
+//@NamedQuery(name = "Curso_externo.totalHoras", query = "select sum(c) from Curso_externo c where c.pessoa=:pessoa")
+
 public class Curso_externo implements Serializable {
 
     @Id
@@ -34,9 +37,8 @@ public class Curso_externo implements Serializable {
     private String nome;
     @Temporal(TemporalType.DATE)
     private Date data_inicio, data_fim;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_pessoa", nullable = false)
+    //@ManyToOne(fetch = FetchType.EAGER)
+    //@JoinColumn(name = "id_pessoa", nullable = false)
     private Pessoa pessoa;
 
     public int getId() {

@@ -34,7 +34,6 @@ public class Curso implements Serializable {
     private int qtd_vagas, duracao;
     @Temporal(TemporalType.DATE)
     private Date data_inicio, data_fim;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_sala", nullable = false)
     private Sala sala;

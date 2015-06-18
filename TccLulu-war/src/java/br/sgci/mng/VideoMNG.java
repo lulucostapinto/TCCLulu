@@ -7,6 +7,7 @@ package br.sgci.mng;
 
 import br.sgci.bean.Video;
 import br.sgci.dao.VideoDAORemote;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,14 +74,24 @@ public class VideoMNG {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-    
-    public void download() {        
-        InputStream stream = ((ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream("/resources/demo/images/optimus.jpg");
+
+    public void download() {
+        InputStream stream = ((ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream("/resources/demo/images/optimus.jpg");
         file = new DefaultStreamedContent(stream);
     }
- 
+
     public StreamedContent getFile() {
-        return file;
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codDown".toString()));
+        Video video = new Video();
+        video.setId(index);
+        video = videoDAO.retrieve(video);
+        if (video != null) {
+            byte[] arquivo1 = video.getArquivo();
+            ByteArrayInputStream bais = new ByteArrayInputStream(arquivo1);
+            DefaultStreamedContent defaultStreamedContent = new DefaultStreamedContent(bais,"text/plain","teste.txt");
+            return defaultStreamedContent;
+        }
+        return null;
     }
 
     public void remove() {

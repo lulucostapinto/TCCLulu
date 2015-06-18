@@ -31,8 +31,9 @@
                                 </p:commandButton>
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                                    <p:fileDownload value="#{videoMNG.download()}" />                              
+                                <p:commandButton value="Download" ajax="false" icon="ui-icon-arrowthick-1-s">
+                                    <p:fileDownload value="#{videoMNG.file}" />                 
+                                    <f:param name="codDown" value="#{video.id}"/>  
                                 </p:commandButton>
                             </p:column>
                             <p:column>
