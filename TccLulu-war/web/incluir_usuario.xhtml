@@ -9,7 +9,13 @@
                 <p:messages autoUpdate="true"/>
                 <h:panelGrid>
                     <p:panel header="INCLUIR USUÁRIOS">
-                        <h:panelGrid columns="2">                             
+                        <h:panelGrid columns="2"> 
+                            <h:outputLabel value="Colaborador"/> 
+                            <p:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{inscricaoMNG.pessoa}">
+                                <f:selectItems value="#{inscricaoMNG.pessoas}" var ="vPessoa"
+                                               itemLabel="#{vPessoa.nome}"
+                                               itemValue="#{vPessoa}"/>
+                            </p:selectOneMenu>
                             <h:outputLabel value="Login"/>
                             <p:inputText id="nome" value="#{usuarioMNG.login}"/> 
                             <h:outputLabel value="Senha"/>

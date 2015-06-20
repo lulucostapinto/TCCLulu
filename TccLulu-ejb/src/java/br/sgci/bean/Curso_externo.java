@@ -26,6 +26,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "curso_externo")
 //@NamedQuery(name = "Curso_externo.totalHoras", query = "select sum(c) from Curso_externo c where c.pessoa=:pessoa")
+@NamedQuery(name = "Curso_externo.totalHoras", query = "select count(c) from Curso_externo c where c.curso_externo=:curso_externo")
 
 public class Curso_externo implements Serializable {
 
@@ -37,8 +38,9 @@ public class Curso_externo implements Serializable {
     private String nome;
     @Temporal(TemporalType.DATE)
     private Date data_inicio, data_fim;
-    //@ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     //@JoinColumn(name = "id_pessoa", nullable = false)
+    @JoinColumn(name = "id_pessoa", referencedColumnName = "ID")
     private Pessoa pessoa;
 
     public int getId() {
@@ -55,7 +57,7 @@ public class Curso_externo implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }    
+    }   
     
 
     public Pessoa getPessoa() {

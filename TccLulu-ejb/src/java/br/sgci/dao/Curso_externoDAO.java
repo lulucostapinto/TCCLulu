@@ -92,5 +92,22 @@ public class Curso_externoDAO implements Curso_externoDAORemote {
 
         return sucesso;
     }
+    
+    /*@Override
+    public Total_horas<Curso_externo> totalizar() {
+        Total_horas<Curso_externo> curso_externo = null;
+         try {
+            Query query = em.createNamedQuery("Curso_externo.totalHoras");
+            Curso_externo curso_externo = qtd_horas.getCurso_Externo();
+            query.setParameter("curso_externo", curso_externo);
+           
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return curso_externo;
+   */ 
+    
 
 }

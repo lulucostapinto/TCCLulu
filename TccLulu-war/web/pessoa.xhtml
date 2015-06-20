@@ -16,7 +16,7 @@
                             <p:commandButton value="Incluir" id="incluir"  action="incluir_pessoa"/>                            
                         </h:form>                       
 
-                        <p:dataTable id="sala" value="#{pessoaMNG.lista}" emptyMessage="Não há registros" var="pessoa" paginator="true" rows="4" style="width: 820px">
+                        <p:dataTable id="pessoa" value="#{pessoaMNG.lista}" emptyMessage="Não há registros" var="pessoa" paginator="true" rows="4" style="width: 820px">
                             <p:column headerText="Nome" filterBy="#{pessoa.lista}">
                                 <h:outputText value="#{pessoa.nome}"/>
                             </p:column>
