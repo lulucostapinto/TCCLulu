@@ -10,35 +10,32 @@
             <h:form id="formulario">
                 <p:messages autoUpdate="true"/>
                 <h:panelGrid>
-                    <p:panel header="CADASTRO DE VIDEOS">
+                    <p:panel header="CERTIFICADOS">
                         <h:form>
                             <p:growl id="growl" life="2000" />     
-                            <p:commandButton value="Incluir" id="incluir"  action="incluir_video"/>                                        
+                            <p:commandButton value="Incluir" id="incluir"  action="incluir_certificado"/>                                        
                         </h:form>                         
-                        <p:dataTable id="video" value="#{videoMNG.lista}" emptyMessage="Não há registros" var="video" paginator="true" rows="4" style="width: 820px">
-                            <p:column headerText="Nome" filterBy="#{video.lista}">
-                                <h:outputText value="#{video.nome}"/>
+                        <p:dataTable id="certificado" value="#{certificadoMNG.lista}" emptyMessage="Não há registros" var="certificado" paginator="true" rows="4" style="width: 820px">
+                            <p:column headerText="Pessoa" filterBy="#{certificado.lista}">
+                                <h:outputText value="#{certificado.pessoa}"/>
                             </p:column>
-                            <p:column headerText="Autor" filterBy="#{video.autor}">
-                                <h:outputText value="#{video.autor}"/>
+                            <p:column headerText="Nome curso">
+                                <h:outputText value="#{certificado.nome}"/>
                             </p:column>
-                            <p:column headerText="Descrição" filterBy="#{video.descricao}">
-                                <h:outputText value="#{video.descricao}"/>
-                            </p:column>                            
                             <p:column>
-                                <p:commandButton value="Upload" action="#{videoMNG.prepUpdate2()}" ajax="false">
-                                    <f:param name="codEditar" value="#{video.id}"/>                              
+                                <p:commandButton value="Upload" action="#{certificadoMNG.prepUpdate2()}" ajax="false">
+                                    <f:param name="codEditar" value="#{certificado.id}"/>                              
                                 </p:commandButton>
                             </p:column>
                             <p:column>
                                 <p:commandButton value="Download" ajax="false" icon="ui-icon-arrowthick-1-s">
-                                    <p:fileDownload value="#{videoMNG.file}" />                 
-                                    <f:param name="codDown" value="#{video.id}"/>  
+                                    <p:fileDownload value="#{certificadoMNG.file}" />                 
+                                    <f:param name="codDown" value="#{certificado.id}"/>  
                                 </p:commandButton>
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Editar" action="#{videoMNG.prepUpdate()}" ajax="false">
-                                    <f:param name="codEditar" value="#{video.id}"/>                              
+                                <p:commandButton value="Editar" action="#{certificadoMNG.prepUpdate()}" ajax="false">
+                                    <f:param name="codEditar" value="#{certificado.id}"/>                              
                                 </p:commandButton>
                             </p:column>
                             <p:column>
