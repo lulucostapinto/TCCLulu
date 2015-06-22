@@ -6,6 +6,7 @@
 package br.sgci.dao;
 
 import br.sgci.bean.Curso_externo;
+import br.sgci.bean.Pessoa;
 import javax.ejb.Remote;
 
 /**
@@ -26,5 +27,7 @@ public interface Curso_externoDAORemote {
     public boolean remover(Curso_externo curso_externo);
 
     public java.util.List<Curso_externo> listar();
+    
+    public Long totalizar (Pessoa pessoa);
     
 }

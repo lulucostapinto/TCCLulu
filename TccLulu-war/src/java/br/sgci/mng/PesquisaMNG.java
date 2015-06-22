@@ -8,6 +8,7 @@ package br.sgci.mng;
 import br.sgci.bean.Pesquisa;
 import br.sgci.bean.Video;
 import br.sgci.dao.PesquisaDAORemote;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +21,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -33,9 +37,11 @@ public class PesquisaMNG {
     @EJB
     PesquisaDAORemote pesquisaDAO;
     private UploadedFile arquivo;
+    private StreamedContent file;
     private int id;
     private String nome, autor, descricao;
     private List<Pesquisa> lista;
+    
 
     public void save(ActionEvent actionEvent) {
         Pesquisa pesquisa = new Pesquisa();
@@ -113,7 +119,26 @@ public class PesquisaMNG {
         pesquisaDAO.alterar(pesquisa);
 
         return "ok";
-    }   
+    } 
+    
+    public void download() {
+        InputStream stream = ((ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream("/resources/demo/images/optimus.jpg");
+        file = new DefaultStreamedContent(stream);
+    }
+
+    public StreamedContent getFile() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codDown".toString()));
+        Pesquisa pesquisa = new Pesquisa();
+        pesquisa.setId(index);
+        pesquisa = pesquisaDAO.retrieve(pesquisa);
+        if (pesquisa != null) {
+            byte[] arquivo1 = pesquisa.getArquivo();
+            ByteArrayInputStream bais = new ByteArrayInputStream(arquivo1);
+            DefaultStreamedContent defaultStreamedContent = new DefaultStreamedContent(bais,"text/plain","teste.txt");
+            return defaultStreamedContent;
+        }
+        return null;
+    }
     
 
     public PesquisaDAORemote getPesquisaDAO() {

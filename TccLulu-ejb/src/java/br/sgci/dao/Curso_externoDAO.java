@@ -6,6 +6,7 @@
 package br.sgci.dao;
 
 import br.sgci.bean.Curso_externo;
+import br.sgci.bean.Pessoa;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -93,21 +94,22 @@ public class Curso_externoDAO implements Curso_externoDAORemote {
         return sucesso;
     }
     
-    /*@Override
-    public Total_horas<Curso_externo> totalizar() {
-        Total_horas<Curso_externo> curso_externo = null;
-         try {
-            Query query = em.createNamedQuery("Curso_externo.totalHoras");
-            Curso_externo curso_externo = qtd_horas.getCurso_Externo();
-            query.setParameter("curso_externo", curso_externo);
-           
-            
+    @Override
+    public Long totalizar(Pessoa pessoa) {
+        Long totalHorasPessoa = null;
+        try {
+            Query query = em.createNamedQuery("Curso_externo.totalHorasPessoa");
+            query.setParameter("pessoa", pessoa);
+            totalHorasPessoa = (Long) query.getSingleResult();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return curso_externo;
-   */ 
+        return totalHorasPessoa;
+
+    }
+
     
 
 }

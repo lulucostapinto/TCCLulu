@@ -10,6 +10,7 @@ import br.sgci.bean.Pessoa;
 import br.sgci.bean.Video;
 import br.sgci.dao.CertificadoDAORemote;
 import br.sgci.dao.PessoaDAORemote;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +23,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -37,6 +41,7 @@ public class CertificadoMNG {
     @EJB
     PessoaDAORemote pessoaDAO;
     private UploadedFile arquivo;
+    private StreamedContent file;
     private int id;
     private String nome;
     private Pessoa pessoa = new Pessoa();
@@ -74,6 +79,25 @@ public class CertificadoMNG {
             FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded. Size: " + arquivo.getSize());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+    }
+    
+    public void download() {
+        InputStream stream = ((ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream("/resources/demo/images/optimus.jpg");
+        file = new DefaultStreamedContent(stream);
+    }
+
+    public StreamedContent getFile() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codDown".toString()));
+        Certificado certificado = new Certificado();
+        certificado.setId(index);
+        certificado = certificadoDAO.retrieve(certificado);
+        if (certificado != null) {
+            byte[] arquivo1 = certificado.getArquivo();
+            ByteArrayInputStream bais = new ByteArrayInputStream(arquivo1);
+            DefaultStreamedContent defaultStreamedContent = new DefaultStreamedContent(bais,"text/plain","teste.txt");
+            return defaultStreamedContent;
+        }
+        return null;
     }
 
     public void remove() {

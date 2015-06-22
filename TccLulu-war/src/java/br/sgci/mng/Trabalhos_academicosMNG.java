@@ -6,7 +6,9 @@
 package br.sgci.mng;
 
 import br.sgci.bean.Trabalhos_academicos;
+import br.sgci.bean.Video;
 import br.sgci.dao.Trabalhos_academicosDAORemote;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +21,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -33,6 +38,7 @@ public class Trabalhos_academicosMNG {
     @EJB
     Trabalhos_academicosDAORemote trabalhos_academicosDAO;
     private UploadedFile arquivo;
+    private StreamedContent file;
     private int id;
     private String nome, autor, descricao;
     private List<Trabalhos_academicos> lista;
@@ -121,6 +127,25 @@ public class Trabalhos_academicosMNG {
             FacesMessage message = new FacesMessage("Succesful", arquivo.getFileName() + " is uploaded. Size: " + arquivo.getSize());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+    }
+    
+    public void download() {
+        InputStream stream = ((ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream("/resources/demo/images/optimus.jpg");
+        file = new DefaultStreamedContent(stream);
+    }
+
+    public StreamedContent getFile() {
+        Integer index = Integer.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codDown".toString()));
+        Trabalhos_academicos trabalhos_academicos = new Trabalhos_academicos();
+        trabalhos_academicos.setId(index);
+        trabalhos_academicos = trabalhos_academicosDAO.retrieve(trabalhos_academicos);
+        if (trabalhos_academicos != null) {
+            byte[] arquivo1 = trabalhos_academicos.getArquivo();
+            ByteArrayInputStream bais = new ByteArrayInputStream(arquivo1);
+            DefaultStreamedContent defaultStreamedContent = new DefaultStreamedContent(bais,"text/plain","teste.txt");
+            return defaultStreamedContent;
+        }
+        return null;
     }
 
     public void remove() {

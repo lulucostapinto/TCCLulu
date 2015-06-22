@@ -25,18 +25,22 @@
                             <p:column headerText="Descrição" filterBy="#{pesquisa.descricao}">
                                 <h:outputText value="#{pesquisa.descricao}"/>
                             </p:column>
+                            <p:commandButton value="Download" ajax="false" icon="ui-icon-arrowthick-1-s">
+                                    <p:fileDownload value="#{pesquisaMNG.file}" />                 
+                                    <f:param name="codDown" value="#{pesquisa.id}"/>  
+                                </p:commandButton>
                             <p:column>
-                                <p:commandButton value="EDITAR" action="#{pesquisaMNG.prepUpdate()}" ajax="false">
+                                <p:commandButton value="Editar" action="#{pesquisaMNG.prepUpdate()}" ajax="false">
                                     <f:param name="codEditar" value="#{pesquisa.id}"/>                              
                                 </p:commandButton>
                             </p:column>
                             <p:column>
-                                <p:commandButton value="UPLOAD" action="#{pesquisaMNG.prepUpdate2()}" ajax="false">
+                                <p:commandButton value="Upload" action="#{pesquisaMNG.prepUpdate2()}" ajax="false">
                                     <f:param name="codEditar" value="#{pesquisa.id}"/>                              
                                 </p:commandButton>
                             </p:column>
                             <p:column>
-                                <p:commandButton value="EXCLUIR" title="#{msgs.btRemove}"
+                                <p:commandButton value="Excluir" title="#{msgs.btRemove}"
                                                  actionListener="#{pesquisaMNG.remove()}"                                             
                                                  onclick="if (!confirm('#{msgs.msgConfRemove}'))
                                                              return false" >

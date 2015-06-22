@@ -26,6 +26,12 @@
                                 <h:outputText value="#{trabalhos_academicos.descricao}"/>
                             </p:column>
                             <p:column>
+                                <p:commandButton value="Download" ajax="false" icon="ui-icon-arrowthick-1-s">
+                                    <p:fileDownload value="#{trabalhos_academicosMNG.file}" />                 
+                                    <f:param name="codDown" value="#{trabalhos_academicos.id}"/>  
+                                </p:commandButton>
+                            </p:column>
+                            <p:column>
                                 <p:commandButton value="Editar" action="#{trabalhos_academicosMNG.prepUpdate()}" ajax="false">
                                     <f:param name="codEditar" value="#{trabalhos_academicos.id}"/>                              
                                 </p:commandButton>

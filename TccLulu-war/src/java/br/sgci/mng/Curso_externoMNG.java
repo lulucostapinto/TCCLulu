@@ -44,6 +44,7 @@ public class Curso_externoMNG {
     private List<Pessoa> pessoas;
     private List<Curso_externo> lista;
     private Date data_inicio, data_fim;
+    
 
     public void save(ActionEvent actionEvent) {
         Curso_externo ce = new Curso_externo();
@@ -55,6 +56,10 @@ public class Curso_externoMNG {
         ce.setPessoa(pessoa);
         curso_externoDAO.gravar(ce);
 
+    }
+    
+    public long total (){
+        return curso_externoDAO.totalizar(pessoa);
     }
 
     public Curso_externoDAORemote getCurso_externoDAO() {
@@ -173,7 +178,6 @@ public class Curso_externoMNG {
         this.nome = ce.getNome();
 
         return "alterar_cursoExterno";
-
     }
 
     public String prepUpdate2() {
@@ -181,6 +185,10 @@ public class Curso_externoMNG {
         this.id = index;
         return "incluir_arquivoCursoExterno";
     }
-
+    
+   
+    
+    
+    
    
 }
